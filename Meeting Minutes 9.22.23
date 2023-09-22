@@ -1,1 +1,18 @@
+MEETING NOTES:
+
+-Client requests a check-in service for volunteers at the Kalamazoo location. 
+The volunteers will provide their information to the front desk worker, who enters their information into a form. 
+The information will be entered into a database which tracks volunteer hours, and, while the volunteer is checked-in, 
+their location within the building.
+
+-A different possibility is to put a QR code near the front desk; 
+volunteers would scan the code and fill out the form on their phones. However, client is unsure if this is desirable, 
+citing the possibility that volunteers enter incorrect information.
+
+-Client prefers we build standalone app instead of adding a webpage to the Loaves and Fishes site, 
+but would also like the option to integrate it at a later date.
+
+-Volunteers can access the app on their phones and log-in to view their schedule/accumulated hours.
+
+-Additionally, the client requests an interface for managing employee schedules
 

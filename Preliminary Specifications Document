@@ -1,15 +1,29 @@
 CLIENTSIDE SPECIFICATIONS:
 
+Functional Requirements:
+- the software shall allow users to log in or create a profile
+- the software shall send an SMS text to the user the day before the assigment
+- the software shall allow users to access their profile when logged-in 
 
+User interface Requirements:
+- the software shall allow users to view their profile which includes their assingment, hours scheduled, and total hours spent volunteering.
+- the software shall provide a means for admins to view users profiles.
+- the software shall allow admins to view current volunteers assignments
 
-
-
-
+Security Requirements:
+- the software shall allow users to create a profile with a unique username and password.
 
 
 SERVERSIDE SPECIFICATIONS:
 
+Functional Requirements:
+- the software shall store up to 6000 volunteer profiles in the volunteer database.
+- the software shall allow admins to edit volunteer information
+- the software shall allow admins to upload .csv files and store information in the volunteer database
+- The software shall prove a means for admins to generate reports on the upcoming weeks volunteer information.
 
+Secuirty Requirements:
+- the software shall save passwords in the volunteer database with encryption
 
 
 

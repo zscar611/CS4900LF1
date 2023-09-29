@@ -6,7 +6,7 @@ Functional Requirements:
 - the software shall allow users to access their profile when logged-in 
 
 User Interface Requirements:
-- the software shall allow users to view their profile which includes their assingment, hours scheduled, and total hours spent volunteering.
+- the software shall allow users to view their profile which includes their assignment, hours scheduled, and total hours spent volunteering.
 - the software shall provide a means for admins to view all users profiles.
 - the software shall allow admins to view volunteers checked in assignments.
 

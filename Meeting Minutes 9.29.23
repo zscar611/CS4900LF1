@@ -11,7 +11,7 @@ Members Present: Zack, Abdiel, Ryan
 Progress Made:
 
 -Drafted Preliminary Specifications Document
--Tentatively decided to use a combination of NodeJS, React, and SQL
+-Tentatively decided to use NodeJS for back-end, React for front-end, and SQL for the database
 
 Next Steps:
 

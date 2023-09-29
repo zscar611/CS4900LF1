@@ -7,7 +7,7 @@ Functional Requirements:
 
 User Interface Requirements:
 - the software shall allow users to view their profile which includes their assignment, hours scheduled, and total hours spent volunteering.
-- the software shall provide a means for admins to view all users profiles.
+- the software shall provide a means for admins to view all user profiles.
 - the software shall allow admins to view volunteers checked in assignments.
 
 Security Requirements:
@@ -21,7 +21,8 @@ Functional Requirements:
 - the software shall allow admins to create new volunteers in the volunteer database
 - the software shall allow admins to edit volunteer information
 - the software shall allow admins to upload .csv files and store information in the volunteer database
-- The software shall prove a means for admins to generate reports on the upcoming weeks volunteer information.
+- the software shall allow previous volunteer records (from before the development of the app) to be retroactively uploaded so a volunteer can see their past assignments
+- The software shall allow a means for admins to generate reports on the upcoming weeks volunteer information.
 
 User Interface Requirements:
 - the software shall provide a means for admins to add and edit the database through a web page

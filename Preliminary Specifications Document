@@ -18,7 +18,7 @@ SERVERSIDE SPECIFICATIONS:
 
 Functional Requirements:
 - the software shall store up to 6000 volunteer profiles in the volunteer database.
-- the software shall store volunteer profiles as: first name, last name, total hours volunteered, previous areas volunteered in, previous volunteer date, next scheduled appointment date, next scheduled appointment time, next scheduled appointment area, current status (scheduled, checked in, not scheduled)
+- the software shall store volunteer profiles as: username, password, phone number, first name, last name, total hours volunteered, previous areas volunteered in, previous volunteer date, next scheduled appointment date, next scheduled appointment time, next scheduled appointment area, current status (scheduled, checked in, not scheduled)
 - the software shall allow admins to create new volunteers in the volunteer database
 - the software shall allow admins to edit volunteer information
 - the software shall allow admins to upload .csv files and store information in the volunteer database

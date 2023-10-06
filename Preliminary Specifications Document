@@ -2,7 +2,7 @@ CLIENTSIDE SPECIFICATIONS:
 
 Functional Requirements:
 - the software shall allow users to log in or create a profile
-- the software shall send an SMS text to the user the day before the assigment
+- the software shall send an SMS text using the provided phone number that is connected to a user profile
 - the software shall allow users to access their profile when logged-in 
 
 User Interface Requirements:

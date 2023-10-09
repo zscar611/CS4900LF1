@@ -19,12 +19,13 @@ SERVERSIDE SPECIFICATIONS:
 Functional Requirements:
 - the software shall store up to 6000 volunteer profiles in the volunteer database.
 - the software shall store volunteer profiles as: 
-    username: Alpha Numerical 6-10 characters long, String
-    password: Alpha Numerical 8-16 characters long, String
+    username: Alpha Numerical 6-16 characters, Not Capitalization specific, String
+    password: Alpha Numerical 8-16 characters, Capitalization specific, String
     phone number: 10 characters, int
     first name: 32 characters, String
     last name: 32 characters, String
     total hours volunteered: Float
+    Previous Appointment Areas: 32 characters, String
     Next Appointment Date: month/date/year, String
     Next Area: 32 characters, String
     Current Area: 32 chacarcters, String

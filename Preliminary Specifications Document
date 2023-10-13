@@ -11,7 +11,7 @@ User Interface Requirements:
 - the software shall allow admins to view volunteers checked in assignments.
 
 Security Requirements:
-- the software shall allow users to create a profile with a unique username and password.
+- the software shall allow users to create a profile with a unique username and phone number as the password.
 
 
 SERVERSIDE SPECIFICATIONS:
@@ -20,7 +20,6 @@ Functional Requirements:
 - the software shall store up to 6000 volunteer profiles in the volunteer database.
 - the software shall store volunteer profiles as: 
     username: Alpha Numerical 6-16 characters, Not Capitalization specific, String
-    password: Alpha Numerical 8-16 characters, Capitalization specific, String
     phone number: 10 characters, int
     first name: 32 characters, String
     last name: 32 characters, String
@@ -30,7 +29,7 @@ Functional Requirements:
     Next Area: 32 characters, String
     Current Area: 32 chacarcters, String
     Current Checked In Status: 32 characters, String
-- the software shall allow admins to create new volunteers in the volunteer database(Assigning username, password, phonenumber, first name , and last name)
+- the software shall allow admins to create new volunteers in the volunteer database(Assigning username, phonenumber, first name , and last name)
 - the software shall allow admins to edit volunteer information
 - the software shall allow admins to upload .csv files and store information in the volunteer database
 - the software shall allow previous volunteer records (from before the development of the app) to be retroactively uploaded so a volunteer can see their past assignments
@@ -40,7 +39,7 @@ User Interface Requirements:
 - the software shall provide a means for admins to add and edit the database through a web page
 
 Secuirty Requirements:
-- the software shall save passwords in the volunteer database with encryption
+- the software shall save passwords/phone number in the volunteer database with encryption
 
 
 

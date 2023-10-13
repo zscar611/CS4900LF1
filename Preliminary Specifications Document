@@ -30,11 +30,11 @@ Functional Requirements:
     Next Area: 32 characters, String
     Current Area: 32 chacarcters, String
     Current Checked In Status: 32 characters, String
-- the software shall allow admins to create new volunteers in the volunteer database
+- the software shall allow admins to create new volunteers in the volunteer database(Assigning username, password, phonenumber, first name , and last name)
 - the software shall allow admins to edit volunteer information
 - the software shall allow admins to upload .csv files and store information in the volunteer database
 - the software shall allow previous volunteer records (from before the development of the app) to be retroactively uploaded so a volunteer can see their past assignments
-- The software shall allow a means for admins to generate reports on the upcoming weeks volunteer information.
+- The software shall allow a means for admins to generate reports on the upcoming weeks volunteer information (First and last name, current checked in status, current area, total hours, previous as well as next appointment).
 
 User Interface Requirements:
 - the software shall provide a means for admins to add and edit the database through a web page

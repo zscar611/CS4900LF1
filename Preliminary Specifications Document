@@ -29,7 +29,7 @@ Functional Requirements:
     Next Area: 32 characters, String
     Current Area: 32 chacarcters, String
     Current Checked In Status: 32 characters, String
-- the software shall allow admins to create new volunteers in the volunteer database(Assigning username, phone number, first name , and last name)
+- the software shall allow admins to create new volunteer profiles in the volunteer database(Assigning username, phone number, first name , and last name)
 - the software shall allow admins to edit volunteer information
 - the software shall allow admins to upload .csv files and store information in the volunteer database
 - the software shall allow previous volunteer records (from before the development of the app) to be retroactively uploaded so a volunteer can see their past assignments

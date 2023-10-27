@@ -7,18 +7,14 @@ Members Present: Zack Scarpelli, Ryan Fredericks, Abdiel Rosario, Tim Healey, Fr
 
 Progress Made:
 
-- Refine requirements - make extremely detailed.
-- Emailed Jillian to update her on progress.
-- Refined UML
+- Added GUI mockups
+- Added second database to UML - there will be a database which has one entry per volunteer, and one that has one entry for each shift completed.
+
+
 
 Next Steps:
 
 
-- Update UML if any problems or ideas arise
+- Create sequence diagram
 - Meet with Jillian one more time to discuss before beginning to implement (next week or week after)
 - Team members create detailed plan together - start working on a flowchart for each section
-
-Questions for Jillian:
-
-details on corporate events
-precise and detailed description of workflow 

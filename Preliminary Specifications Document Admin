@@ -3,17 +3,17 @@ Admin Specification
 CLIENTSIDE SPECIFICATIONS:
 
 Functional Requirements:
-- the software shall allow an to log in or create a profile
-- the software shall send an SMS text using the provided phone number that is connected to a user profile
-- the software shall allow users to access their profile when logged-in 
+- the software shall allow admins to log in
+- the software shall allow admins to create volunteer profiles
+- the software shall allow admins to schedule volunteers
+- the software shall allow admins to access volunteer profiles
 
 User Interface Requirements:
-- the software shall allow users to view their profile which includes their assignment, hours scheduled, and total hours spent volunteering.
 - the software shall provide a means for admins to view all user profiles.
 - the software shall allow admins to view volunteers checked in assignments.
 
 Security Requirements:
-- the software shall allow users to create a profile with a unique username and phone number as the password.
+- the software shall allow admins to create a profile with a unique username and phone number as the password.
 
 
 SERVERSIDE SPECIFICATIONS:

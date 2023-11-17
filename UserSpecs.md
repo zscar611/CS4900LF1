@@ -16,3 +16,4 @@ User Interface Requirements:
 
 
 ![Login](login.png)
+![Profile](profile.png)

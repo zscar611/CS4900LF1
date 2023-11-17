@@ -11,6 +11,7 @@ User Interface Requirements:
 - the profile page shall have a button in the top right corner with the option to log out or change password
 - a user profile will display the schedule view in calendar format, with scheduled days marked. 
 - the software will also display in text below the calendar view the next scheduled appointment, in the form: "Next Shift: Monday, 10/1/23, 10:00 PM. Location: Pantry"
+- the software will also display the total hours volunteered by the user
 - the software shall allow users to change their password if desired
 - all shift information will be input by the admin and stored in a database (see admin page)
 

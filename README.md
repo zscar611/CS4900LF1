@@ -2,4 +2,4 @@
 
 ## Loaves and Fishes
 
-This is a all the artifcats created for the senior design project for Loaves and Fishes.
+This is a all the artifacts created for the senior design project for Loaves and Fishes.

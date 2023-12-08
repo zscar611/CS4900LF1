@@ -23,6 +23,7 @@ Functional Requirements:
 - the software shall store volunteer profiles as: 
     username: Alpha Numerical 6-16 characters, Not Capitalization specific, String
     phone number: 10 characters, int
+    emergency contact: 10 characters, int
     first name: 32 characters, String
     last name: 32 characters, String
     total hours volunteered: Float
@@ -31,7 +32,7 @@ Functional Requirements:
     Next Area: 32 characters, String
     Current Area: 32 chacarcters, String
     Current Checked In Status: 32 characters, String
-- the software shall allow admins to create new volunteer profiles in the volunteer database(Assigning username, phone number, first name , and last name)
+- the software shall allow admins to create new volunteer profiles in the volunteer database(Assigning username, phone number, emergency contact, first name , and last name)
 - the software shall allow admins to edit volunteer information
 - the software shall allow admins to upload .csv files and store information in the volunteer database
 - the software shall allow previous volunteer records (from before the development of the app) to be retroactively uploaded so a volunteer can see their past assignments

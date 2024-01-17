@@ -20,7 +20,6 @@ function App() {
     // check here if userName and password are in db
     if (currentUser === "Baggins")
     {
-      console.log("works");
       navigate('/Dashboard');
       
     }
@@ -35,21 +34,29 @@ function App() {
       <header>
         <img src={'/logo.jpg'} className="main-img" alt="logo" />
       </header>
-      <p className='main-input-text'>Enter Last Name:</p>
-      <input className='main-input'
-        type="text"
-        placeholder="last name"
-        value={currentUser}
-        onChange={handleUserChange}
-      />
-      <p className='main-input-text'>Enter Phone number:</p>
-      <input className='main-input'
-        type="password"
-        placeholder="phone number"
-        value={currentPass}
-        onChange={handlePassChange}
-      />
-      <button onClick={handleSubmit}>Submit</button>
+      <h1>Login</h1>
+      <div className='main-input'>
+        <input
+          type="text"
+          placeholder="Enter last name"
+          value={currentUser}
+          onChange={handleUserChange}
+          className={"main-input-box"}
+        />
+      </div>
+      <div className='main-input'>
+        <input
+          type="password"
+          placeholder="Enter phone number"
+          value={currentPass}
+          onChange={handlePassChange}
+          className={"main-input-box"}
+        />
+      </div>
+
+      <div className="main-button">
+        <button className="main-button-box" onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
 }

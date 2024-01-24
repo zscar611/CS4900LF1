@@ -4,7 +4,7 @@ Allow users and admins to login. Allow users to view their dashboard. Allow admi
 
 ## How to run
 
-In the project directory, you can run:
+You will need nodejs and react-scripts to run the project. In the project directory, you can run:
 
 ### `npm start`
 

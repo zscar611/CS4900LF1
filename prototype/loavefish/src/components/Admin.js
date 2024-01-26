@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
+import Navbar from './Navbar.js';
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
-const handleLogout = () => {
+  const handleLogout = () => {
           navigate('/');
   };
   return (
     <div className="App">
+      <Navbar />
       <header>
         <img src={'/logo.jpg'} className="main-img" alt="logo" />
         <p className='dashboard-text'>Calendar</p>

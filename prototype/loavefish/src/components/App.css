@@ -30,6 +30,11 @@
   cursor: pointer;
 }
 
+.main-button-box:hover {
+  background: darkgreen;
+}
+
+
 .main-input-box {
   height: 3em;
   width: 28em;

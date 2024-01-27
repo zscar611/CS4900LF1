@@ -7,15 +7,25 @@
 
 .navbar-wrapper{
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: green;
-  color: white;
-  font-size: 1.5rem;
+  justify-content: center;
   height: 80px;
-
+  background: green;
 }
 
 .navbar-text{
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
 }
+
+.navbar-text:hover{
+  transition: all 0.1s ease-out;
+  background-color: darkgreen;
+  font-size: 1.8rem;
+  height: 60px;
+}
+

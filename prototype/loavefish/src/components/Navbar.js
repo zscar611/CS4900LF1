@@ -8,18 +8,18 @@ function Navbar() {
     <>
       <nav classname='navbar'>
         <div className='navbar-wrapper'>
-          <ul className='nav-item'>
+          <ul>
             <a onClick={()=>navigate('/Dashboard')} className='navbar-text'>
               Home
             </a>
           </ul>
-          <ul className='nav-item'>
+          <ul>
             <a className='navbar-text'>Calendar</a>
           </ul>
-          <ul className='nav-item'>
+          <ul>
             <a className='navbar-text'>Scheduling</a>
           </ul>
-          <ul className='nav-item'>
+          <ul>
             <a className='navbar-text'>Reports</a>
           </ul>
         </div>

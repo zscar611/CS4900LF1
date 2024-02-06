@@ -4,7 +4,8 @@ import './App.css';
 
 function App() {
 	const handleLogout = () => {
-          navigate('/');
+    // TODO add SQL logic here
+    navigate('/');
   };
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");

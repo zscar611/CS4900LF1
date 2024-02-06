@@ -9,7 +9,7 @@ function Navbar() {
       <nav classname='navbar'>
         <div className='navbar-wrapper'>
           <ul>
-            <a onClick={()=>navigate('/Dashboard')} className='navbar-text'>
+            <a onClick={()=>navigate('/Admin')} className='navbar-text'>
               Home
             </a>
           </ul>
@@ -17,10 +17,10 @@ function Navbar() {
             <a className='navbar-text'>Calendar</a>
           </ul>
           <ul>
-            <a className='navbar-text'>Scheduling</a>
+            <a onClick={()=>navigate('/VolunteerAdd')} className='navbar-text'>Scheduling</a>
           </ul>
           <ul>
-            <a className='navbar-text'>Reports</a>
+            <a onClick={()=>navigate('/Reports')} className='navbar-text'>Reports</a>
           </ul>
         </div>
       </nav>

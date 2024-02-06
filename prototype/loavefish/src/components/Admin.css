@@ -1,0 +1,8 @@
+.admin-top-text {
+  display: flex;
+  justify-content: center; 
+}
+
+.admin-right-text {
+  text-align: right;
+}

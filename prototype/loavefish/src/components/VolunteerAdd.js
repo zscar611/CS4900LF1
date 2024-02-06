@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar.js';
 import './App.css';
 
 
@@ -9,6 +10,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <header>
         <img src={'/logo.jpg'} className="main-img" alt="logo" />
         <p className='dashboard-text'>Calendar</p>

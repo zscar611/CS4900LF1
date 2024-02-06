@@ -18,6 +18,7 @@ function App() {
 
   const handleSubmit = () => {
     // check here if userName and password are in db
+    // TODO add sql logic here
     if (currentUser === "Baggins")
     {
       navigate('/Dashboard');
@@ -25,6 +26,7 @@ function App() {
     }
     else if (currentUser === "Admin")
     {
+      // TODO add sql logic here
       navigate('/Admin');
     } else { console.log("nope");}
   };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
+import './Reports.css';
 import Navbar from './Navbar.js';
 
 function App() {
@@ -11,20 +12,33 @@ function App() {
   };
   return (
     <div className="App">
-      <Navbar />
-      <header>
-        <img src={'/logo.jpg'} className="main-img" alt="logo" />
-        <p className='dashboard-text'>Calendar</p>
-      </header>
-      <p>Currently Checked In</p>
-      <p>Sauron | Pantry | 9:00am - 10:00am | 12/10/2023</p>
-      <p>Future Appointments</p>
-      <p>Frodo Baggins | Warehouse | 10:00am - 11:00am | 12/10/2023</p>
-      <p>Tom Brady | Warehouse | 13:00am - 11:30am | 12/10/2023</p>
-      <button>Add New Volunteer</button>
-	  <button>Assign Shift to Volunteer</button>
-	   <div className="main-button">
+      <Navbar /> 
+	    <div className="main-button">
         <button className="main-button-box" onClick={handleLogout}>Logout</button>
+      </div>
+      <div className="report-align-items">
+      <h1>This Weeks Report</h1>
+        <div className="main-button">
+          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
+        </div>
+      </div>
+      <div className="report-align-items">
+        <h1>This Months Report</h1>
+        <div className="main-button">
+          <button className="main-button-box" style={{display: "flex"}} onC     lick={handleLogout}>Generate</button>
+        </div>
+      </div>
+      <div className="report-align-items">
+        <h1>This Years Report</h1>
+        <div className="main-button">
+          <button className="main-button-box" style={{display: "flex"}} onC     lick={handleLogout}>Generate</button>
+        </div>
+      </div>
+      <div className="report-align-items">
+        <h1>All Time Report</h1>
+        <div className="main-button">
+          <button className="main-button-box" style={{display: "flex"}} onC     lick={handleLogout}>Generate</button>
+        </div>
       </div>
     </div>
   );

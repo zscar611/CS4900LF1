@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function Dashboard() {
 	const handleLogout = () => {
     // TODO add SQL logic here
     navigate('/');
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default Dashboard;

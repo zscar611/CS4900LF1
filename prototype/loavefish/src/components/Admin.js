@@ -4,7 +4,7 @@ import './App.css';
 import './Admin.css';
 import Navbar from './Navbar.js';
 
-function App() {
+function Admin() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
   const handleLogout = () => {
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default Admin;

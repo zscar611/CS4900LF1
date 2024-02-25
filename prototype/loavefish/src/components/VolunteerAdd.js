@@ -4,7 +4,7 @@ import Navbar from './Navbar.js';
 import './App.css';
 
 
-function App() {
+function Add() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
 
@@ -25,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default Add;

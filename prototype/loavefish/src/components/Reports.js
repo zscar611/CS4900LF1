@@ -4,7 +4,7 @@ import './App.css';
 import './Reports.css';
 import Navbar from './Navbar.js';
 
-function App() {
+function Report() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
   const handleLogout = () => {
@@ -44,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default Report;

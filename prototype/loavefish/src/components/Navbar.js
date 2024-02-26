@@ -22,6 +22,9 @@ function Navbar() {
           <ul>
             <a onClick={()=>navigate('/Reports')} className='navbar-text'>Reports</a>
           </ul>
+			<ul>
+            <a onClick={()=>navigate('/')} className='navbar-text'>Logout</a>
+          </ul>
         </div>
       </nav>
     </>

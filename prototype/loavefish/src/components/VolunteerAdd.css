@@ -1,0 +1,20 @@
+.volunteerAdd-input-box {
+    height: 3em;
+    width: 14em;
+    font-size: large;
+    border-radius: 10px;
+    border: 1.5px solid black; 
+    padding-left: 8px;
+}
+
+.volunteerAdd-input {
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 1.3em;
+}
+
+.volunteerAdd-text {
+    font-size: larger;
+    font-weight: bolder;
+    text-align: left;
+}

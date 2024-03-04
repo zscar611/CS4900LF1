@@ -2,25 +2,80 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import './App.css';
-
+import './VolunteerAdd.css'
 
 function Add() {
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState("");
+  
+  const [currentFirst, setCurrentFirst] = useState("");
+  const [currentLast, setCurrentLast] = useState("");
+  const [currentPhone, setCurrentPhone] = useState("");
+  const [submit, setSubmit] = useState(false);
+
+  const handleFirstChange = (event) => {
+    setCurrentFirst(event.target.value);
+  };
+
+  const handleLastChange = (event) => {
+    setCurrentLast(event.target.value);
+  };
+
+  const handlePhoneChange = (event) => {
+    setCurrentPhone(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    // send JSON to backend
+    // reset all values
+    setCurrentFirst("");
+    setCurrentLast("");
+    setCurrentPhone("");
+  };
+
+  const handleLogout = () => {
+    navigate('/');
+  };
 
   return (
     <div className="App">
       <Navbar />
       <header>
-        <img src={'/logo.jpg'} className="main-img" alt="logo" />
-        <p className='dashboard-text'>Calendar</p>
+      <h1>Schedule Volunteers</h1>
       </header>
-      <p>Currently Checked In</p>
-      <p>Lionel Messi | Pantry | 9:00am - 10:00am | 12/10/2023</p>
-      <p>Future Appointments</p>
-      <p>Frodo Baggins | Warehouse | 10:00am - 11:00am | 12/10/2023</p>
-      <p>Tom Brady | Warehouse | 13:00am - 11:30am | 12/10/2023</p>
-      <button onClick={navigate('/Admin')} >Add New Volunteer</button>
+      <div className='volunteerAdd-input'>
+      <p className="volunteerAdd-text">Name: </p>
+        <input
+          type="text"
+          placeholder="Enter first name"
+          value={currentFirst}
+          onChange={handleFirstChange}
+          className={"volunteerAdd-input-box"}
+        />
+      </div>
+      <div className='volunteerAdd-input'>
+        <input
+          type="text"
+          placeholder="Enter last name"
+          value={currentLast}
+          onChange={handleLastChange}
+          className={"volunteerAdd-input-box"}
+        />
+      </div>
+      <div>
+        <div className='volunteerAdd-input'>
+        <p className="volunteerAdd-text">Phone Number: </p>
+            <input
+              type="text"
+              placeholder="(123)-456-7890"
+              value={currentPhone}
+              onChange={handlePhoneChange}
+              className={"main-input-box"}
+            />
+        </div>
+      </div>
+      <div className="main-button">
+        <button className="main-button-box" onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
 }

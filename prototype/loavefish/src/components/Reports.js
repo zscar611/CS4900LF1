@@ -13,9 +13,6 @@ function Report() {
   return (
     <div className="App">
       <Navbar /> 
-	    <div className="main-button">
-        <button className="main-button-box" onClick={handleLogout}>Logout</button>
-      </div>
       <div className="report-align-items">
       <h1>This Weeks Report</h1>
         <div className="main-button">

@@ -16,9 +16,7 @@ function Admin() {
       <Navbar />
       <div className = "admin-top-text">
       <h1>Volunteer Time Sheet</h1>
-      <div className="main-button">
-        <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Logout</button>
-      </div>
+
       </div>
       <p>Currently Checked In     -       Check In</p>
       <p>Sauron | Pantry | 9:00am - 10:00am | 12/10/2023</p>

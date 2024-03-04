@@ -1,6 +1,6 @@
 .volunteerAdd-input-box {
     height: 3em;
-    width: 14em;
+    width: 13.5em;
     font-size: large;
     border-radius: 10px;
     border: 1.5px solid black; 
@@ -17,4 +17,17 @@
     font-size: larger;
     font-weight: bolder;
     text-align: left;
+}
+
+.volunteerAdd-dropdown {
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 1.3em;
+}
+
+.volunteerAdd-dropdown-box {
+    padding: 14px 22px;
+    border-radius: 8px;
+    border-color: black;
+    cursor: pointer;
 }

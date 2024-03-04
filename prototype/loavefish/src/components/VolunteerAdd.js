@@ -11,6 +11,7 @@ function Add() {
   const [currentLast, setCurrentLast] = useState("");
   const [currentPhone, setCurrentPhone] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [areaSelection, setAreaSelection] = useState("")
 
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
@@ -24,12 +25,17 @@ function Add() {
     setCurrentPhone(event.target.value);
   };
 
+  const handleAreaSelectionChange = (event) => {
+    setAreaSelection(event.target.value);
+  };
+
   const handleSubmit = () => {
     // send JSON to backend
     // reset all values
     setCurrentFirst("");
     setCurrentLast("");
     setCurrentPhone("");
+    setAreaSelection("");
   };
 
   const handleLogout = () => {
@@ -73,6 +79,42 @@ function Add() {
             />
         </div>
       </div>
+      
+      <div className='volunteerAdd-dropdown'>
+        <p className="volunteerAdd-text">Area: </p>
+        <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
+          <option value="">Select Area...</option>
+          <option value="option1">Call Center</option>
+          <option value="option2">Pantry</option>
+          <option value="option3">Home Delivery</option>
+          <option value="option4">Warehouse</option>
+        </select>
+    </div>
+
+    <div className='volunteerAdd-dropdown'>
+      <p className="volunteerAdd-text">Day: </p>
+        <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
+          <option value="">Select Day...</option>
+          <option value="option1">Call Center</option>
+          <option value="option2">Pantry</option>
+          <option value="option3">Home Delivery</option>
+          <option value="option4">Warehouse</option>
+        </select>
+    </div>
+
+
+    <div className='volunteerAdd-dropdown'>
+      <p className="volunteerAdd-text">Time: </p>
+        <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
+          <option value="">Select Time...</option>
+          <option value="option1">Call Center</option>
+          <option value="option2">Pantry</option>
+          <option value="option3">Home Delivery</option>
+          <option value="option4">Warehouse</option>
+        </select>
+    </div>
+
+
       <div className="main-button">
         <button className="main-button-box" onClick={handleSubmit}>Submit</button>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import Home from './components/Main';
@@ -8,6 +8,7 @@ import Reports from './components/Reports.js'
 import VolunteerAdd from './components/VolunteerAdd.js';
 
 function App() {
+  const [data, setData] = useState([{}]) 
   return (
     <Router>
       <div>

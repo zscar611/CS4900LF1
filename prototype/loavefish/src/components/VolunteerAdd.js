@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar.js';
+import Calendar from 'react-calendar';
 import './App.css';
 import './VolunteerAdd.css'
 
@@ -12,6 +13,8 @@ function Add() {
   const [currentPhone, setCurrentPhone] = useState("");
   const [submit, setSubmit] = useState(false);
   const [areaSelection, setAreaSelection] = useState("")
+  const [isCalendarVisible, setCalendarVisibility] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
@@ -38,10 +41,15 @@ function Add() {
     setAreaSelection("");
   };
 
-  const handleLogout = () => {
-    navigate('/');
+  const handleCalendarClick = () => {
+    setCalendarVisibility(!isCalendarVisible);
   };
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setCalendarVisibility(false);
+  };
+  
   return (
     <div className="App">
       <Navbar />
@@ -92,16 +100,18 @@ function Add() {
     </div>
 
     <div className='volunteerAdd-dropdown'>
-      <p className="volunteerAdd-text">Day: </p>
-        <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
-          <option value="">Select Day...</option>
-          <option value="option1">Call Center</option>
-          <option value="option2">Pantry</option>
-          <option value="option3">Home Delivery</option>
-          <option value="option4">Warehouse</option>
-        </select>
+      <p className="volunteerAdd-text">Day:</p>
+      <div>
+        <button className="volunteerAdd-dropdown-box" onClick={handleCalendarClick}>Calendar {selectedDate.toLocaleDateString()}</button>
+        {isCalendarVisible && (
+          <div className="volunteerAdd-modal" onClick={handleCalendarClick}>
+            <div className="volunteerAdd-modal-box" onClick={(e) => e.stopPropagation()}>
+              <Calendar onChange={handleDateChange} value={selectedDate} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-
 
     <div className='volunteerAdd-dropdown'>
       <p className="volunteerAdd-text">Time: </p>
@@ -113,6 +123,7 @@ function Add() {
           <option value="option4">Warehouse</option>
         </select>
     </div>
+
 
 
       <div className="main-button">

@@ -15,7 +15,7 @@ function Add() {
   const [areaSelection, setAreaSelection] = useState("")
   const [isCalendarVisible, setCalendarVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const [timeSelected, setTimeSelected] = useState("");
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
   };
@@ -32,9 +32,38 @@ function Add() {
     setAreaSelection(event.target.value);
   };
 
+  const handleTimeSelectionChange = (event) => {
+    setTimeSelected(event.target.value);
+  };
+
+  const sendData = async () => {
+    try {
+
+      const jsonData = {
+        FirstName: currentFirst,
+        LastName: currentLast,
+        Area: areaSelection,
+        Date: selectedDate,
+        Time: areaSelection,
+      };
+      console.log(jsonData);;
+      const response = await fetch('http://localhost:5000', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentFirst),
+      });
+
+    } catch (error) {
+      console.error('Error: ', error);
+    }
+  }
+
   const handleSubmit = () => {
     // send JSON to backend
     // reset all values
+    sendData();
     setCurrentFirst("");
     setCurrentLast("");
     setCurrentPhone("");
@@ -92,10 +121,10 @@ function Add() {
         <p className="volunteerAdd-text">Area: </p>
         <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
           <option value="">Select Area...</option>
-          <option value="option1">Call Center</option>
-          <option value="option2">Pantry</option>
-          <option value="option3">Home Delivery</option>
-          <option value="option4">Warehouse</option>
+          <option value="callCenter">Call Center</option>
+          <option value="pantry">Pantry</option>
+          <option value="homeDelivery">Home Delivery</option>
+          <option value="warehouse">Warehouse</option>
         </select>
     </div>
 
@@ -115,7 +144,7 @@ function Add() {
 
     <div className='volunteerAdd-dropdown'>
       <p className="volunteerAdd-text">Time: </p>
-        <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
+        <select className="volunteerAdd-dropdown-box" value={timeSelected} onChange={handleTimeSelectionChange}>
           <option value="">Select Time...</option>
           <option value="option1">Call Center</option>
           <option value="option2">Pantry</option>

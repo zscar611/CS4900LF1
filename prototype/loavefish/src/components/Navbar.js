@@ -6,7 +6,7 @@ function Navbar() {
   const navigate = useNavigate();
   return  (
     <>
-      <nav classname='navbar'>
+      <nav>
         <div className='navbar-wrapper'>
           <ul>
             <a onClick={()=>navigate('/Admin')} className='navbar-text'>

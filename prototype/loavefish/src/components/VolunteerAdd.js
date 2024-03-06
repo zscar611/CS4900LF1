@@ -16,6 +16,10 @@ function Add() {
   const [isCalendarVisible, setCalendarVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [timeSelected, setTimeSelected] = useState("");
+  const [firstFilled, setFirstFilled] = useState(true);
+  const [lastFilled, setLastFilled] = useState(true);
+  const [areaFilled, setAreaFilled] = useState(true);
+
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
   };
@@ -35,10 +39,27 @@ function Add() {
   const handleTimeSelectionChange = (event) => {
     setTimeSelected(event.target.value);
   };
+  
+  const formCompleted = () => {
+    if (currentFirst != "" && currentLast != "" && selectedDate != "" && areaSelection != "" && timeSelected != "") {
+      handleSubmit();
+    }
+    if (currentFirst == "") {
+      setFirstFilled(false);
+    } else { setFirstFilled(true); }
+    if (currentLast == "") {
+      setLastFilled(false);
+    } else { setLastFilled(true); }
+    // phone number
+    // calendar
+    if (areaSelection == "") {
+      setAreaFilled(false);
+    } else { setAreaFilled(true); }
+    // time
+  };
 
   const sendData = async () => {
     try {
-
       const jsonData = {
         FirstName: currentFirst,
         LastName: currentLast,
@@ -70,6 +91,9 @@ function Add() {
     setCurrentPhone("");
     setAreaSelection("");
     setTimeSelected("");
+    setFirstFilled(true);
+    setLastFilled(true);
+    setAreaFilled(true);
   };
 
   const handleCalendarClick = () => {
@@ -95,6 +119,7 @@ function Add() {
           value={currentFirst}
           onChange={handleFirstChange}
           className={"volunteerAdd-input-box"}
+          style={{ borderColor: firstFilled ? 'initial' : 'red' }}
         />
       </div>
       <div className='volunteerAdd-input'>
@@ -104,6 +129,7 @@ function Add() {
           value={currentLast}
           onChange={handleLastChange}
           className={"volunteerAdd-input-box"}
+          style={{ borderColor: lastFilled ? 'initial' : 'red' }}
         />
       </div>
       <div>
@@ -121,7 +147,7 @@ function Add() {
       
       <div className='volunteerAdd-dropdown'>
         <p className="volunteerAdd-text">Area: </p>
-        <select className="volunteerAdd-dropdown-box" value={areaSelection} onChange={handleAreaSelectionChange}>
+        <select className="volunteerAdd-dropdown-box" style={{ borderColor: areaFilled ? 'initial' : 'red' }} value={areaSelection} onChange={handleAreaSelectionChange}>
           <option value="">Select Area...</option>
           <option value="callCenter">Call Center</option>
           <option value="pantry">Pantry</option>
@@ -156,7 +182,7 @@ function Add() {
     </div>
 
       <div className="main-button">
-        <button className="main-button-box" onClick={handleSubmit}>Submit</button>
+        <button className="main-button-box" onClick={formCompleted}>Submit</button>
       </div>
     </div>
   );

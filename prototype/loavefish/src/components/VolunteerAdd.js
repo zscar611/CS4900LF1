@@ -64,10 +64,12 @@ function Add() {
     // send JSON to backend
     // reset all values
     sendData();
+    setSelectedDate(new Date());
     setCurrentFirst("");
     setCurrentLast("");
     setCurrentPhone("");
     setAreaSelection("");
+    setTimeSelected("");
   };
 
   const handleCalendarClick = () => {
@@ -152,8 +154,6 @@ function Add() {
           <option value="option4">Warehouse</option>
         </select>
     </div>
-
-
 
       <div className="main-button">
         <button className="main-button-box" onClick={handleSubmit}>Submit</button>

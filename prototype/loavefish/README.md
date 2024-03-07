@@ -6,6 +6,9 @@ Allow users and admins to login. Allow users to view their dashboard. Allow admi
 
 You will need nodejs and react-scripts to run the project. In the project directory, you can run:
 
+npm i react-scripts
+npm i react-calendar
+
 ### `npm start`
 
 Runs the app in the development mode.

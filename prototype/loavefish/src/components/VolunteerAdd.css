@@ -1,0 +1,52 @@
+.volunteerAdd-input-box {
+    height: 3em;
+    width: 13.5em;
+    font-size: large;
+    border-radius: 10px;
+    border: 1.5px solid black; 
+    padding-left: 8px;
+}
+
+.volunteerAdd-input {
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 1.3em;
+}
+
+.volunteerAdd-text {
+    font-size: larger;
+    font-weight: bolder;
+    text-align: left;
+}
+
+.volunteerAdd-dropdown {
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 1.3em;
+}
+
+.volunteerAdd-dropdown-box {
+    padding: 14px 22px;
+    border-radius: 8px;
+    border-color: black;
+    cursor: pointer;
+    margin-bottom: 1.3em;
+}
+
+.volunteerAdd-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .volunteerAdd-modal-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+  }

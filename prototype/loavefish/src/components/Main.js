@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function Login() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
   const [currentPass, setCurrentPass] = useState("");
@@ -63,4 +63,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;

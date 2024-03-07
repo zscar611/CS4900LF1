@@ -4,7 +4,7 @@ import './App.css';
 import './Reports.css';
 import Navbar from './Navbar.js';
 
-function App() {
+function Report() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
   const handleLogout = () => {
@@ -13,9 +13,6 @@ function App() {
   return (
     <div className="App">
       <Navbar /> 
-	    <div className="main-button">
-        <button className="main-button-box" onClick={handleLogout}>Logout</button>
-      </div>
       <div className="report-align-items">
       <h1>This Weeks Report</h1>
         <div className="main-button">
@@ -44,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default Report;

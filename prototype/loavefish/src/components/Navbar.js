@@ -6,7 +6,7 @@ function Navbar() {
   const navigate = useNavigate();
   return  (
     <>
-      <nav classname='navbar'>
+      <nav>
         <div className='navbar-wrapper'>
           <ul>
             <a onClick={()=>navigate('/Admin')} className='navbar-text'>
@@ -21,6 +21,9 @@ function Navbar() {
           </ul>
           <ul>
             <a onClick={()=>navigate('/Reports')} className='navbar-text'>Reports</a>
+          </ul>
+			<ul>
+            <a onClick={()=>navigate('/')} className='navbar-text'>Logout</a>
           </ul>
         </div>
       </nav>

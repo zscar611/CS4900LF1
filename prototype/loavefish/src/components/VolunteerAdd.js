@@ -19,6 +19,9 @@ function Add() {
   const [firstFilled, setFirstFilled] = useState(true);
   const [lastFilled, setLastFilled] = useState(true);
   const [areaFilled, setAreaFilled] = useState(true);
+  const [phoneFilled, setPhoneFilled] = useState(true);
+  const [calendarFilled, setCalendarFilled] = useState(true);
+  const [calendarOpened, setCalendarOpened] = useState(false);
 
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
@@ -36,23 +39,42 @@ function Add() {
     setAreaSelection(event.target.value);
   };
 
-  const handleTimeSelectionChange = (event) => {
-    setTimeSelected(event.target.value);
+  const handleTimeChange = (event) => {
+    const timeInput = event.target.value;
+    let newTime = "";
+    if (timeInput.length > 0) {
+      newTime = timeInput.slice(0, 2);
+      let minutes = timeInput.slice(3, 5);
+      if (timeInput.length > 1) {
+        newTime = newTime + ":";
+      }
+      if (timeInput.length > 2) {
+        newTime = newTime + minutes;
+      }
+    }
+    setTimeSelected(newTime);
   };
   
   const formCompleted = () => {
-    if (currentFirst != "" && currentLast != "" && selectedDate != "" && areaSelection != "" && timeSelected != "") {
+    console.log(calendarOpened);
+    if (currentFirst !== "" && currentLast !== "" && currentPhone !== "" && calendarOpened === true && areaSelection !== "" && timeSelected !== "") {
       handleSubmit();
     }
-    if (currentFirst == "") {
+    // if inputs are empty, set flag to highlight red
+    if (currentFirst === "") {
       setFirstFilled(false);
     } else { setFirstFilled(true); }
-    if (currentLast == "") {
+    if (currentLast === "") {
       setLastFilled(false);
     } else { setLastFilled(true); }
-    // phone number
-    // calendar
-    if (areaSelection == "") {
+    if (currentPhone === "") {
+      setPhoneFilled(false);
+    } else { setPhoneFilled(true); }    
+    // if calendar has been opened
+    if (calendarOpened === false) {
+      setCalendarFilled(false);
+    } else { setCalendarFilled(true); }  
+    if (areaSelection === "") {
       setAreaFilled(false);
     } else { setAreaFilled(true); }
     // time
@@ -94,10 +116,13 @@ function Add() {
     setFirstFilled(true);
     setLastFilled(true);
     setAreaFilled(true);
+    setPhoneFilled(true);
+    setCalendarOpened(false);
   };
 
   const handleCalendarClick = () => {
     setCalendarVisibility(!isCalendarVisible);
+    setCalendarOpened(true);
   };
 
   const handleDateChange = (date) => {
@@ -112,15 +137,15 @@ function Add() {
       <h1>Schedule Volunteers</h1>
       </header>
       <div className='volunteerAdd-input'>
-      <p className="volunteerAdd-text">Name: </p>
-        <input
-          type="text"
-          placeholder="Enter first name"
-          value={currentFirst}
-          onChange={handleFirstChange}
-          className={"volunteerAdd-input-box"}
-          style={{ borderColor: firstFilled ? 'initial' : 'red' }}
-        />
+        <p className="volunteerAdd-text">Name: </p>
+          <input
+            type="text"
+            placeholder="Enter first name"
+            value={currentFirst}
+            onChange={handleFirstChange}
+            className={"volunteerAdd-input-box"}
+            style={{ borderColor: firstFilled ? 'initial' : 'red' }}
+          />
       </div>
       <div className='volunteerAdd-input'>
         <input
@@ -139,6 +164,7 @@ function Add() {
               type="text"
               placeholder="(123)-456-7890"
               value={currentPhone}
+              style={{ borderColor: phoneFilled ? 'initial' : 'red' }} 
               onChange={handlePhoneChange}
               className={"main-input-box"}
             />
@@ -159,7 +185,7 @@ function Add() {
     <div className='volunteerAdd-dropdown'>
       <p className="volunteerAdd-text">Day:</p>
       <div>
-        <button className="volunteerAdd-dropdown-box" onClick={handleCalendarClick}>Calendar {selectedDate.toLocaleDateString()}</button>
+        <button className="volunteerAdd-dropdown-box" style={{ borderColor: calendarFilled ? 'black' : 'red' }} onClick={handleCalendarClick}>Calendar {selectedDate.toLocaleDateString()}</button>
         {isCalendarVisible && (
           <div className="volunteerAdd-modal" onClick={handleCalendarClick}>
             <div className="volunteerAdd-modal-box" onClick={(e) => e.stopPropagation()}>
@@ -170,16 +196,17 @@ function Add() {
       </div>
     </div>
 
-    <div className='volunteerAdd-dropdown'>
-      <p className="volunteerAdd-text">Time: </p>
-        <select className="volunteerAdd-dropdown-box" value={timeSelected} onChange={handleTimeSelectionChange}>
-          <option value="">Select Time...</option>
-          <option value="option1">Call Center</option>
-          <option value="option2">Pantry</option>
-          <option value="option3">Home Delivery</option>
-          <option value="option4">Warehouse</option>
-        </select>
-    </div>
+    <div className='volunteerAdd-input'>
+        <p className="volunteerAdd-text">Time: </p>
+          <input
+            type="text"
+            placeholder="00:00 AM/PM"
+            value={timeSelected}
+            onChange={handleTimeChange}
+            className={"volunteerAdd-input-box"}
+            style={{ borderColor: firstFilled ? 'initial' : 'red' }}
+          />
+      </div>
 
       <div className="main-button">
         <button className="main-button-box" onClick={formCompleted}>Submit</button>

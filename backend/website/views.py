@@ -4,8 +4,8 @@ from flask import Blueprint, jsonify
 views = Blueprint('views', __name__)
 
 
-@views.route('/users')
+@views.route('/')
 def home():
-    return "hi"
+    return jsonify({"message": "hi"})
 
     

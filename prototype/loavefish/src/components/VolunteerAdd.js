@@ -42,6 +42,7 @@ function Add() {
   const handleTimeChange = (event) => {
     const timeInput = event.target.value;
     let newTime = "";
+    console.log(event.target.value);
     if (timeInput.length > 0) {
       newTime = timeInput.slice(0, 2);
       let minutes = timeInput.slice(3, 5);
@@ -51,6 +52,9 @@ function Add() {
       if (timeInput.length > 2) {
         newTime = newTime + minutes;
       }
+    }
+    if (event.target.value.slice(-1) === ":" && event.target.value.length < timeSelected.length) {
+      newTime = newTime.slice(0, -1);
     }
     setTimeSelected(newTime);
   };

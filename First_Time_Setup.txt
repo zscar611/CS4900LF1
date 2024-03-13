@@ -8,15 +8,18 @@ python3 is required
 
 set up:
 
-npm install react-scripts
-npm install react-calendar
+In project directory  /prototype/loavesfish:
+  
+  npm install react-scripts
+  npm install react-calendar
 
-cd backend/.venv
-Scripts/activate
+In project directory /backend/.venv
+  
+  Scripts/activate
 
-or
+  or
 
-pip install flask
-pip install flask_cors
-pip install flask_sqlalchemy
-pip install flask_login
+  pip install flask
+  pip install flask_cors
+  pip install flask_sqlalchemy
+  pip install flask_login

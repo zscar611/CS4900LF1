@@ -9,9 +9,12 @@ function Navbar() {
       <nav>
         <div className='navbar-wrapper'>
           <ul>
-            <a onClick={()=>navigate('/Admin')} className='navbar-text'>
+            <a onClick={()=>navigate('/adminhome')} className='navbar-text'>
               Home
             </a>
+          </ul>
+          <ul>
+            <a onClick={()=>navigate('/timesheet')} className='navbar-text'>Time Sheet</a>
           </ul>
           <ul>
             <a className='navbar-text'>Calendar</a>

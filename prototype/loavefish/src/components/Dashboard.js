@@ -31,12 +31,6 @@ function Dashboard() {
     }
 	
 	//END CALENDAR STUFF
-
-  async function logUser() {
-    const response = await fetch('http://localhost:5000');
-    const user = await response.json();
-    console.log(user);
-  }
   
   
 	const handleLogout = () => 
@@ -54,9 +48,6 @@ function Dashboard() {
         <img src={'/logo.jpg'} className="main-img" alt="logo"/>
         <p className='dashboard-text'>Welcome Frodo Baggins! </p>
       </header>
-      <div className="main-button">
-        <button className="main-button-box" onClick={logUser}>Get Data</button>
-      </div>
 	 
 	 
 	  <Calendar

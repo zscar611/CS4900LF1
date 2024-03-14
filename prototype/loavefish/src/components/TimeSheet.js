@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-import "./Admin.css";
+import "./TimeSheet.css";
 import Navbar from "./Navbar.js";
 
 // array of people schedulded for today but not checked in
@@ -11,12 +11,12 @@ import Navbar from "./Navbar.js";
 // check in or check out button
 // check out will ask are you sure
 
-function Admin() {
+function TimeSheet() {
   const navigate = useNavigate();
   //const [checkIn, setCheckedIn] = useState([]);
   //const [checkOut, setCheckOut] = useState([]);
 
-  const signInDict = [
+  const [signInDict, setSignInDict] = useState([
     {
       name: "Lionel Messi",
       area: "Pantry",
@@ -28,13 +28,13 @@ function Admin() {
       timeScheduled: "10:30am - 11:30am",
     },
     {
-      name: "Lionel Messi",
+      name: "Pete Rose",
       area: "Home Deliveries",
       timeScheduled: "10:30am - 11:30am",
     },
     {
       name: "Luca Modric",
-      area: "Call Cener",
+      area: "Call Center",
       timeScheduled: "10:30am - 11:30am",
     },
     {
@@ -43,26 +43,81 @@ function Admin() {
       timeScheduled: "10:30am - 11:30am",
     },
     {
-      name: "Kylian Mbappe",
+      name: "Justin Verlander",
       area: "Home Deliveries",
       timeScheduled: "10:30am - 11:30am",
     },
     {
-      name: "Lionel Messi",
+      name: "Miguel Cabrera",
       area: "Pantry",
       timeScheduled: "10:30am - 11:30am",
     },
     {
-      name: "Kylian Mbappe",
+      name: "Billy Beane",
       area: "Warehouse",
       timeScheduled: "10:30am - 11:30am",
     },
-  ];
+  ]);
+  const [signOutDict, setSignOutDict] = useState([
+    {
+      name: "Tom Brady",
+      area: "Pantry",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Bilbo Baggins",
+      area: "Warehouse",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Frodo Baggins",
+      area: "Home Deliveries",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Sam Gamgee",
+      area: "Call Center",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Dwight Shrute",
+      area: "Pantry",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Wes Anderson",
+      area: "Home Deliveries",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Tim Healey",
+      area: "Pantry",
+      timeScheduled: "10:30am - 11:30am",
+    },
+    {
+      name: "Billy Zoto",
+      area: "Warehouse",
+      timeScheduled: "10:30am - 11:30am",
+    },
+  ]);
 
   const signIn = (person) => {
     console.log(person);
+    // send JSON to backend checking in person
+    setSignOutDict((prevSignOutDict) => [...prevSignOutDict, person]);
+    setSignInDict((prevSignInDict) =>
+      prevSignInDict.filter((p) => p !== person)
+    );  
   };
 
+  const signOut = (person) => {
+    console.log(person);
+    // send JSON to backend checking in person
+    setSignOutDict((prevSignOutDict) =>
+    prevSignOutDict.filter((p) => p !== person)
+    );  
+  };
+  
   const handleLogout = () => {
     // TODO insert SQL logic here
     navigate("/");
@@ -79,7 +134,7 @@ function Admin() {
           <ul>
             {signInDict.map((person, index) => (
               <div className="admin-person" key={index}>
-                <p>{person.name}</p>
+                <p className="admin-text">{person.name}</p>
                 <p>{person.area}</p>
                 <p>{person.timeScheduled}</p>
                 <button onClick={() => signIn(person)}>Sign In</button>{" "}
@@ -91,12 +146,12 @@ function Admin() {
         <div className="column">
           <h2>Sign Out</h2>
           <ul>
-            {signInDict.map((person, index) => (
+            {signOutDict.map((person, index) => (
               <div className="admin-person" key={index}>
-                <p>{person.name}</p>
+                <p className="admin-text">{person.name}</p>
                 <p>{person.area}</p>
                 <p>{person.timeScheduled}</p>
-                <button>Sign Out</button>
+                <button onClick={() => signOut(person)}>Sign Out</button>
               </div>
             ))}
           </ul>
@@ -106,4 +161,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default TimeSheet;

@@ -6,16 +6,8 @@
 }
 
 .column {
-  display: flex;
   flex-direction: column;
   flex: 1;
-  margin-left: 20em;
-  margin-right: 0;
-}
-
-.column:last-child {
-  margin-right: 20em;
-  margin-left: 0;
 }
 
 
@@ -28,8 +20,14 @@
 .admin-person {
   background-color: #d3d3d3;
   width: 35%;
-  padding: 5px; /* Adjust padding as needed */
-  margin-bottom: 15px; /* Add margin bottom to create gap */
+  padding: 5px;
+  font-size: large;
+  margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
+  }
+
+
+  .admin-text{
+    cursor: pointer;
   }

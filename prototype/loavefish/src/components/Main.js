@@ -27,7 +27,7 @@ function Login() {
     else if (currentUser === "Admin")
     {
       // TODO add sql logic here
-      navigate('/Admin');
+      navigate('/AdminHome');
     } else { console.log("nope");}
   };
 

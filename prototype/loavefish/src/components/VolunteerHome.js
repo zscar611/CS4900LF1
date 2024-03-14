@@ -9,7 +9,7 @@ function isSameDay(a, b) {
   return differenceInCalendarDays(a, b) === 0;
 }
 
-function Dashboard() {
+function VolunteerHome() {
 	
 	//CALENDAR STUFF
 	
@@ -68,4 +68,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default VolunteerHome;

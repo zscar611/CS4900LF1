@@ -21,7 +21,7 @@ function Login() {
     // TODO add sql logic here
     if (currentUser === "Baggins")
     {
-      navigate('/Dashboard');
+      navigate('/VolunteerHome');
       
     }
     else if (currentUser === "Admin")

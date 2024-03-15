@@ -23,9 +23,7 @@
 }
 
 .navbar-text:hover{
-  transition: all 0.2s ease-out;
   background-color: darkgreen;
-  font-size: 1.7rem;
   height: 60px;
 }
 

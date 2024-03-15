@@ -17,16 +17,16 @@
 }
 
 .admin-person {
-  background-color: #d3d3d3;
+  background-color: rgb(229, 226, 226);
+  border-radius: 8px;
   width: 35%;
   padding: 5px;
   font-size: large;
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
-  }
+}
 
-
-  .admin-text{
-    cursor: pointer;
-  }
+.admin-text {
+  cursor: pointer;
+}

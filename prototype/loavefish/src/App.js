@@ -5,9 +5,10 @@ import Home from './components/Login.js';
 import VolunteerHome from './components/VolunteerHome.js';
 import TimeSheet from './components/TimeSheet';
 import Reports from './components/Reports.js'
-import VolunteerAdd from './components/VolunteerAdd.js';
+import ScheduleVolunteer from './components/ScheduleVolunteer.js';
 import AdminHome from './components/AdminHome.js';
 import Profiles from './components/Profiles.js';
+import CreateVolunteer from './components/CreateVolunteer.js';
 
 function App() {
   const [data, setData] = useState([{}]) 
@@ -19,8 +20,9 @@ function App() {
           <Route path="/adminhome" element={<AdminHome />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/timesheet" element={<TimeSheet/>} />
-          <Route path="/volunteerAdd" element={< VolunteerAdd/>} />
+          <Route path="/ScheduleVolunteer" element={< ScheduleVolunteer/>} />
           <Route path="/profiles" element={< Profiles/>} />
+          <Route path='/CreateVolunteer' element={< CreateVolunteer/>} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>

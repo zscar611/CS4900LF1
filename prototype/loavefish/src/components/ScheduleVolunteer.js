@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar.js";
 import Calendar from "react-calendar";
 import "./App.css";
-import "./VolunteerAdd.css";
+import "./ScheduleVolunteer.css";
 
-function Add() {
+function ScheduleVolunteer() {
   const navigate = useNavigate();
   // declare variables
   const [currentFirst, setCurrentFirst] = useState("");
@@ -312,4 +312,4 @@ function Add() {
   );
 }
 
-export default Add;
+export default ScheduleVolunteer;

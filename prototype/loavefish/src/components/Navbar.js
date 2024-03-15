@@ -20,7 +20,10 @@ function Navbar() {
             <a className='navbar-text'>Calendar</a>
           </ul>
           <ul>
-            <a onClick={()=>navigate('/VolunteerAdd')} className='navbar-text'>Scheduling</a>
+            <a onClick={()=>navigate('/CreateVolunteer')} className='navbar-text'>Create Account</a>
+          </ul>
+          <ul>
+            <a onClick={()=>navigate('/ScheduleVolunteer')} className='navbar-text'>Scheduling</a>
           </ul>
           <ul>
             <a onClick={()=>navigate('/Reports')} className='navbar-text'>Reports</a>

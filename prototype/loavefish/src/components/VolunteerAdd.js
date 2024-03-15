@@ -7,7 +7,7 @@ import "./VolunteerAdd.css";
 
 function Add() {
   const navigate = useNavigate();
-
+  // declare variables
   const [currentFirst, setCurrentFirst] = useState("");
   const [currentLast, setCurrentLast] = useState("");
   const [currentPhone, setCurrentPhone] = useState("");
@@ -24,7 +24,7 @@ function Add() {
   const [calendarOpened, setCalendarOpened] = useState(false);
   const [amClicked, setAmClicked] = useState(false);
   const [pmClicked, setPmClicked] = useState(false);
-
+  // change first and last name as user types
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
   };
@@ -32,24 +32,25 @@ function Add() {
   const handleLastChange = (event) => {
     setCurrentLast(event.target.value);
   };
-
+  // change phone number as user types
   const handlePhoneChange = (event) => {
     let newNum = event.target.value;
+    // get the most recently typed element
     newNum = newNum[newNum.length - 1];
     let intValue = parseInt(newNum);
     // only allow phone numbers of length 10
     if (event.target.value.length < 11) {
-      // Check if the last character is a number
+      // Check if the last element is a number, add to phone number
       if (!isNaN(intValue)) {
         setCurrentPhone(event.target.value);
       }
     }
-    // Check if the input string is empty
+    // if input is empty, set to empty string
     if (event.target.value === "") {
       setCurrentPhone("");
     }
   };
-
+  
   const handleAreaSelectionChange = (event) => {
     setAreaSelection(event.target.value);
   };

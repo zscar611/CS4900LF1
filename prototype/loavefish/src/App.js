@@ -7,6 +7,7 @@ import TimeSheet from './components/TimeSheet';
 import Reports from './components/Reports.js'
 import VolunteerAdd from './components/VolunteerAdd.js';
 import AdminHome from './components/AdminHome.js';
+import Profiles from './components/Profiles.js';
 
 function App() {
   const [data, setData] = useState([{}]) 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/timesheet" element={<TimeSheet/>} />
           <Route path="/volunteerAdd" element={< VolunteerAdd/>} />
+          <Route path="/profiles" element={< Profiles/>} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>

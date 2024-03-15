@@ -4,14 +4,15 @@ import './App.css';
 
 function Login() {
   const navigate = useNavigate();
+  // declare variables
   const [currentUser, setCurrentUser] = useState("");
   const [currentPass, setCurrentPass] = useState("");
   const [submit, setSubmit] = useState(false);
-
+  // change username as user types 
   const handleUserChange = (event) => {
     setCurrentUser(event.target.value);
   };
-
+  // change password as user types 
   const handlePassChange = (event) => {
     setCurrentPass(event.target.value);
   };

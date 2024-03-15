@@ -117,6 +117,12 @@ function TimeSheet() {
     prevSignOutDict.filter((p) => p !== person)
     );  
   };
+
+  // if name is clicked open the volunteers profile
+  const openProfile = (person) => {
+    // send data to back end and navigate to profile js
+    navigate("/profiles")
+  };
   
   const handleLogout = () => {
     // TODO insert SQL logic here
@@ -134,7 +140,7 @@ function TimeSheet() {
           <ul>
             {signInDict.map((person, index) => (
               <div className="admin-person" key={index}>
-                <p className="admin-text">{person.name}</p>
+                <p className="admin-text" onClick={() => openProfile(person)}>{person.name}</p>
                 <p>{person.area}</p>
                 <p>{person.timeScheduled}</p>
                 <button onClick={() => signIn(person)}>Sign In</button>{" "}

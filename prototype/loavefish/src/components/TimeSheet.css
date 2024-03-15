@@ -10,7 +10,6 @@
   flex: 1;
 }
 
-
 @media screen and (max-width: 700px) {
   .column {
     flex: 0 0 100%;

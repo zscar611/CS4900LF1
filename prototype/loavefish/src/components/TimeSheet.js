@@ -107,23 +107,23 @@ function TimeSheet() {
     setSignOutDict((prevSignOutDict) => [...prevSignOutDict, person]);
     setSignInDict((prevSignInDict) =>
       prevSignInDict.filter((p) => p !== person)
-    );  
+    );
   };
 
   const signOut = (person) => {
     console.log(person);
     // send JSON to backend checking in person
     setSignOutDict((prevSignOutDict) =>
-    prevSignOutDict.filter((p) => p !== person)
-    );  
+      prevSignOutDict.filter((p) => p !== person)
+    );
   };
 
   // if name is clicked open the volunteers profile
   const openProfile = (person) => {
     // send data to back end and navigate to profile js
-    navigate("/profiles")
+    navigate("/profiles");
   };
-  
+
   const handleLogout = () => {
     // TODO insert SQL logic here
     navigate("/");
@@ -134,33 +134,37 @@ function TimeSheet() {
       <div className="admin-top-text">
         <h1>Volunteer Time Sheet</h1>
       </div>
-      <div className="row">
-        <div className="column">
-          <h2>Sign In</h2>
-          <ul>
-            {signInDict.map((person, index) => (
-              <div className="admin-person" key={index}>
-                <p className="admin-text" onClick={() => openProfile(person)}>{person.name}</p>
-                <p>{person.area}</p>
-                <p>{person.timeScheduled}</p>
-                <button onClick={() => signIn(person)}>Sign In</button>{" "}
-              </div>
-            ))}
-          </ul>
-        </div>
+      <div className="time-style">
+        <div className="row">
+          <div className="column">
+            <h2>Sign In</h2>
+            <ul>
+              {signInDict.map((person, index) => (
+                <div className="admin-person" key={index}>
+                  <p className="admin-text" onClick={() => openProfile(person)}>
+                    {person.name}
+                  </p>
+                  <p>{person.area}</p>
+                  <p>{person.timeScheduled}</p>
+                  <button onClick={() => signIn(person)}>Sign In</button>{" "}
+                </div>
+              ))}
+            </ul>
+          </div>
 
-        <div className="column">
-          <h2>Sign Out</h2>
-          <ul>
-            {signOutDict.map((person, index) => (
-              <div className="admin-person" key={index}>
-                <p className="admin-text">{person.name}</p>
-                <p>{person.area}</p>
-                <p>{person.timeScheduled}</p>
-                <button onClick={() => signOut(person)}>Sign Out</button>
-              </div>
-            ))}
-          </ul>
+          <div className="column">
+            <h2>Sign Out</h2>
+            <ul>
+              {signOutDict.map((person, index) => (
+                <div className="admin-person" key={index}>
+                  <p className="admin-text">{person.name}</p>
+                  <p>{person.area}</p>
+                  <p>{person.timeScheduled}</p>
+                  <button onClick={() => signOut(person)}>Sign Out</button>
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

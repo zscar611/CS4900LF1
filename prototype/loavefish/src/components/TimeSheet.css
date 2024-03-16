@@ -16,10 +16,17 @@
   }
 }
 
+.time-style {
+  width: 65%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
 .admin-person {
   background-color: rgb(229, 226, 226);
   border-radius: 8px;
-  width: 35%;
+  width: 45%;
   padding: 5px;
   font-size: large;
   margin-bottom: 15px;
@@ -29,4 +36,8 @@
 
 .admin-text {
   cursor: pointer;
+}
+
+.admin-text:hover{
+  color: green;
 }

@@ -11,6 +11,8 @@
   justify-content: center;
   height: 80px;
   background: green;
+  justify-content:flex-end;
+  padding-right: 4em;
 }
 
 .navbar-text{
@@ -23,7 +25,6 @@
 }
 
 .navbar-text:hover{
-  background-color: darkgreen;
-  height: 60px;
+  color: lightgray;
 }
 

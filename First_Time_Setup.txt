@@ -8,12 +8,17 @@ python3 is required
 
 set up:
 
-In project directory  /prototype/loavesfish:
+Run batchfile 'setup' to install required dependencies, 
+or install manually using instructions below:
+
+
+
+In CS4900LF1/prototype/loavesfish:
   
   npm install react-scripts
   npm install react-calendar
 
-In project directory /backend/.venv
+In CS4900LF1/backend/.venv
   
   Scripts/activate
 

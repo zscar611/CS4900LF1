@@ -12,7 +12,7 @@ function AdminHome() {
   const getVolunteerData = () => {};
 
   return (
-    <div className="App">
+    <div className="admin-App">
       <Navbar />
       <h1>Admin Home</h1>
       <div className="adminHome-style">

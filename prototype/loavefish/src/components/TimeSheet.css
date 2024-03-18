@@ -24,7 +24,7 @@
 }
 
 .admin-person {
-  background-color: rgb(229, 226, 226);
+  background-color: white;
   border-radius: 8px;
   width: 45%;
   padding: 5px;
@@ -32,6 +32,7 @@
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid black;
 }
 
 .admin-text {
@@ -39,5 +40,5 @@
 }
 
 .admin-text:hover{
-  color: green;
+  color: #007052;
 }

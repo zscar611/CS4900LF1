@@ -1,3 +1,7 @@
+.admin-App {
+  text-align: center;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -20,7 +24,6 @@
 }
 
 .adminHome-box {
-  background-color: rgb(229, 226, 226);
   border-radius: 8px;
   width: 75%;
   height: calc(90%);
@@ -29,9 +32,18 @@
   margin-bottom: 25px;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid black;
+  background-color: white;
 }
 
 .adminHome-text {
   padding-left: 1em;
+  padding-right: .1em;
   text-align: left;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 0 0 100%;
+  }
 }

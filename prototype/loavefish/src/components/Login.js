@@ -35,7 +35,7 @@ function Login() {
   return (
     <div className="App">
       <header>
-        <img src={'/logo.jpg'} className="main-img" alt="logo" />
+        <img src={'/logo-Burned.png'} className="main-img" alt="logo" />
       </header>
       <h1>Login</h1>
       <div className='main-input'>

@@ -18,15 +18,18 @@ function VolunteerHome() {
 	
 	//applies styling to given days
 	function tileClassName({ date, view }) {
-    // Add class to tiles in month view only
-    if (view === 'month') {
-    // Check if a date React-Calendar wants to check is on the list of dates to add class to
-    if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) {
+		// Add class to tiles in month view only
+		if (view === 'month') {
+		// Check if a date React-Calendar wants to check is on the list of dates to add class to
+		if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) {
       return 'myClassName';
     }}}
 	
-	 const [value, setValue] = useState(new Date());
-    function onChange(nextValue) {
+	const [value, setValue] = useState(new Date());
+	
+	
+    function onChange(nextValue) 
+	{
     setValue(nextValue);
     }
 	
@@ -49,12 +52,13 @@ function VolunteerHome() {
         <p className='dashboard-text'>Welcome Frodo Baggins! </p>
       </header>
 	 
-	 
+	 <center>
 	  <Calendar
       onChange={onChange}
       value={value}
 	  tileClassName={tileClassName}
       />
+	 </center>
 
       <p>Next Appointment: Warehouse | 10:00am - 11:00am | 12/10/2023</p>
       <p>Past Areas: Warehouse, Front Desk, Mailing</p>

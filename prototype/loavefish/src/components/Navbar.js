@@ -1,34 +1,56 @@
-import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Navbar.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
-  return  (
+  return (
     <>
       <nav>
-        <div className='navbar-wrapper'>
+        <div className="navbar-wrapper">
           <ul>
-            <a onClick={()=>navigate('/Admin')} className='navbar-text'>
+            <a onClick={() => navigate("/adminhome")} className="navbar-text">
               Home
             </a>
           </ul>
           <ul>
-            <a className='navbar-text'>Calendar</a>
+            <a onClick={() => navigate("/timesheet")} className="navbar-text">
+              Time Sheet
+            </a>
           </ul>
           <ul>
-            <a onClick={()=>navigate('/VolunteerAdd')} className='navbar-text'>Scheduling</a>
+            <a className="navbar-text">Calendar</a>
           </ul>
           <ul>
-            <a onClick={()=>navigate('/Reports')} className='navbar-text'>Reports</a>
+            <a
+              onClick={() => navigate("/CreateVolunteer")}
+              className="navbar-text"
+            >
+              Create Account
+            </a>
           </ul>
-			<ul>
-            <a onClick={()=>navigate('/')} className='navbar-text'>Logout</a>
+          <ul>
+            <a
+              onClick={() => navigate("/ScheduleVolunteer")}
+              className="navbar-text"
+            >
+              Scheduling
+            </a>
+          </ul>
+          <ul>
+            <a onClick={() => navigate("/Reports")} className="navbar-text">
+              Reports
+            </a>
+          </ul>
+          <ul>
+            <a onClick={() => navigate("/")} className="navbar-text">
+              Logout
+            </a>
           </ul>
         </div>
       </nav>
     </>
-  )
+  );
 }
 
 export default Navbar;

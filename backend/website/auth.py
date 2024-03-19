@@ -2,16 +2,20 @@ from flask import Blueprint, request, jsonify
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
+from flask_sqlalchemy import SQLAlchemy
 
 auth = Blueprint('auth', __name__)
+dbName = "database.db"
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     pass
 
+
 @auth.route('/logout', methods=['GET', 'POST'])
 def logout():
     pass
+
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -21,7 +25,7 @@ def sign_up():
         last_name = request.form.get('last_name')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        
+
         if len(phone_number) != 10:
             message = {"ERROR": "Invalid phone number."}
             return jsonify(message)

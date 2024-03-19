@@ -1,6 +1,15 @@
 .volunteerAdd-input-box {
     height: 3em;
-    width: 13.5em;
+    width: 15em;
+    font-size: large;
+    border-radius: 10px;
+    border: 1.5px solid black; 
+    padding-left: 8px;
+}
+
+.volunteerAdd-input-box-time {
+    height: 3em;
+    width: 6.5em;
     font-size: large;
     border-radius: 10px;
     border: 1.5px solid black; 
@@ -11,6 +20,33 @@
     display: inline-block;
     padding: 5px;
     margin-bottom: 1.3em;
+}
+
+.volunteerAdd-input-box-phone {
+    height: 3em;
+    width: 31.5em;
+    font-size: large;
+    border-radius: 10px;
+    border: 1.5px solid black; 
+    padding-left: 8px;
+  }
+  
+
+.volunteerAdd-inputTime{
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    margin-bottom: 1.3em;
+}
+
+.volunteerAdd-ButtonTime {
+    position: relative;
+    background: green;  
+    color: white;
+    padding: 4px 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .volunteerAdd-text {
@@ -43,11 +79,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
   }
   
   .volunteerAdd-modal-box {
-    background: #fff;
+    background:white;
     padding: 20px;
     border-radius: 8px;
+    z-index: 101;
   }
   

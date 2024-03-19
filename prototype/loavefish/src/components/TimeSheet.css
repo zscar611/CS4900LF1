@@ -1,0 +1,44 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.column {
+  flex-direction: column;
+  flex: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .column {
+    flex: 0 0 100%;
+  }
+}
+
+.time-style {
+  width: 65%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-person {
+  background-color: white;
+  border-radius: 8px;
+  width: 45%;
+  padding: 5px;
+  font-size: large;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+}
+
+.admin-text {
+  cursor: pointer;
+}
+
+.admin-text:hover{
+  color: #007052;
+}

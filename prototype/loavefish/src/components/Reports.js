@@ -13,6 +13,7 @@ function Report() {
   return (
     <div className="App">
       <Navbar /> 
+      <h1>Reports</h1>
       <div className="report-align-items">
       <h1>This Weeks Report</h1>
         <div className="main-button">

@@ -10,7 +10,9 @@
   align-items: center;
   justify-content: center;
   height: 80px;
-  background: green;
+  background: #007052;
+  justify-content:flex-end;
+  padding-right: 4em;
 }
 
 .navbar-text{
@@ -20,12 +22,28 @@
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
 }
 
 .navbar-text:hover{
-  transition: all 0.2s ease-out;
-  background-color: darkgreen;
-  font-size: 1.7rem;
-  height: 60px;
+  color: lightgray;
 }
 
+.navbar-text::after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  background-color: lightgray;
+  display:block;
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  opacity: 0;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.navbar-text:hover::after{
+  opacity: 1;
+}

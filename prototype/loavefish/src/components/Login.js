@@ -4,14 +4,15 @@ import './App.css';
 
 function Login() {
   const navigate = useNavigate();
+  // declare variables
   const [currentUser, setCurrentUser] = useState("");
   const [currentPass, setCurrentPass] = useState("");
   const [submit, setSubmit] = useState(false);
-
+  // change username as user types 
   const handleUserChange = (event) => {
     setCurrentUser(event.target.value);
   };
-
+  // change password as user types 
   const handlePassChange = (event) => {
     setCurrentPass(event.target.value);
   };
@@ -21,20 +22,20 @@ function Login() {
     // TODO add sql logic here
     if (currentUser === "Baggins")
     {
-      navigate('/Dashboard');
+      navigate('/VolunteerHome');
       
     }
     else if (currentUser === "Admin")
     {
       // TODO add sql logic here
-      navigate('/Admin');
+      navigate('/AdminHome');
     } else { console.log("nope");}
   };
 
   return (
     <div className="App">
       <header>
-        <img src={'/logo.jpg'} className="main-img" alt="logo" />
+        <img src={'/logo-Burned.png'} className="main-img" alt="logo" />
       </header>
       <h1>Login</h1>
       <div className='main-input'>

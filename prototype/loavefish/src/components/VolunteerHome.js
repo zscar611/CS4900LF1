@@ -13,7 +13,7 @@ function VolunteerHome() {
 	
 	//CALENDAR STUFF
 	
-	//TODO: get json data for scheduled shifts for a user here, add 1 to the day value for some weird reason to get it right
+	//TODO: get json data for scheduled shift dates for a user here, add 1 to the day value for some weird reason to get it right ( e.g. april 3rd will highlight april 2nd)
 	const datesToAddClassTo = ['2024-03-08','2024-03-10','2024-03-15'];
 	
 	//applies styling to given days
@@ -32,6 +32,9 @@ function VolunteerHome() {
 				return 'normalDate';
 		}
 	}
+	
+	
+	//adds content to given days
 	function tileContent({ date, view }) 
 	{
 		// Add class to tiles in month view only
@@ -40,12 +43,27 @@ function VolunteerHome() {
 			// Check if a date React-Calendar wants to check is on the list of dates to add class to
 			if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) 
 			{
-			return <div><span class="dot"></span></div>;
+			return <div class="popup">
+			
+					<span class="popuptext" id="myPopup">helloooooooooooo!!!...</span>
+					<span class="dot"></span>
+				   </div>;
 			}
 		}
 	}
 	
-	const [value, setValue] = useState(new Date());
+	//WIP: show popup of shift information
+	function showPopup(date) 
+	{
+		if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) 
+			{
+				var popup = document.getElementById("myPopup");
+				popup.classList.toggle("show");
+			}
+	}
+	
+	
+	const [value, setValue] = useState();
 	
 	
     function onChange(nextValue) 
@@ -77,6 +95,7 @@ function VolunteerHome() {
 	  <Calendar
       onChange={onChange}
       value={value}
+	  onClickDay = {showPopup}
 	  tileClassName={tileClassName}
 	  tileContent={tileContent}
       />

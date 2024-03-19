@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import './Calendar.css';
 import { differenceInCalendarDays } from 'date-fns';
 
 function isSameDay(a, b) {
@@ -13,17 +13,25 @@ function VolunteerHome() {
 	
 	//CALENDAR STUFF
 	
-	//list of dates to style differently, this should be list of days that a user is scheduled
-	const datesToAddClassTo = [];
+	//TODO: get json data for scheduled shifts for a user here, add 1 to the day value for some weird reason to get it right
+	const datesToAddClassTo = ['2024-03-08','2024-03-10'];
 	
 	//applies styling to given days
-	function tileClassName({ date, view }) {
+	function tileClassName({ date, view }) 
+	{
 		// Add class to tiles in month view only
-		if (view === 'month') {
-		// Check if a date React-Calendar wants to check is on the list of dates to add class to
-		if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) {
-      return 'myClassName';
-    }}}
+		if (view === 'month') 
+		{
+			// Check if a date React-Calendar wants to check is on the list of dates to add class to
+			if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) 
+			{
+				return 'scheduledDate';
+		
+			}
+			else
+				return 'normalDate';
+		}
+	}
 	
 	const [value, setValue] = useState(new Date());
 	
@@ -48,8 +56,9 @@ function VolunteerHome() {
   return (
     <div className="App">
       <header>
-        <img src={'/logo.jpg'} className="main-img" alt="logo"/>
-        <p className='dashboard-text'>Welcome Frodo Baggins! </p>
+        <img src={'/logo-burned.png'} className="main-img" alt="logo"/>
+        <p className='dashboard-text'>Hello, Frodo!</p>
+		<p>Next Appointment: 12/10/2023 | 10:00am - 11:00am | Warehouse </p>
       </header>
 	 
 	 <center>
@@ -60,9 +69,9 @@ function VolunteerHome() {
       />
 	 </center>
 
-      <p>Next Appointment: Warehouse | 10:00am - 11:00am | 12/10/2023</p>
-      <p>Past Areas: Warehouse, Front Desk, Mailing</p>
-      <p>Total Hours: 30 hours</p>
+   
+      <p>Favorite Areas: Warehouse, Front Desk, Mailing</p>
+      <p>Total Hours Volunteered: 30 </p>
 	   <div className="main-button">
         <button className="main-button-box" onClick={handleLogout}>Logout</button>
       </div>

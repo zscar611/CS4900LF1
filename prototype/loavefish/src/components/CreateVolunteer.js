@@ -27,7 +27,7 @@ function CreateVolunteer() {
   const handlePasswordChange = (event) => {
     setCurrentPassword(event.target.value);
   };
-  
+
   // change phone number as user types
   const handlePhoneChange = (event) => {
     let newNum = event.target.value;
@@ -107,64 +107,65 @@ function CreateVolunteer() {
     setPhoneFilled(true);
   };
 
-
   return (
     <div className="App">
       <Navbar />
+      <div className="box">
       <header>
         <h1>Create Volunteer Account</h1>
       </header>
-      <div className="volunteerAdd-input">
-        <p className="volunteerAdd-text">Name: </p>
-        <input
-          type="text"
-          placeholder="Enter first name"
-          value={currentFirst}
-          onChange={handleFirstChange}
-          className={"volunteerAdd-input-box"}
-          style={{ borderColor: firstFilled ? "initial" : "red" }}
-        />
-      </div>
-      <div className="volunteerAdd-input">
-        <input
-          type="text"
-          placeholder="Enter last name"
-          value={currentLast}
-          onChange={handleLastChange}
-          className={"volunteerAdd-input-box"}
-          style={{ borderColor: lastFilled ? "initial" : "red" }}
-        />
-      </div>
-      <div>
         <div className="volunteerAdd-input">
-          <p className="volunteerAdd-text">Phone Number: </p>
+          <p className="volunteerAdd-text">Name: </p>
           <input
             type="text"
-            placeholder="(123)-456-7890"
-            value={currentPhone}
-            style={{ borderColor: phoneFilled ? "initial" : "red" }}
-            onChange={handlePhoneChange}
-            className={"volunteerAdd-input-box-phone"}
+            placeholder="Enter first name"
+            value={currentFirst}
+            onChange={handleFirstChange}
+            className={"volunteerAdd-input-box"}
+            style={{ borderColor: firstFilled ? "initial" : "red" }}
           />
         </div>
-      </div>
-      <div>
         <div className="volunteerAdd-input">
-          <p className="volunteerAdd-text">?Password: Figure out?</p>
           <input
             type="text"
-            placeholder="Enter Password"
-            value={currentPassword}
-            style={{ borderColor: phoneFilled ? "initial" : "red" }}
-            onChange={handlePasswordChange}
-            className={"volunteerAdd-input-box-phone"}
+            placeholder="Enter last name"
+            value={currentLast}
+            onChange={handleLastChange}
+            className={"volunteerAdd-input-box"}
+            style={{ borderColor: lastFilled ? "initial" : "red" }}
           />
         </div>
-      </div>
-      <div className="main-button">
-        <button className="main-button-box" onClick={formCompleted}>
-          Submit
-        </button>
+        <div>
+          <div className="volunteerAdd-input">
+            <p className="volunteerAdd-text">Phone Number: </p>
+            <input
+              type="text"
+              placeholder="(123)-456-7890"
+              value={currentPhone}
+              style={{ borderColor: phoneFilled ? "initial" : "red" }}
+              onChange={handlePhoneChange}
+              className={"volunteerAdd-input-box-phone"}
+            />
+          </div>
+        </div>
+        <div>
+          <div className="volunteerAdd-input">
+            <p className="volunteerAdd-text">?Password: Figure out?</p>
+            <input
+              type="text"
+              placeholder="Enter Password"
+              value={currentPassword}
+              style={{ borderColor: phoneFilled ? "initial" : "red" }}
+              onChange={handlePasswordChange}
+              className={"volunteerAdd-input-box-phone"}
+            />
+          </div>
+        </div>
+        <div className="main-button">
+          <button className="main-button-box" onClick={formCompleted}>
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

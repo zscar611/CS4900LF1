@@ -22,9 +22,28 @@
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
 }
 
 .navbar-text:hover{
   color: lightgray;
 }
 
+.navbar-text::after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  background-color: lightgray;
+  display:block;
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  opacity: 0;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.navbar-text:hover::after{
+  opacity: 1;
+}

@@ -14,7 +14,7 @@ function VolunteerHome() {
 	//CALENDAR STUFF
 	
 	//TODO: get json data for scheduled shifts for a user here, add 1 to the day value for some weird reason to get it right
-	const datesToAddClassTo = ['2024-03-08','2024-03-10'];
+	const datesToAddClassTo = ['2024-03-08','2024-03-10','2024-03-15'];
 	
 	//applies styling to given days
 	function tileClassName({ date, view }) 
@@ -30,6 +30,18 @@ function VolunteerHome() {
 			}
 			else
 				return 'normalDate';
+		}
+	}
+	function tileContent({ date, view }) 
+	{
+		// Add class to tiles in month view only
+		if (view === 'month') 
+		{
+			// Check if a date React-Calendar wants to check is on the list of dates to add class to
+			if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) 
+			{
+			return <div><span class="dot"></span></div>;
+			}
 		}
 	}
 	
@@ -66,6 +78,7 @@ function VolunteerHome() {
       onChange={onChange}
       value={value}
 	  tileClassName={tileClassName}
+	  tileContent={tileContent}
       />
 	 </center>
 

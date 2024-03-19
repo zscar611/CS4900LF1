@@ -14,10 +14,14 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .shift import shift
 
     app.register_blueprint(views, url_prefix='/')
     
     app.register_blueprint(auth, url_prefix='/auth')
+
+    app.register_blueprint(shift, url_prefix='/shift')
+
 
 
     from .models import User, Shift

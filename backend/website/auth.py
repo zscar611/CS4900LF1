@@ -10,11 +10,11 @@ def login():
     pass
 
 @auth.route('/logout', methods=['GET', 'POST'])
-def login():
+def logout():
     pass
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
-def login():
+def sign_up():
     if request.method == 'POST':
         phone_number = request.form.get('phone_number')
         first_name = request.form.get('first_name')
@@ -38,8 +38,10 @@ def login():
             message = {"ERROR": "Passwords do not match."}
             return jsonify(message)
         else:
-            new_user = User(first_name=first_name, last_name=last_name, phone_number=phone_number, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(first_name=first_name, last_name=last_name, phone_number=phone_number, password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
             message = {"SUCESS": "Account created."}
             return jsonify(message)
+    elif request.method == 'GET':
+        return jsonify({"message": "hi"}), 200

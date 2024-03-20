@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-import "./TimeSheet.css";
+import "./TimeAutonomous.css";
 import Navbar from "./Navbar.js";
 
 // array of people schedulded for today but not checked in
@@ -11,7 +11,7 @@ import Navbar from "./Navbar.js";
 // check in or check out button
 // check out will ask are you sure
 
-function TimeSheet() {
+function TimeAuto() {
   const navigate = useNavigate();
   //const [checkIn, setCheckedIn] = useState([]);
   //const [checkOut, setCheckOut] = useState([]);
@@ -118,38 +118,30 @@ function TimeSheet() {
     );
   };
 
-  // if name is clicked open the volunteers profile
-  const openProfile = (person) => {
-    // send data to back end and navigate to profile js
-    navigate("/profiles");
-  };
-
   const handleLogout = () => {
     // TODO insert SQL logic here
     navigate("/");
   };
 
-  const enterAutoMode = () => {
+  const exitAuto = () => {
     // TODO insert SQL logic here
-    window.open("/autotime", "_blank");
-    window.close();
+    navigate("/timesheet");
   };
 
   return (
     <div className="App">
-      <Navbar />
       <div className="admin-top-text">
         <h1>Volunteer Time Sheet</h1>
       </div>
+      <button onClick={exitAuto}>Exit Autonomous Mode</button>
       <div className="time-style">
-        <button onClick={enterAutoMode}>Enter Autonomous Mode</button>
         <div className="row">
           <div className="column">
             <h2>Sign In</h2>
             <ul>
               {signInDict.map((person, index) => (
                 <div className="admin-person" key={index}>
-                  <p className="admin-text" onClick={() => openProfile(person)}>
+                  <p className="admin-text">
                     {person.name}
                   </p>
                   <p>{person.area}</p>
@@ -179,4 +171,4 @@ function TimeSheet() {
   );
 }
 
-export default TimeSheet;
+export default TimeAuto;

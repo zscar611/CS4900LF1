@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, request, jsonify
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -5,7 +6,17 @@ from . import db
 from flask_sqlalchemy import SQLAlchemy
 
 auth = Blueprint('auth', __name__)
-dbName = "database.db"
+
+@auth.route('/all', methods=['GET'])
+def all():
+   
+   users = User.query.all()
+   all_users = []
+   for user in users:
+    all_users += {"first name": user.first_name, "last name": user.last_name}
+    
+    return json.dumps(all_users)
+       
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():

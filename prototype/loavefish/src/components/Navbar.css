@@ -1,3 +1,7 @@
+.menu-icon {
+  display: none;
+}
+
 .navbar{
   display: flex;
   justify-content: center;
@@ -13,6 +17,7 @@
   background: #007052;
   justify-content:flex-end;
   padding-right: 4em;
+  z-index: 999;
 }
 
 .navbar-text{
@@ -46,4 +51,87 @@
 
 .navbar-text:hover::after{
   opacity: 1;
+}
+
+
+
+@media screen and (max-width: 1300px) {
+  .navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+  }
+  
+  .navbar-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    background: #007052;
+    justify-content:flex-end;
+    padding-right: 2em;
+  }
+  
+  .navbar-text{
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: 0.25rem .65rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+  }
+  
+  .navbar-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    background: #007052;
+    justify-content:flex-end;
+    padding-right: 1.6em;
+  }
+  
+  .navbar-text{
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 0.15rem .15rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+
+  .navbar-wrapper{
+    display: block;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    position: absolute;
+    opacity: 1;
+    background-color: #007052;
+    transition: all 0.2s ease;
+  }
+  
+  .navbar-text{
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+  }
 }

@@ -76,19 +76,19 @@ function CreateVolunteer() {
 
   const sendData = async () => {
     try {
-      const jsonData = {
-        first_name: currentFirst,
-        last_name: currentLast,
-        phone_number: currentPhone,
-      };
-      console.log(jsonData);
-      const response = await fetch("http://localhost:5000/cors/sign-up", {
+      const formData = new FormData();
+      formData.append('first_name', currentFirst);
+      formData.append('last_name', currentLast);
+      formData.append('phone_number', currentPhone);
+      formData.append('password1', currentPassword);
+      formData.append('password2', currentPassword);
+  
+      console.log("Creating:", formData);
+  
+      const response = await fetch("http://localhost:5000/auth/sign-up", {
         method: "POST",
         mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(currentFirst),
+        body: formData,
       });
     } catch (error) {
       console.error("Error: ", error);
@@ -102,6 +102,7 @@ function CreateVolunteer() {
     setCurrentFirst("");
     setCurrentLast("");
     setCurrentPhone("");
+    setCurrentPassword("");
     setFirstFilled(true);
     setLastFilled(true);
     setPhoneFilled(true);
@@ -150,10 +151,10 @@ function CreateVolunteer() {
         </div>
         <div>
           <div className="volunteerAdd-input">
-            <p className="volunteerAdd-text">?Password: Figure out?</p>
+            <p className="volunteerAdd-text">DOB:</p>
             <input
               type="text"
-              placeholder="Enter Password"
+              placeholder="Enter DOB"
               value={currentPassword}
               style={{ borderColor: phoneFilled ? "initial" : "red" }}
               onChange={handlePasswordChange}

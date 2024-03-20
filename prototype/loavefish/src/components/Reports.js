@@ -23,19 +23,19 @@ function Report() {
       <div className="report-align-items">
         <h1>This Months Report</h1>
         <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onC     lick={handleLogout}>Generate</button>
+          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
         </div>
       </div>
       <div className="report-align-items">
         <h1>This Years Report</h1>
         <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onC     lick={handleLogout}>Generate</button>
+          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
         </div>
       </div>
       <div className="report-align-items">
         <h1>All Time Report</h1>
         <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onC     lick={handleLogout}>Generate</button>
+          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
         </div>
       </div>
     </div>

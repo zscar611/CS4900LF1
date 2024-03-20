@@ -4,6 +4,25 @@ import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [button, setButton] = useState(true);
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => setClick(!click);
+
+  const showButton = () => {
+    if (window.innerWidth <= 1000) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
+
+  useEffect(() => {
+    showButton();
+  }, []);
+
+  window.addEventListener("resize", showButton);
+
   return (
     <>
       <nav>

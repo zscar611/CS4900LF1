@@ -48,6 +48,14 @@ function Navbar() {
             </li>
             <li>
               <a
+                onClick={() => navigate("/TimeSheet")}
+                className={"navbar-wrapper-text"}
+              >
+                Time
+              </a>
+            </li>
+            <li>
+              <a
                 onClick={() => navigate("/adminhome")}
                 className={"navbar-wrapper-text"}
               >

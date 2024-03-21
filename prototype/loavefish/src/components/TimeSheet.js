@@ -142,7 +142,6 @@ function TimeSheet() {
         <h1>Volunteer Time Sheet</h1>
       </div>
       <div className="time-style">
-        <button onClick={enterAutoMode}>Enter Autonomous Mode</button>
         <div className="row">
           <div className="column">
             <h2>Sign In</h2>

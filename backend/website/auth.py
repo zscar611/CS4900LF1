@@ -9,12 +9,10 @@ auth = Blueprint('auth', __name__)
        
 @auth.route('/all', methods=['GET'])
 def all():
-   users = User.query.all()
-   all_users = []
-   for user in users:
-    all_users += {"first name": user.first_name, "last name": user.last_name}
-    # Talk to Ryan, for me the function only works with append, and the += adds copy of "first name", "last name"
-    # all_users.append({"first name": user.first_name, "last name": user.last_name})
+    users = User.query.all()
+    all_users = []
+    for user in users:
+        all_users.append({"first name": user.first_name, "last name": user.last_name})
     return json.dumps(all_users)
 
 @auth.route('/login', methods=['GET', 'POST'])

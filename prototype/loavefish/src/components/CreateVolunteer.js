@@ -77,44 +77,73 @@ function CreateVolunteer() {
   const sendData = async () => {
     try {
       const formData = new FormData();
-      formData.append('first_name', currentFirst);
-      formData.append('last_name', currentLast);
-      formData.append('phone_number', currentPhone);
-      formData.append('password1', currentPassword);
-      formData.append('password2', currentPassword);
-  
+      formData.append("first_name", currentFirst);
+      formData.append("last_name", currentLast);
+      formData.append("phone_number", currentPhone);
+      formData.append("password1", currentPassword);
+      formData.append("password2", currentPassword);
+
       console.log("Creating:", formData);
-  
+
       const response = await fetch("http://localhost:5000/auth/sign-up", {
         method: "POST",
         mode: "cors",
         body: formData,
       });
+      if (response.ok) {
+        // account created
+        console.log("Response received");
+        const responseData = await response.json();
+        // if account created
+        if (responseData.SUCESS) {
+          console.log("Account Created");
+          return true;
+        }
+        // if error
+        if (responseData.ERROR) {
+          if ((responseData.ERROR === "First name must be greater than 2 characters.")) {
+            setFirstFilled(false);
+            console.log("Error: First Name must be greater than two characters");
+          }
+          if ((responseData.ERROR === "Last name must be greater than 2 characters.")) {
+            setLastFilled(false);
+            console.log("Error: Last name must be greater than 2 characters");
+          }
+          if ((responseData.ERROR === "Password must be over 12 characters.")) {
+            setPhoneFilled(false);
+            console.log("Error: Password must be over 12 characters");
+          }
+          return false;
+        }
+      }
     } catch (error) {
-      console.error("Error: ", error);
+      console.error("Message Not Sent: ", error);
     }
   };
 
-  const handleSubmit = () => {
-    // send JSON to backend
+  const handleSubmit = async () => {
+    // send Form to backend
+    const result = await sendData();
     // reset all values
-    sendData();
-    setCurrentFirst("");
-    setCurrentLast("");
-    setCurrentPhone("");
-    setCurrentPassword("");
-    setFirstFilled(true);
-    setLastFilled(true);
-    setPhoneFilled(true);
+    console.log(result);
+    if (result === true) {
+      setCurrentFirst("");
+      setCurrentLast("");
+      setCurrentPhone("");
+      setCurrentPassword("");
+      setFirstFilled(true);
+      setLastFilled(true);
+      setPhoneFilled(true);
+    }
   };
 
   return (
     <div className="App">
       <Navbar />
       <div className="box">
-      <header>
-        <h1>Create Volunteer Account</h1>
-      </header>
+        <header>
+          <h1>Create Volunteer Account</h1>
+        </header>
         <div className="volunteerAdd-input">
           <p className="volunteerAdd-text">Name: </p>
           <input

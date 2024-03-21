@@ -1,31 +1,29 @@
 from flask import Blueprint, request, jsonify
 from .models import Shift
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
-from flask_sqlalchemy import SQLAlchemy
 
 shift = Blueprint('shift', __name__)
 
-# new route to retrieve information from the add shift page (volunteerAdd.js) then communicate that to the database
-@shift.route('/add', methods=['GET', 'POST'])
-def newShift():
-    # TODO: Add a function to remove a record from the database
-    # TODO: Gonna have to talk to Tim about his code and getting the data from volunteerAdd.js over to here
-    # ^ Until then, I'm just gonna be sending test data to the DB
-    firstName = "Frank"
-    lastName = "Sawyer"
-    phoneNumber = "7088000222"  # TODO: phone number is listed in the form on /VolunteerAdd but does not exist in the Database itself
-    date = "10/27/2025"
-    timeIn = "4:20"
+@shift.route('/ScheduleVolunteer') # decorator
+def home():  # will run every time the directory is entered
+    # TODO: phone number is listed in the form on /VolunteerAdd but does not exist in the Database itself
+    first_name = request.form.get()
+    last_name = request.form.get()
+    phone_number = request.form.get()
+    date = request.form.get()
+    time_in = request.form.get()
+    # TODO: determine how the following 6 values will be entered into the DB
     timeOut = "8:20"
-    shiftId = 1
+    shiftId = 1  # Shift ID is the only required value in the DB
     hours = 4
     group = "Broncos"
     zone = "Pantry"
-    totalVol = 1               #TODO: Verify that volunteer field is in fact the number of volunteers in the shift
-    # admin = User(username='admin', email='admin@example.com')
-    testShift = shift(id=shiftId, date=date, fullname=firstName + ' ' + lastName, activity=zone, time_in=timeIn, time_out=timeOut, hours=hours, group=group, volunteer=totalVol)
-    # TODO: verify that this is actually pushing the data to the db
-    db.session.add(testShift)
+    totalVol = 1  #TODO: Verify that volunteer field is in fact the number of volunteers in the shift given that it is a group
+
+    newShift = Shift(first_name=first_name, last_name=last_name, phone_number=phone_number,
+                    date=date, time_in=time_in)
+    db.session.add(newShift)
     db.session.commit()
     message = {"SUCESS": "Shift created."}
     return jsonify(message)

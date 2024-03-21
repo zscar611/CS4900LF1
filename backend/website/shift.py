@@ -5,6 +5,25 @@ from . import db
 
 shift = Blueprint('shift', __name__)
 
+# TODO: Query functions are designed but need to be implemented and tested
+# A query for any shifts that has an in time but does not have an out time (clocked in or has not begun)
+def incompleteShifts():
+    clockedIn = Shift.query.filter(
+    Shift.out_time.like('NULL')
+    )
+
+# A query for any shifts that has both in and out times (completed shift)
+def completedShifts():
+    clockedIn = Shift.query.filter(
+    Shift.out_time.like(not 'NULL')
+    )
+
+# A query for any given shifts in a given day (regardless of clocked in or out)
+def shiftOnGivenDay(day):
+    givenDay = Shift.query.filter(
+    Shift.date.like(day)
+    )
+
 @shift.route('/ScheduleVolunteer') # decorator
 def home():  # will run every time the directory is entered
     # TODO: phone number is listed in the form on /VolunteerAdd but does not exist in the Database itself
@@ -25,5 +44,5 @@ def home():  # will run every time the directory is entered
                     date=date, time_in=time_in)
     db.session.add(newShift)
     db.session.commit()
-    message = {"SUCESS": "Shift created."}
+    message = {"SUCCESS": "Shift created."}
     return jsonify(message)

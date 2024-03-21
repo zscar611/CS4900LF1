@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './App.css';
-import './Reports.css';
-import Navbar from './Navbar.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./App.css";
+import "./Reports.css";
+import Navbar from "./Navbar.js";
 
 function Report() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState("");
-  const handleLogout = () => {
-          navigate('/');
-  };
+  const [allAccounts, setAllAccounts] = useState([]);
+
 
   const getData = async () => {
     try {
@@ -20,8 +19,10 @@ function Report() {
       if (response.ok) {
         const allUsers = await response.json();
         console.log("All users:", allUsers);
-        allUsers.forEach(user => {
+        setAllAccounts([]);
+        allUsers.forEach((user) => {
           console.log(user["first name"], user["last name"]);
+          setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
         });
       } else {
         console.error("Error fetching all users:", response.statusText);
@@ -33,30 +34,35 @@ function Report() {
 
   return (
     <div className="App">
-      <Navbar /> 
+      <Navbar />
       <h1>Reports</h1>
       <div className="report-align-items">
-      <h1>This Weeks Report</h1>
+        <h1>This Weeks Report</h1>
         <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onClick={getData}>Generate</button>
+          <button
+            className="main-button-box"
+            style={{ display: "flex" }}
+            onClick={getData}
+          >
+            Generate
+          </button>
         </div>
       </div>
-      <div className="report-align-items">
-        <h1>This Months Report</h1>
-        <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
-        </div>
-      </div>
-      <div className="report-align-items">
-        <h1>This Years Report</h1>
-        <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
-        </div>
-      </div>
-      <div className="report-align-items">
-        <h1>All Time Report</h1>
-        <div className="main-button">
-          <button className="main-button-box" style={{display: "flex"}} onClick={handleLogout}>Generate</button>
+      <div className="adminHome-style">
+        <div className="row">
+          <div className="column">
+            <ul>
+              <div className="admin-person">
+                <p className="admin-text">All Accounts: </p>
+                {allAccounts.map((person, index) => (
+                  <p className="admin-text" key={index}>
+                    {person["first name"]} {person["last name"]}
+                  </p>
+                ))}
+                <p className="admin-text">Total Accounts: {allAccounts.length}</p>
+              </div>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

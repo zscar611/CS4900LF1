@@ -168,6 +168,7 @@ function TimeSheet() {
                   <p className="admin-text">{person.name}</p>
                   <p>{person.area}</p>
                   <p>{person.timeScheduled}</p>
+                  <button onClick={() => signOut(person)}>Undo</button>
                   <button onClick={() => signOut(person)}>Sign Out</button>
                 </div>
               ))}

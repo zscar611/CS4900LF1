@@ -1,74 +1,95 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [button, setButton] = useState(true);
-  const [click, setClick] = useState(false);
+  const [displayNav, setDisplayNavr] = useState(false);
 
-  const handleClick = () => setClick(!click);
+  // when user clicks on hamburger, either open or close the display
+  const handleClickNav = () => {
+    setDisplayNavr(!displayNav);
+  };
 
-  const showButton = () => {
-    if (window.innerWidth <= 1000) {
-      setButton(false);
-    } else {
-      setButton(true);
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      // USE SQL TO FIND USER PROFILE
+      console.log("Search For Name");
+      navigate("/profiles");
     }
   };
 
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener("resize", showButton);
-
   return (
-    <>
-      <nav>
-        <div className="navbar-wrapper">
-          <ul>
-            <a onClick={() => navigate("/adminhome")} className="navbar-text">
-              Home
-            </a>
-          </ul>
-          <ul>
-            <a onClick={() => navigate("/timesheet")} className="navbar-text">
-              Time Sheet
-            </a>
-          </ul>
-          <ul>
-            <a className="navbar-text">Calendar</a>
-          </ul>
-          <ul>
-            <a
-              onClick={() => navigate("/CreateVolunteer")}
-              className="navbar-text"
-            >
-              Create Account
-            </a>
-          </ul>
-          <ul>
-            <a
-              onClick={() => navigate("/ScheduleVolunteer")}
-              className="navbar-text"
-            >
-              Scheduling
-            </a>
-          </ul>
-          <ul>
-            <a onClick={() => navigate("/Reports")} className="navbar-text">
-              Reports
-            </a>
-          </ul>
-          <ul>
-            <a onClick={() => navigate("/")} className="navbar-text">
-              Logout
-            </a>
+    <nav className="navbar-body">
+      <div className="navbar-container">
+        <input
+          type="text"
+          placeholder=" Search Volunteers Name"
+          className={"navbar-input"}
+          onKeyDown={handleEnter}
+        />
+        <div className="navbar-dynammicButton" onClick={handleClickNav}>
+          <img
+            src={"/hamburger.png"}
+            className="navbar-image"
+            alt="hamburger"
+          />
+        </div>
+
+        <div className={`navbar-wrapper  ${displayNav && "displayed"}`}>
+          <ul className={"navbar-wrapper-list"}>
+            <li>
+              <a
+                onClick={() => navigate("/adminhome")}
+                className={"navbar-wrapper-text"}
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => navigate("/adminhome")}
+                className={"navbar-wrapper-text"}
+              >
+                Calendar
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => navigate("/CreateVolunteer")}
+                className={"navbar-wrapper-text"}
+              >
+                Create
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => navigate("/ScheduleVolunteer")}
+                className={"navbar-wrapper-text"}
+              >
+                Schedule
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => navigate("/Reports")}
+                className={"navbar-wrapper-text"}
+              >
+                Reports
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => navigate("/")}
+                className={"navbar-wrapper-text"}
+              >
+                Sign Out
+              </a>
+            </li>
           </ul>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 }
 

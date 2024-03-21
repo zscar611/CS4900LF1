@@ -24,7 +24,7 @@ function Navbar() {
       <div className="navbar-container">
         <input
           type="text"
-          placeholder=" Search Volunteers Name"
+          placeholder="Search Volunteers Name"
           className={"navbar-input"}
           onKeyDown={handleEnter}
         />

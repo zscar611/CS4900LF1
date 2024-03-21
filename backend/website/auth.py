@@ -61,7 +61,7 @@ def sign_up():
             message = {"ERROR": "Invalid date of birth"}
             return jsonify(message), 400
         else:
-            new_user = User(first_name=first_name, last_name=last_name, phone_number=phone_number, password=generate_password_hash(password, method='pbkdf2:sha256'))
+            new_user = User(first_name=first_name, last_name=last_name, phone_number=phone_number, date_of_birth=date_of_birth, password=generate_password_hash(password, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
             message = {"SUCESS": "Account created."}

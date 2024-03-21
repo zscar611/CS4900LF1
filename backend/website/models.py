@@ -22,4 +22,5 @@ class User(db.Model, UserMixin):
     # unsure if I should merge these two
     first_name = db.Column(db.String(150), nullable=False)
     last_name = db.Column(db.String(150), nullable=False)
+    date_of_birth = db.Column(db.String(10), nullable=False)
     shifts = db.relationship('Shift')

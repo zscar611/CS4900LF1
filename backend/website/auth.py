@@ -6,13 +6,22 @@ from . import db
 from flask_sqlalchemy import SQLAlchemy
 
 auth = Blueprint('auth', __name__)
+
+def serialize_user(user):
+    user_to_return = {}
+    user_to_return['first_name'] = user.first_name
+    user_to_return['last_name'] = user.last_name
+    user_to_return['phone_number'] = user.phone_number
+    user_to_return['date_of_birth'] = user.date_of_birth
+
+    return user_to_return
        
 @auth.route('/all', methods=['GET'])
 def all():
     users = User.query.all()
     all_users = []
     for user in users:
-        all_users.append({"first name": user.first_name, "last name": user.last_name})
+        all_users.append(serialize_user(user))
     return json.dumps(all_users)
 
 # get users basic info
@@ -21,15 +30,6 @@ def get_user():
     if request.method == 'GET':
         first_name = request.args.get('first_name')
         last_name = request.args.get('last_name')
-
-        def serialize_user(user):
-            user_to_return = {}
-            user_to_return['first_name'] = user.first_name
-            user_to_return['last_name'] = user.last_name
-            user_to_return['phone_number'] = user.phone_number
-            user_to_return['date_of_birth'] = user.date_of_birth
-
-            return user_to_return
         
         return_list = []
 
@@ -44,7 +44,27 @@ def get_user():
 
         if users:
             return json.dumps(return_list), 200
+        
+# delete user
+@auth.route('/delete', methods=['DELETE'])
+def delete():
+    if request.method == 'DELETE':
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        phone_number = request.form.get('phone_number')
 
+        user = User.query.filter(
+        User.first_name.like(first_name),
+        User.last_name.like(last_name),
+        User.phone_number.like(phone_number)
+        ).first()
+
+        return jsonify({"message": "hi"})
+
+
+
+
+        
 
 
 
@@ -72,7 +92,6 @@ def login():
             message = {"ERROR": "Phone number not found"}
             return jsonify(message), 400
         
-
 
 
 @auth.route('/logout', methods=['GET', 'POST'])

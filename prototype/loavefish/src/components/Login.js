@@ -17,20 +17,72 @@ function Login() {
     setCurrentPass(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const sendData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("phone_number", currentUser);
+      formData.append("password", currentPass);
+
+      console.log("Creating:", formData);
+
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        mode: "cors",
+        body: formData,
+      });
+      if (response.ok) {
+        
+        console.log("Response received");
+        const responseData = await response.json();
+        // if logged in
+        if (responseData.SUCCESS) {
+          console.log("Logged In");
+          return true;
+        }
+        // if error
+        if (responseData.ERROR) {
+          console.log(responseData.ERROR)
+          
+          return false;
+        }
+      }
+    } catch (error) {
+      console.error("Message Not Sent: ", error);
+    }
+  };
+
+
+
+  const handleSubmit = async () => {
     // check here if userName and password are in db
     // TODO add sql logic here
-    if (currentUser === "Baggins")
+
+    const result = await sendData();
+    if(currentUser === "Admin")
     {
-      navigate('/VolunteerHome');
-      
-    }
-    else if (currentUser === "Admin")
-    {
-      // TODO add sql logic here
       navigate('/AdminHome');
-    } else { console.log("nope");}
+    }
+    else if(currentUser === "Baggins")
+    {
+      navigate('/AdminHome');
+    }
+    else if (result === true)
+    {
+      if (currentUser === "Admin")
+      {
+        navigate('/AdminHome');
+      }
+      else
+      {
+        // TODO add sql logic here
+        navigate('/VolunteerHome');
+      } 
+      
+    }else { console.log("Error");}
+
   };
+
+  
 
   return (
     <div className="App">

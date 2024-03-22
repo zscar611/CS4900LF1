@@ -6,6 +6,53 @@ import "./App.css";
 import "./ScheduleVolunteer.css";
 
 function ScheduleVolunteer() {
+	
+
+	//list of names to populate
+	const fullNameList = [];
+  
+	//list of names to concantenate
+	const firstNameList = [];
+	const lastNameList = []; 
+	const nameInput = document.getElementById('nameInput');		
+  
+  
+	//gets name data
+	const [allAccounts, setAllAccounts] = useState([]);
+	const getData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/auth/all", {
+        method: "GET",
+        mode: "cors",
+      });
+      if (response.ok) {
+        const allUsers = await response.json();
+		
+  
+        console.log("All users:", allUsers);
+        setAllAccounts([]);
+        allUsers.forEach((user) => {
+          console.log(user["first name"], user["last name"]);
+          setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
+        });
+      } else {
+        console.error("Error fetching all users:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching all users:", error);
+    }
+  };
+
+ console.log(fullNameList);
+for(let i = 0; i < allAccounts.length; i++)
+		{
+		
+			fullNameList.push(allAccounts[i]["first_name"] + " " + allAccounts[i]["last_name"]);
+		}	
+	
+  
+  
+	
   const navigate = useNavigate();
   // declare variables
   const [currentFirst, setCurrentFirst] = useState("");
@@ -26,6 +73,9 @@ function ScheduleVolunteer() {
   const [pmClicked, setPmClicked] = useState(false);
   // change first and last name as user types
   const handleFirstChange = (event) => {
+	  getData();
+	 document.getElementById('fullNamesList').innerHTML = fullNameList
+	.map( name => `<option>${name}</option>`).join("")
     setCurrentFirst(event.target.value);
   };
 
@@ -203,27 +253,25 @@ function ScheduleVolunteer() {
       <header>
         <h1>Schedule Volunteers</h1>
       </header>
-      <div className="volunteerAdd-input">
-        <p className="volunteerAdd-text">Name: </p>
-        <input
-          type="text"
-          placeholder="Enter first name"
-          value={currentFirst}
-          onChange={handleFirstChange}
-          className={"volunteerAdd-input-box"}
-          style={{ borderColor: firstFilled ? "initial" : "red" }}
-        />
-      </div>
-      <div className="volunteerAdd-input">
-        <input
-          type="text"
-          placeholder="Enter last name"
-          value={currentLast}
-          onChange={handleLastChange}
-          className={"volunteerAdd-input-box"}
-          style={{ borderColor: lastFilled ? "initial" : "red" }}
-        />
-      </div>
+	  
+	  
+	  
+	  
+       <div  className="volunteerAdd-input">
+          <p className="volunteerAdd-text">Name: </p>
+          <input
+		    
+            type="text"
+			list = "fullNamesList"
+            placeholder="Click here"
+            value={currentFirst}
+            onChange={handleFirstChange}
+            className={"volunteerAdd-input-box"}
+			id = "nameInput"
+            style={{ borderColor: firstFilled ? "initial" : "red" }}
+          />
+		  <datalist id = "fullNamesList"></datalist>
+        </div>
       <div>
         <div className="volunteerAdd-input">
           <p className="volunteerAdd-text">Phone Number: </p>
@@ -238,6 +286,8 @@ function ScheduleVolunteer() {
         </div>
       </div>
 
+		
+	
       <div className="volunteerAdd-dropdown">
         <p className="volunteerAdd-text">Area: </p>
         <select

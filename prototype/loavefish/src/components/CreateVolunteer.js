@@ -10,11 +10,13 @@ function CreateVolunteer() {
   const [currentFirst, setCurrentFirst] = useState("");
   const [currentLast, setCurrentLast] = useState("");
   const [currentPhone, setCurrentPhone] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
+  let phoneNumberInt = "";
+  const [currentDOB, setCurrentDOB] = useState("");
   const [submit, setSubmit] = useState(false);
   const [firstFilled, setFirstFilled] = useState(true);
   const [lastFilled, setLastFilled] = useState(true);
   const [phoneFilled, setPhoneFilled] = useState(true);
+  const [dobFilled, setDOBFilled] = useState(true);
   // change first and last name as user types
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
@@ -24,35 +26,85 @@ function CreateVolunteer() {
     setCurrentLast(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
-    setCurrentPassword(event.target.value);
+  const handleDOBChange = (event) => {
+    let newNum = event.target.value;
+    let intValue = parseInt(newNum[newNum.length - 1]);
+    // if data load is null its backspace
+    if (event.nativeEvent.data == null) {
+      if (event.target.value.length !== 2 && event.target.value.length !== 5) {
+        setCurrentDOB(event.target.value);
+      } // if it has a / delete two elements
+      else {
+        setCurrentDOB(newNum.slice(0, -1));
+      }
+    }
+    // if data load has data add
+    else {
+      if (event.target.value === "") {
+        setCurrentDOB("");
+        return;
+      }
+      if (event.target.value.length < 11) {
+        if (!isNaN(intValue)) {
+          setCurrentDOB(event.target.value);
+        }
+        if (event.target.value.length === 2 || event.target.value.length === 5) {
+          setCurrentDOB(event.target.value + "/");
+        }
+      }
+    }
   };
 
   // change phone number as user types
   const handlePhoneChange = (event) => {
     let newNum = event.target.value;
-    // get the most recently typed element
-    newNum = newNum[newNum.length - 1];
-    let intValue = parseInt(newNum);
-    // only allow phone numbers of length 10
-    if (event.target.value.length < 11) {
-      // Check if the last element is a number, add to phone number
-      if (!isNaN(intValue)) {
+    let intValue = parseInt(newNum[newNum.length - 1]);
+    // if data load is null its backspace
+    if (event.nativeEvent.data == null) {
+      if (event.target.value.length !== 1 && event.target.value.length !== 4 && event.target.value.length !== 8) {
         setCurrentPhone(event.target.value);
+        
+      } // if it has a / delete two elements
+      else {
+        setCurrentPhone(newNum.slice(0, -1));
       }
     }
-    // if input is empty, set to empty string
-    if (event.target.value === "") {
-      setCurrentPhone("");
+    // if data load has data add
+    else {
+      if (event.target.value === "") {
+        setCurrentPhone("");
+        return;
+      }
+      if (event.target.value.length < 14) {
+        if (!isNaN(intValue)) {
+          setCurrentPhone(event.target.value);
+        }
+        if ((event.target.value.length - 1) === 0) {
+          setCurrentPhone("(" + event.target.value);
+        }
+        if ((event.target.value.length - 1) === 3) {
+          setCurrentPhone(event.target.value + ")");
+        }
+        if ((event.target.value.length - 1) === 7) {
+          setCurrentPhone(event.target.value + "-");
+        }
+      }
     }
   };
 
   const formCompleted = () => {
+    for (let i = 0; i < currentPhone.length; i++) {
+      if (!isNaN(currentPhone[i])){
+        phoneNumberInt = phoneNumberInt + currentPhone[i];
+      }
+    }
     if (
       currentFirst !== "" &&
       currentLast !== "" &&
       currentPhone !== "" &&
-      currentPhone.length === 10
+      phoneNumberInt.length === 10 &&
+      currentDOB !== "" &&
+      currentDOB.length === 10
     ) {
       handleSubmit();
     }
@@ -67,10 +119,15 @@ function CreateVolunteer() {
     } else {
       setLastFilled(true);
     }
-    if (currentPhone === "" || currentPhone.length != 10) {
+    if (currentPhone === "" || phoneNumberInt.length != 10) {
       setPhoneFilled(false);
     } else {
       setPhoneFilled(true);
+    }
+    if (currentDOB === "" || currentDOB.length != 10) {
+      setDOBFilled(false);
+    } else {
+      setDOBFilled(true);
     }
   };
 
@@ -79,9 +136,8 @@ function CreateVolunteer() {
       const formData = new FormData();
       formData.append("first_name", currentFirst);
       formData.append("last_name", currentLast);
-      formData.append("phone_number", currentPhone);
-      formData.append("password1", currentPassword);
-      formData.append("password2", currentPassword);
+      formData.append("phone_number", phoneNumberInt);
+      formData.append("date_of_birth", currentDOB);
 
       console.log("Creating:", formData);
 
@@ -130,7 +186,7 @@ function CreateVolunteer() {
       setCurrentFirst("");
       setCurrentLast("");
       setCurrentPhone("");
-      setCurrentPassword("");
+      setCurrentDOB("");
       setFirstFilled(true);
       setLastFilled(true);
       setPhoneFilled(true);
@@ -170,7 +226,7 @@ function CreateVolunteer() {
             <p className="volunteerAdd-text">Phone Number: </p>
             <input
               type="text"
-              placeholder="(123)-456-7890"
+              placeholder="(123)456-7890"
               value={currentPhone}
               style={{ borderColor: phoneFilled ? "initial" : "red" }}
               onChange={handlePhoneChange}
@@ -178,19 +234,22 @@ function CreateVolunteer() {
             />
           </div>
         </div>
+
         <div>
           <div className="volunteerAdd-input">
             <p className="volunteerAdd-text">DOB:</p>
             <input
               type="text"
-              placeholder="Enter DOB"
-              value={currentPassword}
-              style={{ borderColor: phoneFilled ? "initial" : "red" }}
-              onChange={handlePasswordChange}
+              placeholder="01/01/2002"
+              value={currentDOB}
+              style={{ borderColor: dobFilled ? "initial" : "red" }}
+              onChange={handleDOBChange}
               className={"volunteerAdd-input-box-phone"}
             />
           </div>
         </div>
+
+        
         <div className="main-button">
           <button className="main-button-box" onClick={formCompleted}>
             Submit

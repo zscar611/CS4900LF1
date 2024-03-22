@@ -17,7 +17,23 @@ def all():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    pass
+    if request.method == 'POST':
+        phone_number = request.form.get('phone_number')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(phone_number=phone_number).first()
+        if user:
+            if check_password_hash(user.password, password):
+                message = {"SUCESS": "User sucessfully logged in"}
+                return jsonify(message), 200
+            else:
+                message = {"ERROR": "Incorrect password"}
+                return jsonify(message), 400
+        else:
+            message = {"ERROR": "Phone number not found"}
+            return jsonify(message), 400
+        
+
 
 
 @auth.route('/logout', methods=['GET', 'POST'])

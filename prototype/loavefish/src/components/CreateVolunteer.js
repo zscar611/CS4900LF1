@@ -151,7 +151,7 @@ function CreateVolunteer() {
         console.log("Response received");
         const responseData = await response.json();
         // if account created
-        if (responseData.SUCESS) {
+        if (responseData.SUCCESS) {
           console.log("Account Created");
           return true;
         }

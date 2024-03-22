@@ -28,8 +28,8 @@ def all():
 @auth.route('/user', methods=['GET', 'POST'])
 def get_user():
     if request.method == 'GET':
-        first_name = request.args.get('first_name')
-        last_name = request.args.get('last_name')
+        first_name = request.args.get("first_name")
+        last_name = request.args.get("last_name")
         
         return_list = []
 
@@ -49,9 +49,9 @@ def get_user():
 @auth.route('/delete', methods=['DELETE'])
 def delete():
     if request.method == 'DELETE':
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        phone_number = request.form.get('phone_number')
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        phone_number = request.form.get("phone_number")
 
         user = User.query.filter(
             User.first_name.like(first_name),
@@ -59,15 +59,12 @@ def delete():
             User.phone_number.like(phone_number)
         ).first()
 
-        print(user)
-
         if user:
+            db.session.delete(user)
+            db.session.commit()
             message = {"SUCCESS": "User deleted"}
             return jsonify(message), 200
-        else:
-            message = {"ERROR": "User not found"}
-            return jsonify(message), 400
-
+       
 
 
 
@@ -80,8 +77,8 @@ def delete():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        phone_number = request.form.get('phone_number')
-        password = request.form.get('password')
+        phone_number = request.form.get("phone_number")
+        password = request.form.get("password")
 
         user = User.query.filter(
         User.phone_number.like(phone_number),
@@ -109,10 +106,12 @@ def logout():
 @auth.route('/sign-up/', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
-        phone_number = request.form.get('phone_number')
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        date_of_birth = request.form.get('date_of_birth')
+        phone_number = request.form.get("phone_number")
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        date_of_birth = request.form.get("date_of_birth")
+
+        print(last_name)
 
         # auto generate password
         password = last_name.lower()[:3] + first_name.lower()[:3] + date_of_birth[:2] + date_of_birth[6:]

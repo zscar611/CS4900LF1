@@ -54,12 +54,19 @@ def delete():
         phone_number = request.form.get('phone_number')
 
         user = User.query.filter(
-        User.first_name.like(first_name),
-        User.last_name.like(last_name),
-        User.phone_number.like(phone_number)
+            User.first_name.like(first_name),
+            User.last_name.like(last_name),
+            User.phone_number.like(phone_number)
         ).first()
 
-        return jsonify({"message": "hi"})
+        print(user)
+
+        if user:
+            message = {"SUCCESS": "User deleted"}
+            return jsonify(message), 200
+        else:
+            message = {"ERROR": "User not found"}
+            return jsonify(message), 400
 
 
 

@@ -63,7 +63,7 @@ def login():
 
         if user:
             if check_password_hash(user.password, password):
-                message = {"SUCESS": "User sucessfully logged in"}
+                message = {"SUCCESS": "User sucessfully logged in"}
                 return jsonify(message), 200
             else:
                 message = {"ERROR": "Incorrect password"}
@@ -119,7 +119,7 @@ def sign_up():
             new_user = User(first_name=first_name, last_name=last_name, phone_number=phone_number, date_of_birth=date_of_birth, password=generate_password_hash(password, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
-            message = {"SUCESS": "Account created."}
+            message = {"SUCCESS": "Account created."}
             return jsonify(message), 201 
     elif request.method == 'GET':
         message = {"FORMAT": "first_name = string over 2 chars, last_name = string over 2 chars, phone_number = string of 10 chars, date_of_birth = string of 10 chars"}

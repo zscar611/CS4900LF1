@@ -56,7 +56,7 @@ function Report() {
                 <p className="admin-text">All Accounts: </p>
                 {allAccounts.map((person, index) => (
                   <p className="admin-text" key={index}>
-                    {person["first name"]} {person["last name"]}
+                    {person.first_name} {person.last_name} {person.phone_number}
                   </p>
                 ))}
                 <p className="admin-text">Total Accounts: {allAccounts.length}</p>

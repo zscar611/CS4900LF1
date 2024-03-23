@@ -47,7 +47,7 @@ def get_user():
         
 # delete user
 @auth.route('/delete', methods=['DELETE'])
-def delete():
+def delete_user():
     if request.method == 'DELETE':
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
@@ -58,12 +58,15 @@ def delete():
             User.last_name.like(last_name),
             User.phone_number.like(phone_number)
         ).first()
-
-        if user:
+        
+        if user: 
             db.session.delete(user)
             db.session.commit()
             message = {"SUCCESS": "User deleted"}
             return jsonify(message), 200
+        else:
+            message = {"ERROR": "User not found"}
+            return jsonify(message), 400
        
 
 

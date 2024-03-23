@@ -5,8 +5,13 @@ import Calendar from "react-calendar";
 import "./App.css";
 
 function CreateVolunteer() {
-  const navigate = useNavigate();
+	
+	
+	
+	
+	
   // declare variables
+  const navigate = useNavigate();
   const [currentFirst, setCurrentFirst] = useState("");
   const [currentLast, setCurrentLast] = useState("");
   const [currentPhone, setCurrentPhone] = useState("");
@@ -17,7 +22,13 @@ function CreateVolunteer() {
   const [lastFilled, setLastFilled] = useState(true);
   const [phoneFilled, setPhoneFilled] = useState(true);
   const [dobFilled, setDOBFilled] = useState(true);
-  // change first and last name as user types
+  
+  
+  
+  
+  
+  
+  // update name, last name, DOB, phone
   const handleFirstChange = (event) => {
     setCurrentFirst(event.target.value);
   };
@@ -54,8 +65,6 @@ function CreateVolunteer() {
       }
     }
   };
-
-  // change phone number as user types
   const handlePhoneChange = (event) => {
     let newNum = event.target.value;
     let intValue = parseInt(newNum[newNum.length - 1]);
@@ -91,6 +100,11 @@ function CreateVolunteer() {
       }
     }
   };
+
+
+
+
+
 
   const formCompleted = () => {
     for (let i = 0; i < currentPhone.length; i++) {
@@ -131,9 +145,11 @@ function CreateVolunteer() {
     }
   };
 
+
   const sendData = async () => {
     try {
       const formData = new FormData();
+	  
       formData.append("first_name", currentFirst);
       formData.append("last_name", currentLast);
       formData.append("phone_number", phoneNumberInt);

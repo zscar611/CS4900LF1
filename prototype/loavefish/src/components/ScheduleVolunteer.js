@@ -33,6 +33,11 @@ function ScheduleVolunteer() {
   const [pmOutClicked, setPmOutClicked] = useState(false);
   const [timeOutSelected, setTimeOutSelected] = useState("");
   
+  
+  
+  
+  
+  
 	//gets name data from DB
 	const [allAccounts, setAllAccounts] = useState([]);
 	const getData = async () => {
@@ -80,13 +85,18 @@ function ScheduleVolunteer() {
   };
 
 
-  
   //update selected area
   const handleAreaSelectionChange = (event) => {
     setAreaSelection(event.target.value);
   };
-  //updates time
-  const handleTimeChange = (event) => {
+  
+  
+  
+  
+  
+  
+  //updates timeIn
+  const handleTimeInChange = (event) => {
     let newNum = event.target.value;
     let intValue = parseInt(newNum[newNum.length - 1]);
     // if data load is null its backspace
@@ -114,16 +124,14 @@ function ScheduleVolunteer() {
       }
     }
   };
-
-
-	//updates AM and PM
-  const handleAmChange = () => {
+	//updates AM and PM for TimeIn
+  const handleAmInChange = () => {
     if (amInClicked === false) {
       setAmInClicked(true);
       setPmInClicked(false);
     }
   };
-  const handlePmChange = () => {
+  const handlePmInChange = () => {
     if (pmInClicked === false) {
       setPmInClicked(true);
       setAmInClicked(false);
@@ -135,17 +143,67 @@ function ScheduleVolunteer() {
 
 
 
+  //updates timeOut
+  const handleTimeOutChange = (event) => {
+    let newNum = event.target.value;
+    let intValue = parseInt(newNum[newNum.length - 1]);
+    // if data load is null its backspace
+    if (event.nativeEvent.data == null) {
+      if (event.target.value.length !== 2) {
+        setTimeOutSelected(event.target.value);
+      } // if it has a semi colon delete two elements
+      else {
+        setTimeOutSelected(newNum.slice(0, -1));
+      }
+    }
+    // if data load has data add
+    else {
+      if (event.target.value === "") {
+        setTimeOutSelected("");
+        return;
+      }
+      if (event.target.value.length < 6) {
+        if (!isNaN(intValue)) {
+          setTimeOutSelected(event.target.value);
+        }
+        if (event.target.value.length === 2) {
+          setTimeOutSelected(event.target.value + ":");
+        }
+      }
+    }
+  };
+	//updates AM and PM timeOut
+  const handleAmOutChange = () => {
+    if (amOutClicked === false) {
+      setAmOutClicked(true);
+      setPmOutClicked(false);
+    }
+  };
+  const handlePmOutChange = () => {
+    if (pmOutClicked === false) {
+      setPmOutClicked(true);
+      setAmOutClicked(false);
+    }
+  };
 
 
 
-	//
+
+
+
+
+
+
+
   const formCompleted = () => {
     if (
       currentName !== "" &&
       calendarOpened === true &&
       areaSelection !== "" &&
       timeInSelected !== "" &&
-      (amInClicked ===true || pmInClicked === true)
+	  timeOutSelected !== "" &&
+      (amInClicked ===true || pmInClicked === true) &&
+	  (amOutClicked ===true || pmOutClicked === true)
     ) {
       handleSubmit();
     }
@@ -181,31 +239,32 @@ function ScheduleVolunteer() {
 	  const formData = new FormData();
 	  
 	  
-      let timeZone = "";
+      let timeZone1 = "";
       if (amInClicked == true) {
-        timeZone = "AM";
-      } else { timeZone = "PM";}
+        timeZone1 = "AM";
+      } else { timeZone1 = "PM";}
 	  
-	  formData.append("date", selectedDate);
+	  let timeZone2 = "";
+      if (amOutClicked == true) {
+        timeZone2 = "AM";
+      } else { timeZone2 = "PM";}
+	  
 	  formData.append("full_name", currentName);
+	  formData.append("area", areaSelection);
 	  formData.append("date", selectedDate);
+	  formData.append("timeIn", currentName);
+	  formData.append("amPmIn", currentName);
+	  formData.append("timeOut", currentName);
+	  formData.append("amPmOut", currentName);
 	  
-	  
-      const jsonData = {
-        Name: currentName,
-        Area: areaSelection,
-        Date: selectedDate,
-        Time: timeInSelected,
-        TimeZone: timeZone,
-      };
-      console.log(jsonData);
+	  console.log("Creating:", formData);
+
       const response = await fetch("http://localhost:5000", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(currentName),
+        mode: "cors",
+        body: formData,
       });
+	  
     } catch (error) {
       console.error("Error: ", error);
     }
@@ -320,30 +379,74 @@ function ScheduleVolunteer() {
       </div>
 
       <div className="volunteerAdd-inputTime">
-        <p className="volunteerAdd-text">Time: </p>
+        <p className="volunteerAdd-text">Time in: </p>
         <input
           type="text"
           placeholder="00:00"
           value={timeInSelected}
-          onChange={handleTimeChange}
+          onChange={handleTimeInChange}
           className={"volunteerAdd-input-box-time"}
           style={{ borderColor: nameFilled ? "initial" : "red" }}
         />
         <button
           style={{ background: amInClicked ? "green" : "gray" }}
-          onClick={handleAmChange}
+          onClick={handleAmInChange}
           className="volunteerAdd-ButtonTime"
         >
           AM
         </button>
         <button
           style={{ background: pmInClicked ? "green" : "gray" }}
-          onClick={handlePmChange}
+          onClick={handlePmInChange}
           className="volunteerAdd-ButtonTime"
         >
           PM
         </button>
       </div>
+
+
+
+
+
+
+	
+      <div className="volunteerAdd-inputTime">
+        <p className="volunteerAdd-text">Time out: </p>
+        <input
+          type="text"
+          placeholder="00:00"
+          value={timeOutSelected}
+          onChange={handleTimeOutChange}
+          className={"volunteerAdd-input-box-time"}
+          style={{ borderColor: nameFilled ? "initial" : "red" }}
+        />
+        <button
+          style={{ background: amOutClicked ? "green" : "gray" }}
+          onClick={handleAmOutChange}
+          className="volunteerAdd-ButtonTime"
+        >
+          AM
+        </button>
+        <button
+          style={{ background: pmOutClicked ? "green" : "gray" }}
+          onClick={handlePmOutChange}
+          className="volunteerAdd-ButtonTime"
+        >
+          PM
+        </button>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
       <div className="main-button">
         <button className="main-button-box" onClick={formCompleted}>

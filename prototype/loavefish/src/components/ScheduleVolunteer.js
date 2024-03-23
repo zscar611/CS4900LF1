@@ -251,15 +251,13 @@ function ScheduleVolunteer() {
 	  
 	  formData.append("full_name", currentName);
 	  formData.append("area", areaSelection);
-	  formData.append("date", selectedDate);
-	  formData.append("timeIn", currentName);
-	  formData.append("amPmIn", currentName);
-	  formData.append("timeOut", currentName);
-	  formData.append("amPmOut", currentName);
-	  
+	  formData.append("date", selectedDate.toISOString().split('T')[0]);
+	  formData.append("timeIn", (timeInSelected + " " +  timeZone1));
+	  formData.append("timeOut", (timeOutSelected + " " + timeZone2));
+	  formData.append("group", "");
 	  console.log("Creating:", formData);
 
-      const response = await fetch("http://localhost:5000", {
+      const response = await fetch("http://localhost:5000/shift/ScheduleVolunteer", {
         method: "POST",
         mode: "cors",
         body: formData,

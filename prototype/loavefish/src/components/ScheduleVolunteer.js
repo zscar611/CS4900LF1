@@ -13,23 +13,25 @@ function ScheduleVolunteer() {
   const nameInput = document.getElementById('nameInput');		
   const navigate = useNavigate();
   const [currentName, setCurrentName] = useState("");
-  const [currentPhone, setCurrentPhone] = useState("");
   const [submit, setSubmit] = useState(false);
   const [areaSelection, setAreaSelection] = useState("");
   const [isCalendarVisible, setCalendarVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [timeSelected, setTimeSelected] = useState("");
   const [nameFilled, setNameFilled] = useState(true);
   const [areaFilled, setAreaFilled] = useState(true);
-  const [phoneFilled, setPhoneFilled] = useState(true);
   const [calendarFilled, setCalendarFilled] = useState(true);
   const [calendarOpened, setCalendarOpened] = useState(false);
-  const [amClicked, setAmClicked] = useState(false);
-  const [pmClicked, setPmClicked] = useState(false);
   
   
+  //TIME IN VARIABLES
+  const [amInClicked, setAmInClicked] = useState(false);
+  const [pmInClicked, setPmInClicked] = useState(false);
+  const [timeInSelected, setTimeInSelected] = useState("");
   
-  
+  //TIME OUT VARIABLES
+  const [amOutClicked, setAmOutClicked] = useState(false);
+  const [pmOutClicked, setPmOutClicked] = useState(false);
+  const [timeOutSelected, setTimeOutSelected] = useState("");
   
 	//gets name data from DB
 	const [allAccounts, setAllAccounts] = useState([]);
@@ -77,24 +79,7 @@ function ScheduleVolunteer() {
     setCurrentName(event.target.value);
   };
 
-  //update phone number
-  const handlePhoneChange = (event) => {
-    let newNum = event.target.value;
-    // get the most recently typed element
-    newNum = newNum[newNum.length - 1];
-    let intValue = parseInt(newNum);
-    // only allow phone numbers of length 10
-    if (event.target.value.length < 11) {
-      // Check if the last element is a number, add to phone number
-      if (!isNaN(intValue)) {
-        setCurrentPhone(event.target.value);
-      }
-    }
-    // if input is empty, set to empty string
-    if (event.target.value === "") {
-      setCurrentPhone("");
-    }
-  };
+
   
   //update selected area
   const handleAreaSelectionChange = (event) => {
@@ -107,24 +92,24 @@ function ScheduleVolunteer() {
     // if data load is null its backspace
     if (event.nativeEvent.data == null) {
       if (event.target.value.length !== 2) {
-        setTimeSelected(event.target.value);
+        setTimeInSelected(event.target.value);
       } // if it has a semi colon delete two elements
       else {
-        setTimeSelected(newNum.slice(0, -1));
+        setTimeInSelected(newNum.slice(0, -1));
       }
     }
     // if data load has data add
     else {
       if (event.target.value === "") {
-        setTimeSelected("");
+        setTimeInSelected("");
         return;
       }
       if (event.target.value.length < 6) {
         if (!isNaN(intValue)) {
-          setTimeSelected(event.target.value);
+          setTimeInSelected(event.target.value);
         }
         if (event.target.value.length === 2) {
-          setTimeSelected(event.target.value + ":");
+          setTimeInSelected(event.target.value + ":");
         }
       }
     }
@@ -133,15 +118,15 @@ function ScheduleVolunteer() {
 
 	//updates AM and PM
   const handleAmChange = () => {
-    if (amClicked === false) {
-      setAmClicked(true);
-      setPmClicked(false);
+    if (amInClicked === false) {
+      setAmInClicked(true);
+      setPmInClicked(false);
     }
   };
   const handlePmChange = () => {
-    if (pmClicked === false) {
-      setPmClicked(true);
-      setAmClicked(false);
+    if (pmInClicked === false) {
+      setPmInClicked(true);
+      setAmInClicked(false);
     }
   };
 
@@ -157,12 +142,10 @@ function ScheduleVolunteer() {
   const formCompleted = () => {
     if (
       currentName !== "" &&
-      currentPhone !== "" &&
-      currentPhone.length === 10 &&
       calendarOpened === true &&
       areaSelection !== "" &&
-      timeSelected !== "" &&
-      (amClicked ===true || pmClicked === true)
+      timeInSelected !== "" &&
+      (amInClicked ===true || pmInClicked === true)
     ) {
       handleSubmit();
     }
@@ -173,11 +156,6 @@ function ScheduleVolunteer() {
       setNameFilled(true);
     }
    
-    if (currentPhone === "" || currentPhone.length != 10) {
-      setPhoneFilled(false);
-    } else {
-      setPhoneFilled(true);
-    }
     // if calendar has been opened
     if (calendarOpened === false) {
       setCalendarFilled(false);
@@ -204,7 +182,7 @@ function ScheduleVolunteer() {
 	  
 	  
       let timeZone = "";
-      if (amClicked == true) {
+      if (amInClicked == true) {
         timeZone = "AM";
       } else { timeZone = "PM";}
 	  
@@ -217,7 +195,7 @@ function ScheduleVolunteer() {
         Name: currentName,
         Area: areaSelection,
         Date: selectedDate,
-        Time: timeSelected,
+        Time: timeInSelected,
         TimeZone: timeZone,
       };
       console.log(jsonData);
@@ -244,15 +222,13 @@ function ScheduleVolunteer() {
     sendData();
     setSelectedDate(new Date());
     setCurrentName("");
-    setCurrentPhone("");
     setAreaSelection("");
-    setTimeSelected("");
+    setTimeInSelected("");
     setNameFilled(true);
     setAreaFilled(true);
-    setPhoneFilled(true);
     setCalendarOpened(false);
-    setAmClicked(false);
-    setPmClicked(false);
+    setAmInClicked(false);
+    setPmInClicked(false);
   };
 
 
@@ -300,19 +276,7 @@ function ScheduleVolunteer() {
           />
 		  <datalist id = "fullNamesList"></datalist>
         </div>
-      <div>
-        <div className="volunteerAdd-input">
-          <p className="volunteerAdd-text">Phone Number: </p>
-          <input
-            type="text"
-            placeholder="(123)-456-7890"
-            value={currentPhone}
-            style={{ borderColor: phoneFilled ? "initial" : "red" }}
-            onChange={handlePhoneChange}
-            className={"volunteerAdd-input-box-phone"}
-          />
-        </div>
-      </div>
+      
 
 		
 	
@@ -360,20 +324,20 @@ function ScheduleVolunteer() {
         <input
           type="text"
           placeholder="00:00"
-          value={timeSelected}
+          value={timeInSelected}
           onChange={handleTimeChange}
           className={"volunteerAdd-input-box-time"}
           style={{ borderColor: nameFilled ? "initial" : "red" }}
         />
         <button
-          style={{ background: amClicked ? "green" : "gray" }}
+          style={{ background: amInClicked ? "green" : "gray" }}
           onClick={handleAmChange}
           className="volunteerAdd-ButtonTime"
         >
           AM
         </button>
         <button
-          style={{ background: pmClicked ? "green" : "gray" }}
+          style={{ background: pmInClicked ? "green" : "gray" }}
           onClick={handlePmChange}
           className="volunteerAdd-ButtonTime"
         >

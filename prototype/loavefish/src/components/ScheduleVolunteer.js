@@ -8,16 +8,30 @@ import "./ScheduleVolunteer.css";
 function ScheduleVolunteer() {
 	
 
-	//list of names to populate
-	const fullNameList = [];
+  //declare variables
+  const fullNameList = [];
+  const nameInput = document.getElementById('nameInput');		
+  const navigate = useNavigate();
+  const [currentName, setCurrentName] = useState("");
+  const [currentPhone, setCurrentPhone] = useState("");
+  const [submit, setSubmit] = useState(false);
+  const [areaSelection, setAreaSelection] = useState("");
+  const [isCalendarVisible, setCalendarVisibility] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [timeSelected, setTimeSelected] = useState("");
+  const [nameFilled, setNameFilled] = useState(true);
+  const [areaFilled, setAreaFilled] = useState(true);
+  const [phoneFilled, setPhoneFilled] = useState(true);
+  const [calendarFilled, setCalendarFilled] = useState(true);
+  const [calendarOpened, setCalendarOpened] = useState(false);
+  const [amClicked, setAmClicked] = useState(false);
+  const [pmClicked, setPmClicked] = useState(false);
   
-	//list of names to concantenate
-	const firstNameList = [];
-	const lastNameList = []; 
-	const nameInput = document.getElementById('nameInput');		
   
   
-	//gets name data
+  
+  
+	//gets name data from DB
 	const [allAccounts, setAllAccounts] = useState([]);
 	const getData = async () => {
     try {
@@ -42,9 +56,8 @@ function ScheduleVolunteer() {
       console.error("Error fetching all users:", error);
     }
   };
-
- console.log(fullNameList);
-for(let i = 0; i < allAccounts.length; i++)
+	//adds names to fullNameList
+	for(let i = 0; i < allAccounts.length; i++)
 		{
 		
 			fullNameList.push(allAccounts[i]["first_name"] + " " + allAccounts[i]["last_name"]);
@@ -52,37 +65,19 @@ for(let i = 0; i < allAccounts.length; i++)
 	
   
   
-	
-  const navigate = useNavigate();
-  // declare variables
-  const [currentFirst, setCurrentFirst] = useState("");
-  const [currentLast, setCurrentLast] = useState("");
-  const [currentPhone, setCurrentPhone] = useState("");
-  const [submit, setSubmit] = useState(false);
-  const [areaSelection, setAreaSelection] = useState("");
-  const [isCalendarVisible, setCalendarVisibility] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [timeSelected, setTimeSelected] = useState("");
-  const [firstFilled, setFirstFilled] = useState(true);
-  const [lastFilled, setLastFilled] = useState(true);
-  const [areaFilled, setAreaFilled] = useState(true);
-  const [phoneFilled, setPhoneFilled] = useState(true);
-  const [calendarFilled, setCalendarFilled] = useState(true);
-  const [calendarOpened, setCalendarOpened] = useState(false);
-  const [amClicked, setAmClicked] = useState(false);
-  const [pmClicked, setPmClicked] = useState(false);
-  // change first and last name as user types
-  const handleFirstChange = (event) => {
+  
+  
+  
+  
+  // updates name
+  const handleNameChange = (event) => {
 	  getData();
 	 document.getElementById('fullNamesList').innerHTML = fullNameList
 	.map( name => `<option>${name}</option>`).join("")
-    setCurrentFirst(event.target.value);
+    setCurrentName(event.target.value);
   };
 
-  const handleLastChange = (event) => {
-    setCurrentLast(event.target.value);
-  };
-  // change phone number as user types
+  //update phone number
   const handlePhoneChange = (event) => {
     let newNum = event.target.value;
     // get the most recently typed element
@@ -101,10 +96,11 @@ for(let i = 0; i < allAccounts.length; i++)
     }
   };
   
+  //update selected area
   const handleAreaSelectionChange = (event) => {
     setAreaSelection(event.target.value);
   };
-
+  //updates time
   const handleTimeChange = (event) => {
     let newNum = event.target.value;
     let intValue = parseInt(newNum[newNum.length - 1]);
@@ -134,13 +130,14 @@ for(let i = 0; i < allAccounts.length; i++)
     }
   };
 
+
+	//updates AM and PM
   const handleAmChange = () => {
     if (amClicked === false) {
       setAmClicked(true);
       setPmClicked(false);
     }
   };
-
   const handlePmChange = () => {
     if (pmClicked === false) {
       setPmClicked(true);
@@ -148,10 +145,18 @@ for(let i = 0; i < allAccounts.length; i++)
     }
   };
 
+
+
+
+
+
+
+
+
+	//
   const formCompleted = () => {
     if (
-      currentFirst !== "" &&
-      currentLast !== "" &&
+      currentName !== "" &&
       currentPhone !== "" &&
       currentPhone.length === 10 &&
       calendarOpened === true &&
@@ -162,16 +167,12 @@ for(let i = 0; i < allAccounts.length; i++)
       handleSubmit();
     }
     // if inputs are empty, set flag to highlight red
-    if (currentFirst === "") {
-      setFirstFilled(false);
+    if (currentName === "") {
+      setNameFilled(false);
     } else {
-      setFirstFilled(true);
+      setNameFilled(true);
     }
-    if (currentLast === "") {
-      setLastFilled(false);
-    } else {
-      setLastFilled(true);
-    }
+   
     if (currentPhone === "" || currentPhone.length != 10) {
       setPhoneFilled(false);
     } else {
@@ -191,15 +192,29 @@ for(let i = 0; i < allAccounts.length; i++)
     // time
   };
 
+
+
+
+
+
+//sends data
   const sendData = async () => {
     try {
+	  const formData = new FormData();
+	  
+	  
       let timeZone = "";
       if (amClicked == true) {
         timeZone = "AM";
       } else { timeZone = "PM";}
+	  
+	  formData.append("date", selectedDate);
+	  formData.append("full_name", currentName);
+	  formData.append("date", selectedDate);
+	  
+	  
       const jsonData = {
-        FirstName: currentFirst,
-        LastName: currentLast,
+        Name: currentName,
         Area: areaSelection,
         Date: selectedDate,
         Time: timeSelected,
@@ -211,25 +226,28 @@ for(let i = 0; i < allAccounts.length; i++)
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(currentFirst),
+        body: JSON.stringify(currentName),
       });
     } catch (error) {
       console.error("Error: ", error);
     }
   };
 
+
+
+
+
+//calls sendata and resets form
   const handleSubmit = () => {
     // send JSON to backend
     // reset all values
     sendData();
     setSelectedDate(new Date());
-    setCurrentFirst("");
-    setCurrentLast("");
+    setCurrentName("");
     setCurrentPhone("");
     setAreaSelection("");
     setTimeSelected("");
-    setFirstFilled(true);
-    setLastFilled(true);
+    setNameFilled(true);
     setAreaFilled(true);
     setPhoneFilled(true);
     setCalendarOpened(false);
@@ -237,15 +255,25 @@ for(let i = 0; i < allAccounts.length; i++)
     setPmClicked(false);
   };
 
+
+
+
+//CALENDAR STUFF
   const handleCalendarClick = () => {
     setCalendarVisibility(!isCalendarVisible);
     setCalendarOpened(true);
   };
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setCalendarVisibility(false);
   };
+
+
+
+
+
+
+
 
   return (
     <div className="App">
@@ -264,11 +292,11 @@ for(let i = 0; i < allAccounts.length; i++)
             type="text"
 			list = "fullNamesList"
             placeholder="Click here"
-            value={currentFirst}
-            onChange={handleFirstChange}
+            value={currentName}
+            onChange={handleNameChange}
             className={"volunteerAdd-input-box"}
 			id = "nameInput"
-            style={{ borderColor: firstFilled ? "initial" : "red" }}
+            style={{ borderColor: nameFilled ? "initial" : "red" }}
           />
 		  <datalist id = "fullNamesList"></datalist>
         </div>
@@ -335,7 +363,7 @@ for(let i = 0; i < allAccounts.length; i++)
           value={timeSelected}
           onChange={handleTimeChange}
           className={"volunteerAdd-input-box-time"}
-          style={{ borderColor: firstFilled ? "initial" : "red" }}
+          style={{ borderColor: nameFilled ? "initial" : "red" }}
         />
         <button
           style={{ background: amClicked ? "green" : "gray" }}

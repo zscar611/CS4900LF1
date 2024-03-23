@@ -9,7 +9,9 @@ class Shift(db.Model):
     activity = db.Column(db.String(150), nullable=False)
     time_in = db.Column(db.DateTime(), nullable=False)
     time_out = db.Column(db.DateTime(), nullable=True)
-    hours = db.Column(db.Float(), nullable=False)
+    checked_in = db.Column(db.DateTime(), nullable=False)
+    checked_out = db.Column(db.DateTime(), nullable=False)
+    hours = db.Column(db.Boolean(), nullable=True)
     group = db.Column(db.String(150), nullable=True)
     volunteer = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 

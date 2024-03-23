@@ -68,6 +68,10 @@ def delete_user():
             message = {"ERROR": "User not found"}
             return jsonify(message), 400
        
+@auth.route('/update_phone', methods=['PATCH'])
+def update_phone_number():
+    pass
+
 
 
 

@@ -16,6 +16,10 @@ function TimeSheet() {
   //const [checkIn, setCheckedIn] = useState([]);
   //const [checkOut, setCheckOut] = useState([]);
 
+//TODO: GET SHIFT ENTRIES WITH A TIME WITHIN 15 MINS OF CURRENT TIME AND SIGNEDIN = 0 &
+
+
+
   const [signInDict, setSignInDict] = useState([
     {
       name: "Lionel Messi",
@@ -129,11 +133,7 @@ function TimeSheet() {
     navigate("/");
   };
 
-  const enterAutoMode = () => {
-    // TODO insert SQL logic here
-    window.open("/autotime", "_blank");
-    window.close();
-  };
+
 
   return (
     <div className="App">

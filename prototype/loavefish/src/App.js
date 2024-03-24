@@ -10,6 +10,7 @@ import AdminHome from './components/AdminHome.js';
 import Profiles from './components/Profiles.js';
 import CreateVolunteer from './components/CreateVolunteer.js';
 import TimeAuto from './components/TimeAutonomous.js';
+import Calendar from './components/Calendar.js';
 
 function App() {
   const [data, setData] = useState([{}]) 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/profiles" element={< Profiles/>} />
           <Route path='/CreateVolunteer' element={< CreateVolunteer/>} />
           <Route path='/CreateVolunteer' element={< CreateVolunteer/>} />
+		  <Route path='/Calendar' element={< Calendar/>} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>

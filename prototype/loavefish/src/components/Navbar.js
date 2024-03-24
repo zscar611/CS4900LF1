@@ -105,7 +105,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                onClick={() => navigate("/adminhome")}
+                onClick={() => navigate("/Calendar")}
                 className={"navbar-wrapper-text"}
               >
                 Calendar

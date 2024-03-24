@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .models import Shift
+from .models import Shift, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
@@ -24,25 +24,49 @@ def shiftOnGivenDay(day):
     Shift.date.like(day)
     )
 
-@shift.route('/ScheduleVolunteer') # decorator
-def home():  # will run every time the directory is entered
-    # TODO: phone number is listed in the form on /VolunteerAdd but does not exist in the Database itself
-    first_name = request.form.get()
-    last_name = request.form.get()
-    phone_number = request.form.get()
-    date = request.form.get()
-    time_in = request.form.get()
-    # TODO: determine how the following 6 values will be entered into the DB
-    timeOut = "8:20"
-    shiftId = 1  # Shift ID is the only required value in the DB
-    hours = 4
-    group = "Broncos"
-    zone = "Pantry"
-    totalVol = 1  #TODO: Verify that volunteer field is in fact the number of volunteers in the shift given that it is a group
+@shift.route('/add', methods=['GET', 'POST']) # decorator
+def add():  
+    if request.method == 'POST':
+        date = request.form.get("date")
+        full_name = request.form.get("full_name")
+        id = request.form.get("id")
+        activity = request.form.get("area")
+        time_in = request.form.get("time_in")
+        time_out = request.form.get("time_out")
+        group = request.form.get("group")
 
-    newShift = Shift(first_name=first_name, last_name=last_name, phone_number=phone_number,
-                    date=date, time_in=time_in)
-    db.session.add(newShift)
-    db.session.commit()
-    message = {"SUCCESS": "Shift created."}
-    return jsonify(message)
+        if len(date) != 10:
+            message = {"ERROR": "Invalid date."}
+            return jsonify(message), 400
+       
+       # user = User.query.filter(
+        #        User.first_name.like(id)
+        #).first()
+
+        #if not user:
+         #   message = {"ERROR": "Volunteer does not exist."}
+          #  return jsonify(message), 400
+        
+        # parse and change date and times
+        date = date.replace("-", "/")
+
+        def to_mil_time(normal_time):
+            hour = int(normal_time[:2])
+            meridian = normal_time[8:]
+            if (hour == 12):
+                hour = 0
+            if (meridian == 'PM'):
+                hour += 12
+            return str(hour) + normal_time[2:8]
+        
+        print(to_mil_time(time_in))
+
+        return "hi"
+
+
+
+        
+
+            
+
+        

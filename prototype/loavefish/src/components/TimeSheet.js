@@ -46,6 +46,7 @@ function TimeSheet() {
         console.log("All users:", allUsers);
         setAllAccounts([]);
 		setSignInDict2([]);
+		setSignInDict([]);
         allUsers.forEach((user) => {
           console.log(user["full_name"]);
           setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
@@ -66,9 +67,9 @@ function TimeSheet() {
 			 area: allAccounts[i]["activity"],
 			 timeScheduled: (allAccounts[i]["time_in"] + " - " + allAccounts[i]["time_out"]),
 			 shiftid:  allAccounts[i]["id"],
-			 volunteerid: allAccounts[i]["volunteer"]
-			
-	
+			 volunteerid: allAccounts[i]["volunteer"],
+			 date: allAccounts[i]["date"]	
+				
 			})	
 			 
 		}	

@@ -74,38 +74,41 @@ def completedShifts():
 
 # A query for shifts that need to be checked in
 @shift.route('/scheduledToday', methods=['GET'])
-def shiftOnGivenDay(day):
+def shiftOnGivenDay():
+    day = datetime.date.today()
     givenDay = Shift.query.filter(
-    Shift.date.like(day) & Shift.checked_in == False & Shift.checked_out == False
+    Shift.date.like(day) 
     )
     scheduledVolunteers = []
     for x in givenDay:
         scheduledVolunteers.append(serialize_shift(x))
-    return json.dumps(scheduledVolunteers)
+    return jsonify(scheduledVolunteers)
 
 
 # A query for shifts that are checked in
 @shift.route('/checkedIn', methods=['GET'])
-def checkedIn(day):
+def checkedIn():
+    day = datetime.date.today()
     givenDay = Shift.query.filter(
     Shift.date.like(day) & Shift.checked_in == True
     )
     scheduledVolunteers = []
     for x in givenDay:
         scheduledVolunteers.append(serialize_shift(x))
-    return json.dumps(scheduledVolunteers)
+    return jsonify(scheduledVolunteers)
 
 
 # A query for shifts that are checked out
 @shift.route('/checkedOut', methods=['GET'])
-def checkedOut(day):
+def checkedOut():
+    day = datetime.date.today()
     givenDay = Shift.query.filter(
     Shift.date.like(day) & Shift.checked_out == True
     )
     scheduledVolunteers = []
     for x in givenDay:
         scheduledVolunteers.append(serialize_shift(x))
-    return json.dumps(scheduledVolunteers)
+    return jsonify(scheduledVolunteers)
 
 
 

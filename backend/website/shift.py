@@ -85,7 +85,7 @@ def shiftOnGivenDay(day):
 
 
 # A query for shifts that are checked in
-@shift.route('/scheduledToday', methods=['GET'])
+@shift.route('/checkedIn', methods=['GET'])
 def checkedIn(day):
     givenDay = Shift.query.filter(
     Shift.date.like(day) & Shift.checked_in == True
@@ -97,7 +97,7 @@ def checkedIn(day):
 
 
 # A query for shifts that are checked out
-@shift.route('/scheduledToday', methods=['GET'])
+@shift.route('/checkedOut', methods=['GET'])
 def checkedOut(day):
     givenDay = Shift.query.filter(
     Shift.date.like(day) & Shift.checked_out == True

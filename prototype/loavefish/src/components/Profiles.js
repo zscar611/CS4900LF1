@@ -24,6 +24,7 @@ function Profiles() {
           </div>
           <p className="profile-text">Next Shift: Pantry - 4/12/2024</p>
           <p className="profile-text">Last Shift: Warehouse - 02/10/2024</p>
+          <p className="profile-text">Groups: WMU</p>
           <p className="profile-text">Total Hours: 60 hours</p>
           <p className="profile-text">Yearly Hours: 30 hours</p>
           <p className="profile-text">Total Shifts: 12</p>

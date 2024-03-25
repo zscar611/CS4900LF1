@@ -21,8 +21,9 @@ function ScheduleVolunteer() {
   const [areaFilled, setAreaFilled] = useState(true);
   const [calendarFilled, setCalendarFilled] = useState(true);
   const [calendarOpened, setCalendarOpened] = useState(false);
-  
-  
+  const [inGroup, setInGroup] = useState(false);
+  const [currentGroup, setCurrentGroup] = useState("");
+
   //TIME IN VARIABLES
   const [amInClicked, setAmInClicked] = useState(false);
   const [pmInClicked, setPmInClicked] = useState(false);
@@ -82,6 +83,15 @@ function ScheduleVolunteer() {
 	 document.getElementById('fullNamesList').innerHTML = fullNameList
 	.map( name => `<option>${name}</option>`).join("")
     setCurrentName(event.target.value);
+  };
+
+  // update group name
+  const handleGroupChange = (event) => {
+    setCurrentGroup(event.target.value);
+  };
+
+  const handleGroupButton = () => {
+    setInGroup(!inGroup);
   };
 
 
@@ -225,10 +235,7 @@ function ScheduleVolunteer() {
     } else {
       setAreaFilled(true);
     }
-    // time
   };
-
-
 
 
 
@@ -238,23 +245,23 @@ function ScheduleVolunteer() {
     try {
 	  const formData = new FormData();
 	  
-	  
-      let timeZone1 = "";
-      if (amInClicked == true) {
-        timeZone1 = "AM";
-      } else { timeZone1 = "PM";}
-	  
-	  let timeZone2 = "";
-      if (amOutClicked == true) {
-        timeZone2 = "AM";
-      } else { timeZone2 = "PM";}
-	  
+    let timeZone1 = "";
+    if (amInClicked == true) {
+      timeZone1 = "AM";
+    } else { timeZone1 = "PM";}
+    
+    let timeZone2 = "";
+    if (amOutClicked == true) {
+      timeZone2 = "AM";
+    } else { timeZone2 = "PM";}
+
 	  formData.append("full_name", currentName);
 	  formData.append("area", areaSelection);
 	  formData.append("date", selectedDate.toISOString().split('T')[0]);
 	  formData.append("timeIn", (timeInSelected + " " +  timeZone1));
 	  formData.append("timeOut", (timeOutSelected + " " + timeZone2));
-	  formData.append("group", "");
+    // if in group send currentGroup, else send empty string
+	  formData.append("group", inGroup ? currentGroup : "");
 	  console.log("Creating:", formData);
 
       const response = await fetch("http://localhost:5000/shift/ScheduleVolunteer", {
@@ -275,8 +282,8 @@ function ScheduleVolunteer() {
 //calls sendata and resets form
   const handleSubmit = () => {
     // send JSON to backend
-    // reset all values
     sendData();
+    // reset all values
     setSelectedDate(new Date());
     setCurrentName("");
     setAreaSelection("");
@@ -286,6 +293,11 @@ function ScheduleVolunteer() {
     setCalendarOpened(false);
     setAmInClicked(false);
     setPmInClicked(false);
+    setInGroup(false);
+    setCurrentGroup("");
+    setTimeOutSelected("");
+    setAmOutClicked(false);
+    setPmOutClicked(false);
   };
 
 
@@ -335,6 +347,19 @@ function ScheduleVolunteer() {
 		  <datalist id = "fullNamesList"></datalist>
         </div>
       
+        <div>
+          <div className="scheduleVol-input">
+            <p className="scheduleVol-text">Group: <input type="checkbox" checked={inGroup} onChange={handleGroupButton}/> </p>
+            {!inGroup && <div className="schedulevol-inputTest" />}
+            {inGroup && <input
+              type="text"
+              placeholder="Type group here"
+              value={currentGroup}
+              className={"schedulevol-inputName"}
+              onChange={handleGroupChange}
+            />}
+          </div>
+        </div>
 
 		
       <div>
@@ -353,6 +378,8 @@ function ScheduleVolunteer() {
             <option value="warehouse">Warehouse</option>
           </select>
         </div>
+
+
 
         <div className="scheduleVol-dropdown">
           <p className="scheduleVol-text">Day:</p>

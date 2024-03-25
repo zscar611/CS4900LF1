@@ -18,50 +18,58 @@ function TimeSheet() {
 
 //TODO: GET SHIFT ENTRIES WITH A TIME WITHIN 15 MINS OF CURRENT TIME AND SIGNEDIN = 0 &
 
-
-
-  const [signInDict, setSignInDict] = useState([
-    {
-      name: "Lionel Messi",
+  const [signInDict, setSignInDict] = useState([ {
+      name: "Tom Brady",
       area: "Pantry",
       timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Kylian Mbappe",
-      area: "Warehouse",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Pete Rose",
-      area: "Home Deliveries",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Luca Modric",
-      area: "Call Center",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Lebron James",
-      area: "Pantry",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Justin Verlander",
-      area: "Home Deliveries",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Miguel Cabrera",
-      area: "Pantry",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Billy Beane",
-      area: "Warehouse",
-      timeScheduled: "10:30am - 11:30am",
-    },
+    }
   ]);
+  
+  //gets scheduled shift data from DB
+	const [allAccounts, setAllAccounts] = useState([]);
+	const getData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/auth/all", {
+        method: "GET",
+        mode: "cors",
+      });
+      if (response.ok) {
+        const allUsers = await response.json();
+		
+  
+        console.log("All users:", allUsers);
+        setAllAccounts([]);
+        allUsers.forEach((user) => {
+          console.log(user["full_name"]);
+          setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
+        });
+      } else {
+        console.error("Error fetching all users:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching all users:", error);
+    }
+  };
+	//adds names to fullNameList
+	for(let i = 0; i < allAccounts.length; i++)
+		{
+		
+			signInDict.push(             
+			
+			{name: allAccounts[i]["full_name"],
+			 area: allAccounts[i]["activity"],
+			 timeScheduled: (allAccounts[i]["time_in"] + " - " + allAccounts[i]["time_out"])
+			})	
+		}	
+	
+  
+	window.onload = getData;
+	
+	
+	
+	
+
+
   const [signOutDict, setSignOutDict] = useState([
     {
       name: "Tom Brady",

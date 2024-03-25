@@ -6,6 +6,59 @@ import datetime
 
 shift = Blueprint('shift', __name__)
 
+
+
+
+
+
+def convert_to_military_time(time_str):
+        # Split the time string into hours, minutes, and AM/PM indicator
+        time_parts = time_str.split(':')
+        hours = int(time_parts[0])
+        minutes = int(time_parts[1][:2])
+        period = time_parts[1][-2:]
+
+        # Convert to military time
+        if period.upper() == 'PM' and hours != 12:
+            hours += 12
+        elif period.upper() == 'AM' and hours == 12:
+            hours = 0
+
+        # Format military time as HH:MM
+        military_time = '{:02d}:{:02d}:00'.format(hours, minutes)
+        return military_time
+        
+def convert_to_standard_time(time_str):
+        # Split the time string into hours, minutes, and AM/PM indicator
+        time_parts = time_str.split(':')
+        hours = int(time_parts[0])
+        minutes = int(time_parts[1][:2])
+        period = time_parts[1][-2:]
+
+        # Convert to military time
+        if period.upper() == 'PM' and hours != 12:
+            hours += 12
+        elif period.upper() == 'AM' and hours == 12:
+            hours = 0
+
+        # Format military time as HH:MM
+        military_time = '{:02d}:{:02d}:00'.format(hours, minutes)
+        return military_time
+        
+def serialize_shift(shift):
+    shift_to_return = {}
+    shift_to_return['full_name'] = shift.full_name
+    shift_to_return['date'] = shift.date
+    shift_to_return['activity'] = shift.activity
+    shift_to_return['time_in'] = shift.time_in
+    shift_to_return['time_out'] = shift.time_out
+    shift_to_return['hours'] = shift.hours
+    shift_to_return['group'] = shift.group
+    shift_to_return['volunteer'] = shift.volunteer
+
+    return shift_to_return
+
+
 # TODO: Query functions are designed but need to be implemented and tested
 # A query for any shifts that has an in time but does not have an out time (clocked in or has not begun)
 def incompleteShifts():
@@ -20,10 +73,17 @@ def completedShifts():
     )
 
 # A query for any given shifts in a given day (regardless of clocked in or out)
+@shift.route('/scheduledToday', methods=['GET'])
 def shiftOnGivenDay(day):
     givenDay = Shift.query.filter(
     Shift.date.like(day)
     )
+    scheduledVolunteers = []
+    for x in givenDay:
+        scheduledVolunteers.append(serialize_shift(x))
+    return json.dumps(scheduledVolunteers)
+
+
 
 @shift.route('/add', methods=['GET', 'POST']) # decorator
 def add():  
@@ -58,22 +118,6 @@ def add():
         date = date.split('-')
         date = datetime.datetime(int(date[0]), int(date[1]), int(date[2]))
 
-    def convert_to_military_time(time_str):
-        # Split the time string into hours, minutes, and AM/PM indicator
-        time_parts = time_str.split(':')
-        hours = int(time_parts[0])
-        minutes = int(time_parts[1][:2])
-        period = time_parts[1][-2:]
-
-        # Convert to military time
-        if period.upper() == 'PM' and hours != 12:
-            hours += 12
-        elif period.upper() == 'AM' and hours == 12:
-            hours = 0
-
-        # Format military time as HH:MM
-        military_time = '{:02d}:{:02d}:00'.format(hours, minutes)
-        return military_time
     time_in = convert_to_military_time(time_in).split(":")
     time_out = convert_to_military_time(time_out).split(":")
     time_in = datetime.time(int(time_in[0]), int(time_in[1]), 0)

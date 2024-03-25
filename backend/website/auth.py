@@ -13,7 +13,7 @@ def serialize_user(user):
     user_to_return['last_name'] = user.last_name
     user_to_return['phone_number'] = user.phone_number
     user_to_return['date_of_birth'] = user.date_of_birth
-
+    user_to_return['id'] = user.id
     return user_to_return
        
 @auth.route('/all', methods=['GET'])

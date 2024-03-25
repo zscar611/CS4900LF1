@@ -35,7 +35,9 @@ def add():
         time_in = request.form.get("time_in")
         time_out = request.form.get("time_out")
         group = request.form.get("group")
-
+        
+        print(time_in)
+        print(time_out)
         if len(date) != 10:
             message = {"ERROR": "Invalid date."}
             return jsonify(message), 400

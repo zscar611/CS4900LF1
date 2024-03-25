@@ -10,6 +10,7 @@ function ScheduleVolunteer() {
 
   //declare variables
   const fullNameList = [];
+  const idList = [];
   const nameInput = document.getElementById('nameInput');		
   const navigate = useNavigate();
   const [currentName, setCurrentName] = useState("");
@@ -34,8 +35,8 @@ function ScheduleVolunteer() {
   const [pmOutClicked, setPmOutClicked] = useState(false);
   const [timeOutSelected, setTimeOutSelected] = useState("");
   
-  
-  
+  // USER VARIABLES
+  const [userId, setUserId] = useState("");
   
   
   
@@ -67,8 +68,8 @@ function ScheduleVolunteer() {
 	//adds names to fullNameList
 	for(let i = 0; i < allAccounts.length; i++)
 		{
-		
 			fullNameList.push(allAccounts[i]["first_name"] + " " + allAccounts[i]["last_name"]);
+      idList.push(allAccounts[i]["id"]);
 		}	
 	
   
@@ -83,6 +84,14 @@ function ScheduleVolunteer() {
 	 document.getElementById('fullNamesList').innerHTML = fullNameList
 	.map( name => `<option>${name}</option>`).join("")
     setCurrentName(event.target.value);
+    // if event.target.value is matches a name in list, link ID
+    if (fullNameList.includes(event.target.value)) {
+      // find index of where name is 
+      const index = fullNameList.indexOf(event.target.value);
+      // use name index to find id index
+      const matchedId = idList[index];
+      setUserId(matchedId);
+    } else {setUserId("");}
   };
 
   // update group name
@@ -258,15 +267,16 @@ function ScheduleVolunteer() {
 	  formData.append("full_name", currentName);
 	  formData.append("area", areaSelection);
 	  formData.append("date", selectedDate.toISOString().split('T')[0]);
-	  formData.append("timeIn", (timeInSelected + " " +  timeZone1));
-	  formData.append("timeOut", (timeOutSelected + " " + timeZone2));
+	  formData.append("time_in", (timeInSelected + " " +  timeZone1));
+	  formData.append("time_out", (timeOutSelected + " " + timeZone2));
+    formData.append("id", userId);
     // if in group send currentGroup
     if (inGroup) {
       formData.append("group", currentGroup) ;
     }
 	  console.log("Creating:", formData);
 
-      const response = await fetch("http://localhost:5000/shift/ScheduleVolunteer", {
+      const response = await fetch("http://localhost:5000/shift/add", {
         method: "POST",
         mode: "cors",
         body: formData,

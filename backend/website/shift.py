@@ -48,10 +48,10 @@ def convert_to_standard_time(time_str):
 def serialize_shift(shift):
     shift_to_return = {}
     shift_to_return['full_name'] = shift.full_name
-    shift_to_return['date'] = shift.date
+    shift_to_return['date'] = str(shift.date)
     shift_to_return['activity'] = shift.activity
-    shift_to_return['time_in'] = shift.time_in
-    shift_to_return['time_out'] = shift.time_out
+    shift_to_return['time_in'] = str(shift.time_in)
+    shift_to_return['time_out'] = str(shift.time_out)
     shift_to_return['hours'] = shift.hours
     shift_to_return['group'] = shift.group
     shift_to_return['volunteer'] = shift.volunteer
@@ -72,16 +72,46 @@ def completedShifts():
     Shift.out_time.like(not 'NULL')
     )
 
-# A query for any given shifts in a given day (regardless of clocked in or out)
+# A query for shifts that need to be checked in
 @shift.route('/scheduledToday', methods=['GET'])
 def shiftOnGivenDay(day):
     givenDay = Shift.query.filter(
-    Shift.date.like(day)
+    Shift.date.like(day) & Shift.checked_in == False & Shift.checked_out == False
     )
     scheduledVolunteers = []
     for x in givenDay:
         scheduledVolunteers.append(serialize_shift(x))
     return json.dumps(scheduledVolunteers)
+
+
+# A query for shifts that are checked in
+@shift.route('/scheduledToday', methods=['GET'])
+def checkedIn(day):
+    givenDay = Shift.query.filter(
+    Shift.date.like(day) & Shift.checked_in == True
+    )
+    scheduledVolunteers = []
+    for x in givenDay:
+        scheduledVolunteers.append(serialize_shift(x))
+    return json.dumps(scheduledVolunteers)
+
+
+# A query for shifts that are checked out
+@shift.route('/scheduledToday', methods=['GET'])
+def checkedOut(day):
+    givenDay = Shift.query.filter(
+    Shift.date.like(day) & Shift.checked_out == True
+    )
+    scheduledVolunteers = []
+    for x in givenDay:
+        scheduledVolunteers.append(serialize_shift(x))
+    return json.dumps(scheduledVolunteers)
+
+
+
+
+
+
 
 @shift.route('/activate', methods=['GET', 'POST'])
 def activate():

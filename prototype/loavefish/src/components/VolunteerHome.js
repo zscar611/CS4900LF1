@@ -5,6 +5,8 @@ import Calendar from 'react-calendar';
 import './Calendar.css';
 import { differenceInCalendarDays } from 'date-fns';
 import { differenceInCalendarMonths } from 'date-fns';
+
+
 function isSameDay(a, b) {
   return differenceInCalendarDays(a, b) === 0;
 }

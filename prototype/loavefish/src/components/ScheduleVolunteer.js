@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar.js";
 import Calendar from "react-calendar";
 import "./App.css";
-import "./ScheduleVolunteer.css";
+import "./scheduleVolunteer.css";
 
 function ScheduleVolunteer() {
 	
@@ -317,17 +317,18 @@ function ScheduleVolunteer() {
 	  
 	  
 	  
-	  
-       <div  className="volunteerAdd-input">
-          <p className="volunteerAdd-text">Name: </p>
+      <div className="scheduleVol-container">
+
+       <div className="scheduleVol-input">
+          <p className="scheduleVol-text">Name: </p>
           <input
-		    
+
             type="text"
 			list = "fullNamesList"
             placeholder="Click here"
             value={currentName}
+            className={"schedulevol-inputName"}
             onChange={handleNameChange}
-            className={"volunteerAdd-input-box"}
 			id = "nameInput"
             style={{ borderColor: nameFilled ? "initial" : "red" }}
           />
@@ -336,105 +337,105 @@ function ScheduleVolunteer() {
       
 
 		
-	
-      <div className="volunteerAdd-dropdown">
-        <p className="volunteerAdd-text">Area: </p>
-        <select
-          className="volunteerAdd-dropdown-box"
-          style={{ borderColor: areaFilled ? "initial" : "red" }}
-          value={areaSelection}
-          onChange={handleAreaSelectionChange}
-        >
-          <option value="">Select Area...</option>
-          <option value="callCenter">Call Center</option>
-          <option value="pantry">Pantry</option>
-          <option value="homeDelivery">Home Delivery</option>
-          <option value="warehouse">Warehouse</option>
-        </select>
-      </div>
-
-      <div className="volunteerAdd-dropdown">
-        <p className="volunteerAdd-text">Day:</p>
-        <div>
-          <button
+      <div>
+        <div className="scheduleVol-dropdown">
+          <p className="scheduleVol-text">Area: </p>
+          <select
             className="volunteerAdd-dropdown-box"
-            style={{ borderColor: calendarFilled ? "black" : "red" }}
-            onClick={handleCalendarClick}
+            style={{ borderColor: areaFilled ? "initial" : "red" }}
+            value={areaSelection}
+            onChange={handleAreaSelectionChange}
           >
-            Calendar {selectedDate.toLocaleDateString()}
-          </button>
-          {isCalendarVisible && (
-            <div className="volunteerAdd-modal" onClick={handleCalendarClick}>
-              <div
-                className="volunteerAdd-modal-box"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Calendar onChange={handleDateChange} value={selectedDate} />
+            <option value="">Select Area...</option>
+            <option value="callCenter">Call Center</option>
+            <option value="pantry">Pantry</option>
+            <option value="homeDelivery">Home Delivery</option>
+            <option value="warehouse">Warehouse</option>
+          </select>
+        </div>
+
+        <div className="scheduleVol-dropdown">
+          <p className="scheduleVol-text">Day:</p>
+          <div>
+            <button
+              className="volunteerAdd-dropdown-box"
+              style={{ borderColor: calendarFilled ? "black" : "red" }}
+              onClick={handleCalendarClick}
+            >
+              Calendar {selectedDate.toLocaleDateString()}
+            </button>
+            {isCalendarVisible && (
+              <div className="volunteerAdd-modal" onClick={handleCalendarClick}>
+                <div
+                  className="volunteerAdd-modal-box"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Calendar onChange={handleDateChange} value={selectedDate} />
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="volunteerAdd-inputTime">
-        <p className="volunteerAdd-text">Time in: </p>
-        <input
-          type="text"
-          placeholder="00:00"
-          value={timeInSelected}
-          onChange={handleTimeInChange}
-          className={"volunteerAdd-input-box-time"}
-          style={{ borderColor: nameFilled ? "initial" : "red" }}
-        />
-        <button
-          style={{ background: amInClicked ? "green" : "gray" }}
-          onClick={handleAmInChange}
-          className="volunteerAdd-ButtonTime"
-        >
-          AM
-        </button>
-        <button
-          style={{ background: pmInClicked ? "green" : "gray" }}
-          onClick={handlePmInChange}
-          className="volunteerAdd-ButtonTime"
-        >
-          PM
-        </button>
+
+
+      <div className="volunteerAdd-rows">
+        <div className="volunteerAdd-inputTime">
+          <p className="volunteerAdd-text">Time in: </p>
+          <input
+            type="text"
+            placeholder="00:00"
+            value={timeInSelected}
+            onChange={handleTimeInChange}
+            className={"volunteerAdd-input-box-time"}
+            style={{ borderColor: nameFilled ? "initial" : "red" }}
+          />
+          <button
+            style={{ background: amInClicked ? "green" : "gray" }}
+            onClick={handleAmInChange}
+            className="volunteerAdd-ButtonTime"
+          >
+            AM
+          </button>
+          <button
+            style={{ background: pmInClicked ? "green" : "gray" }}
+            onClick={handlePmInChange}
+            className="volunteerAdd-ButtonTime"
+          >
+            PM
+          </button>
+        </div>
+
+
+
+        <div className="volunteerAdd-inputTime">
+          <p className="volunteerAdd-text">Time out: </p>
+          <input
+            type="text"
+            placeholder="00:00"
+            value={timeOutSelected}
+            onChange={handleTimeOutChange}
+            className={"volunteerAdd-input-box-time"}
+            style={{ borderColor: nameFilled ? "initial" : "red" }}
+          />
+          <button
+            style={{ background: amOutClicked ? "green" : "gray" }}
+            onClick={handleAmOutChange}
+            className="volunteerAdd-ButtonTime"
+          >
+            AM
+          </button>
+          <button
+            style={{ background: pmOutClicked ? "green" : "gray" }}
+            onClick={handlePmOutChange}
+            className="volunteerAdd-ButtonTime"
+          >
+            PM
+          </button>
+        </div>
       </div>
-
-
-
-
-
-
-	
-      <div className="volunteerAdd-inputTime">
-        <p className="volunteerAdd-text">Time out: </p>
-        <input
-          type="text"
-          placeholder="00:00"
-          value={timeOutSelected}
-          onChange={handleTimeOutChange}
-          className={"volunteerAdd-input-box-time"}
-          style={{ borderColor: nameFilled ? "initial" : "red" }}
-        />
-        <button
-          style={{ background: amOutClicked ? "green" : "gray" }}
-          onClick={handleAmOutChange}
-          className="volunteerAdd-ButtonTime"
-        >
-          AM
-        </button>
-        <button
-          style={{ background: pmOutClicked ? "green" : "gray" }}
-          onClick={handlePmOutChange}
-          className="volunteerAdd-ButtonTime"
-        >
-          PM
-        </button>
       </div>
-
-
 
 
 

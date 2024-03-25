@@ -55,10 +55,29 @@ function Navbar() {
     setDisplayNavr(!displayNav);
   };
 
+  const sendNameData = async () => {
+    try {
+	  const formData = new FormData();
+	  
+	  formData.append("full_name", currentName);
+	  console.log("Creating:", formData);
+
+      const response = await fetch("http://localhost:5000/shift/ScheduleVolunteer", {
+        method: "POST",
+        mode: "cors",
+        body: formData,
+      });
+	  
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+
   const handleEnter = (event) => {
     if (event.key === "Enter") {
       // USE SQL TO FIND USER PROFILE
       console.log("Search For Name");
+      const response = sendNameData();
       navigate("/profiles");
     }
   };
@@ -76,7 +95,7 @@ function Navbar() {
         />
 		  <datalist id = "fullNamesList"></datalist>
 
-
+        
         <div className="navbar-dynammicButton" onClick={handleClickNav}>
           <img
             src={"/hamburger.png"}

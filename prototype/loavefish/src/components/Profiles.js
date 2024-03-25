@@ -14,26 +14,20 @@ function Profiles() {
     <div className="App">
       <Navbar />
       <div className="profile-name-container">
-        <h1 className="profile-header">MARK ZUCKERBERG</h1>
-        <div className="profile-icons">
-          <FontAwesomeIcon icon={faPenToSquare} />
-          <FontAwesomeIcon icon={faTrash} />
-        </div>
+        <h1>MARK ZUCKERBERG</h1>
       </div>
-      <div className="adminHome-style">
-        <div className="row">
-          <div className="column">
-            <ul>
-              <div className="profile-statBox">
-                <p className="profile-text">Next Shift: </p>
-                <p className="profile-text">Last Shift: </p>
-                <p className="profile-text">Total Hours: </p>
-                <p className="profile-text">Yearly Hours: </p>
-                <p className="profile-text">Total Shifts: </p>
-                <p className="profile-text">Yearly Shifts: </p>
-              </div>
-            </ul>
+      <div className="profile-style">
+        <div className="profile-statBox">
+          <div className="profile-icons">
+            <FontAwesomeIcon icon={faPenToSquare} className="profile-icons-element"/>
+            <FontAwesomeIcon icon={faTrash} className="profile-icons-element"/>
           </div>
+          <p className="profile-text">Next Shift: Pantry - 4/12/2024</p>
+          <p className="profile-text">Last Shift: Warehouse - 02/10/2024</p>
+          <p className="profile-text">Total Hours: 60 hours</p>
+          <p className="profile-text">Yearly Hours: 30 hours</p>
+          <p className="profile-text">Total Shifts: 12</p>
+          <p className="profile-text">Yearly Shifts: 6</p>
         </div>
       </div>
     </div>

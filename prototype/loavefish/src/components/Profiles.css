@@ -1,3 +1,4 @@
+
 .profile-text {
     padding-left: 1em;
     padding-right: .1em;
@@ -8,14 +9,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.profile-header {
 
 }
 
 .profile-icons {
     cursor: pointer;
+    font-size: larger;
+    display:flex;
+    justify-content: right;
+    padding: 0;
+}
+
+.profile-icons-element {
+    margin-right: 1em;
+    padding: 0;
+}
+
+.profile-icons-element:hover {
+    color: gray;
+}
+
+.profile-style {
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
 }
 
 .profile-statBox {

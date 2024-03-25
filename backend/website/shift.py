@@ -131,6 +131,25 @@ def activate():
             message = {"ERROR": "Shift id not found"}
             return jsonify(message), 400
         
+@shift.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        id = request.form.get("id")
+        shift = Shift.query.filter_by(id=id).first()
+        if shift:
+            # format current time to match time in database
+            time_out = datetime.datetime.now()
+            time_out = datetime.time(time_out.hour, time_out.minute, 0)
+            hours = float(str(time_out.hour - shift.time_in.hour) + '.' + str(time_out.minute - shift.time_in.minute))
+            shift = Shift.query.filter_by(id=id).update({Shift.checked_in:False, Shift.checked_out:True, Shift.time_out:time_out, Shift.hours:hours})
+            db.session.commit()
+            message = {"SUCCESS": "Shift checked out"}
+            return jsonify(message), 400
+        else:
+            message = {"ERROR": "Shift id not found"}
+            return jsonify(message), 400
+
+        
 
 
         

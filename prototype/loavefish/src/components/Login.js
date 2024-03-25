@@ -64,7 +64,7 @@ function Login() {
     }
     else if(currentUser === "Baggins")
     {
-      navigate('/AdminHome');
+      navigate('/VolunteerHome');
     }
     else if (result === true)
     {

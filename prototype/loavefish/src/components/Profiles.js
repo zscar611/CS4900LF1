@@ -7,8 +7,18 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Profiles() {
+  const [deleteOpen, setDeleteOpen] = useState(false);
   // get data for inidivual person
   const getVolunteerData = () => {};
+
+  const openDeleteModal = () => {
+    setDeleteOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteOpen(false);
+  };
+
 
   return (
     <div className="App">
@@ -20,8 +30,11 @@ function Profiles() {
         <div className="profile-statBox">
           <div className="profile-icons">
             <FontAwesomeIcon icon={faPenToSquare} className="profile-icons-element"/>
-            <FontAwesomeIcon icon={faTrash} className="profile-icons-element"/>
+            <FontAwesomeIcon icon={faTrash} onClick={openDeleteModal} className="profile-icons-element"/>
           </div>
+
+
+
           <p className="profile-text">Next Shift: Pantry - 4/12/2024</p>
           <p className="profile-text">Last Shift: Warehouse - 02/10/2024</p>
           <p className="profile-text">Groups: WMU</p>

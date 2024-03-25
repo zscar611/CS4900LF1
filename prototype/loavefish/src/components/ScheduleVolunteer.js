@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar.js";
 import Calendar from "react-calendar";
 import "./App.css";
-import "./scheduleVolunteer.css";
+import "./ScheduleVolunteer.css";
 
 function ScheduleVolunteer() {
 	
@@ -260,8 +260,10 @@ function ScheduleVolunteer() {
 	  formData.append("date", selectedDate.toISOString().split('T')[0]);
 	  formData.append("timeIn", (timeInSelected + " " +  timeZone1));
 	  formData.append("timeOut", (timeOutSelected + " " + timeZone2));
-    // if in group send currentGroup, else send empty string
-	  formData.append("group", inGroup ? currentGroup : "");
+    // if in group send currentGroup
+    if (inGroup) {
+      formData.append("group", currentGroup) ;
+    }
 	  console.log("Creating:", formData);
 
       const response = await fetch("http://localhost:5000/shift/ScheduleVolunteer", {
@@ -334,7 +336,6 @@ function ScheduleVolunteer() {
        <div className="scheduleVol-input">
           <p className="scheduleVol-text">Name: </p>
           <input
-
             type="text"
 			list = "fullNamesList"
             placeholder="Click here"

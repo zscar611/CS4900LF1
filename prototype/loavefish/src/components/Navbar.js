@@ -82,6 +82,39 @@ function Navbar() {
     }
   };
 
+  const sendRequest = async () => {
+		try {
+		  const response = await fetch("http://localhost:5000/auth/logout", {
+			method: "POST",
+			mode: "cors"
+		  });
+		  if (response.ok) {
+			
+			console.log("Response received");
+			const responseData = await response.json();
+			// if logged in
+			if (responseData.SUCCESS) {
+			  console.log("Logged Out");
+			  return true;
+			}
+			// if error
+			if (responseData.ERROR) {
+			  console.log(responseData.ERROR)
+			  
+			  return false;
+			}
+		  }
+		} catch (error) {
+		  console.error("Message Not Sent: ", error);
+		}
+	  };
+
+  const handleLogout = async () => 
+	{
+		const result = await sendRequest();
+    	navigate('/');
+    };
+
   return (
     <nav className="navbar-body">
       <div className="navbar-container">
@@ -156,7 +189,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                onClick={() => navigate("/")}
+                onClick={handleLogout}
                 className={"navbar-wrapper-text"}
               >
                 Sign Out

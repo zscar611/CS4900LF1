@@ -119,8 +119,6 @@ def sign_up():
         last_name = request.form.get("last_name")
         date_of_birth = request.form.get("date_of_birth")
 
-        print(last_name)
-
         # auto generate password
         password = last_name.lower()[:3] + first_name.lower()[:3] + date_of_birth[:2] + date_of_birth[6:]
 

@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from .models import Shift, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
+import datetime
 
 shift = Blueprint('shift', __name__)
 
@@ -38,31 +39,64 @@ def add():
         if len(date) != 10:
             message = {"ERROR": "Invalid date."}
             return jsonify(message), 400
+        elif len(time_in) < 7 or len(time_in) > 8:
+            message = {"ERROR": "Invalid time in."}
+            return jsonify(message), 400
+        elif len(time_out) < 7 or len(time_out) > 8:
+            message = {"ERROR": "Invalid time out."}
+            return jsonify(message), 400
        
-       # user = User.query.filter(
-        #        User.first_name.like(id)
-        #).first()
+        user = User.query.filter_by(id=id).first()
 
-        #if not user:
-         #   message = {"ERROR": "Volunteer does not exist."}
-          #  return jsonify(message), 400
+        if not user:
+            message = {"ERROR": "Volunteer does not exist."}
+            return jsonify(message), 400
         
         # parse and change date and times
-        date = date.replace("-", "/")
+        date = date.split('-')
+        date = datetime.datetime(int(date[0]), int(date[1]), int(date[2]))
 
-        def to_mil_time(normal_time):
-            hour = int(normal_time[:2])
-            meridian = normal_time[8:]
-            if (hour == 12):
-                hour = 0
-            if (meridian == 'PM'):
-                hour += 12
-            return str(hour) + normal_time[2:8]
-        
-        print(to_mil_time(time_in))
+    def convert_to_military_time(time_str):
+        # Split the time string into hours, minutes, and AM/PM indicator
+        time_parts = time_str.split(':')
+        hours = int(time_parts[0])
+        minutes = int(time_parts[1][:2])
+        period = time_parts[1][-2:]
 
-        return "hi"
+        # Convert to military time
+        if period.upper() == 'PM' and hours != 12:
+            hours += 12
+        elif period.upper() == 'AM' and hours == 12:
+            hours = 0
 
+        # Format military time as HH:MM
+        military_time = '{:02d}:{:02d}:00'.format(hours, minutes)
+        return military_time
+    time_in = convert_to_military_time(time_in).split(":")
+    time_out = convert_to_military_time(time_out).split(":")
+    time_in = datetime.time(int(time_in[0]), int(time_in[1]), 0)
+    time_out = datetime.time(int(time_out[0]), int(time_out[1]), 0)
+
+    shift = Shift.query.filter(
+        Shift.date.like(date),
+        Shift.time_in.like(time_in),
+        Shift.time_out.like(time_out)
+    ).first()
+
+    print(shift)
+
+    if shift:
+        message = {"ERROR": "Shift is already scheduled"}
+        return jsonify(message), 400
+
+    new_shift= Shift(date=date, full_name=full_name, volunteer=id, activity=activity, time_in=time_in, time_out=time_out, group=group, checked_in=False, checked_out=False)                                                                           
+    db.session.add(new_shift)
+    db.session.commit()
+
+    message = {"SUCCESS": "Volunteer shift scheduled"}
+    return jsonify(message), 201
+
+    
 
 
         

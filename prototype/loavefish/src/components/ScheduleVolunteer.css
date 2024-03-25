@@ -1,91 +1,49 @@
-.volunteerAdd-input-box {
-    height: 3em;
-    width: 15em;
-    font-size: large;
-    border-radius: 10px;
-    border: 1.5px solid black; 
-    padding-left: 8px;
-}
 
-.volunteerAdd-input-box-time {
-    height: 3em;
-    width: 6.5em;
-    font-size: large;
-    border-radius: 10px;
-    border: 1.5px solid black; 
-    padding-left: 8px;
-}
-
-.volunteerAdd-input {
+.scheduleVol-input {
     display: inline-block;
     padding: 5px;
     margin-bottom: 1.3em;
 }
 
-.volunteerAdd-input-box-phone {
+.schedulevol-inputName {
     height: 3em;
-    width: 31.5em;
+    width: 26em;
     font-size: large;
     border-radius: 10px;
     border: 1.5px solid black; 
     padding-left: 8px;
-  }
-  
+}
 
-.volunteerAdd-inputTime{
+.schedulevol-inputTest {
+    width: 26em;
+    font-size: large;
+    border-radius: 10px;
+    border: 1.5px solid black; 
+    padding-left: 8px;
+    opacity: 0;
+}
+
+.scheduleVol-dropdown {
     display: inline-block;
-    position: relative;
     padding: 5px;
     margin-bottom: 1.3em;
+    margin-right: 4.2em;
 }
 
-.volunteerAdd-ButtonTime {
-    position: relative;
-    background: green;  
-    color: white;
-    padding: 4px 10px;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.volunteerAdd-text {
+.scheduleVol-text {
     font-size: larger;
     font-weight: bolder;
     text-align: left;
 }
 
-.volunteerAdd-dropdown {
-    display: inline-block;
-    padding: 5px;
-    margin-bottom: 1.3em;
-}
-
-.volunteerAdd-dropdown-box {
-    padding: 14px 22px;
-    border-radius: 8px;
-    border-color: black;
-    cursor: pointer;
-    margin-bottom: 1.3em;
-}
-
-.volunteerAdd-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
+@media (max-width: 600px) {
+    .schedulevol-inputName {
+        height: 3em;
+        width: 15em;
+        font-size: large;
+        border-radius: 10px;
+        border: 1.5px solid black; 
+        padding-left: 8px;
+    }
+    
   }
-  
-  .volunteerAdd-modal-box {
-    background:white;
-    padding: 20px;
-    border-radius: 8px;
-    z-index: 101;
-  }
-  

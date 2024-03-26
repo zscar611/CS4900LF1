@@ -18,13 +18,18 @@ function Profiles() {
   const [nextShift, setNextShift] = useState("");
   const [lastShift, setLastShift] = useState("");
   const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState("");
+
 
   useEffect(() => {
     if (location.state && location.state.data) {
       console.log("IN PROFILE", location.state.data);
-      setUserName(location.state.data[0].full_name);
+      setUserName(location.state.data[0]);
+      setUserId(location.state.data[1]);
     }
   }, [location]);
+
+  
 
   const openDeleteModal = () => {
     setDeleteOpen(true);

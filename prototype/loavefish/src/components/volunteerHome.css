@@ -1,0 +1,95 @@
+
+.profile-text {
+    padding-left: 1em;
+    padding-right: .1em;
+    text-align: left;
+}
+
+.profile-name-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.profile-icons {
+    cursor: pointer;
+    font-size: larger;
+    display:flex;
+    justify-content: right;
+    padding: 0;
+}
+
+.profile-icons-caret {
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile-icons-caret-hover {
+    color: gray;
+}
+
+
+.profile-icons-element {
+    margin-right: 1em;
+    padding: 0;
+}
+
+.profile-icons-element:hover {
+    color: gray;
+}
+
+.profile-style {
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.volunteerHome-statBox {
+    background-color: white;
+    border-radius: 8px;
+    width: 60%;
+    padding: 5px;
+    font-size: large;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+  }
+
+  .volunteerHome-statBox-firstLine {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .volunteerHome-calendar {
+    padding: 1em;
+  }
+
+  .volunteer-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.5em;
+    margin-bottom: 1.3em;
+    width: 70%;
+  }
+
+  .volunteerHome-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .volunteerHome-button-box {
+    background: #007052;
+    color: white;
+    padding: 14px 22px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  

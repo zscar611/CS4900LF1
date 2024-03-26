@@ -65,75 +65,14 @@ function Navbar() {
     setDisplayNavr(!displayNav);
   };
 
-  const sendNameData = async () => {
-    try {
-      const formData = new FormData();
-
-      formData.append("full_name", currentName);
-      formData.append("id", currentId);
-      console.log("Creating:", formData);
-
-      const response = await fetch("http://localhost:5000/shift/find-user", {
-        method: "POST",
-        mode: "cors",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("HTTP error! Status: ${response.status}");
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
-
   const handleEnter = async (event) => {
     if (event.key === "Enter") {
       // USE SQL TO FIND USER PROFILE
       console.log("Search For Name");
-      const response = await sendNameData();
-      if (response) {
-        console.log("RESPONSE", response);
-        navigate('/profiles', { state: { data: response } });
-      }
-      //navigate("/profiles");
+      let dataVar = [currentName, currentId];
+      navigate('/profiles', { state: { data: dataVar } });
     }
   };
-
-  const sendRequest = async () => {
-		try {
-		  const response = await fetch("http://localhost:5000/auth/logout", {
-			method: "POST",
-			mode: "cors"
-		  });
-		  if (response.ok) {
-			
-			console.log("Response received");
-			const responseData = await response.json();
-			// if logged in
-			if (responseData.SUCCESS) {
-			  console.log("Logged Out");
-			  return true;
-			}
-			// if error
-			if (responseData.ERROR) {
-			  console.log(responseData.ERROR)
-			  
-			  return false;
-			}
-		  }
-		} catch (error) {
-		  console.error("Message Not Sent: ", error);
-		}
-	  };
-
-  const handleLogout = async () => 
-	{
-		const result = await sendRequest();
-    	navigate('/');
-    };
 
   return (
     <nav className="navbar-body">
@@ -208,7 +147,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                onClick={handleLogout}
+                onClick={() => navigate("/")}
                 className={"navbar-wrapper-text"}
               >
                 Sign Out

@@ -342,7 +342,7 @@ function ScheduleVolunteer() {
 	  
 	  
       <div className="scheduleVol-container">
-
+      <div className="scheduleVol-leftHalf">
        <div className="scheduleVol-input">
           <p className="scheduleVol-text">Name: </p>
           <input
@@ -371,9 +371,10 @@ function ScheduleVolunteer() {
             />}
           </div>
         </div>
+        </div>
 
 		
-      <div>
+      <div className="scheduleVol-rightHalf">
         <div className="scheduleVol-dropdown">
           <p className="scheduleVol-text">Area: </p>
           <select
@@ -389,7 +390,6 @@ function ScheduleVolunteer() {
             <option value="warehouse">Warehouse</option>
           </select>
         </div>
-
 
 
         <div className="scheduleVol-dropdown">
@@ -414,7 +414,6 @@ function ScheduleVolunteer() {
             )}
           </div>
         </div>
-      </div>
 
 
 
@@ -474,12 +473,7 @@ function ScheduleVolunteer() {
         </div>
       </div>
       </div>
-
-
-
-
-
-
+      </div>
 
 
 

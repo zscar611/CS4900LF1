@@ -5,7 +5,7 @@
     text-align: left;
 }
 
-.profile-name-container {
+.volunteerHome-name-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,3 +93,8 @@
     cursor: pointer;
   }
   
+  .volunteerHome-img {
+    width: 20%;
+    height: 10%;
+    padding-top: 1%;
+  }

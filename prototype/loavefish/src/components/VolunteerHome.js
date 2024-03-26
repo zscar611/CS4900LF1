@@ -20,7 +20,21 @@ function popup(props) {
 }
 var active_index = 4000;
 var new_index = 4001;
+
+
 function VolunteerHome() {
+
+
+  const [openInstructions, setOpenInstructions] = useState(false);
+
+  const openInstructionModal = () => {
+    setOpenInstructions(true);
+  };
+
+  const closeInstructionModal = () => {
+    setOpenInstructions(false);
+  };
+
   function getShiftData() {
     //TODO: get shift data from here
   }
@@ -146,14 +160,33 @@ function VolunteerHome() {
 
   return (
     <div className="App">
-      <div className="profile-name-container">
+      <header>
+        <img src={'/logo-Burned.png'} className="volunteerHome-img" alt="logo" />
+      </header>
+      <div className="volunteerHome-name-container">
         <h1>Hello Frodo Baggins!</h1>
         <div className="volunteerHome-button">
           <button className="volunteerHome-button-box" onClick={handleLogout}>
             Logout
           </button>
-        </div>
+        </div>  
       </div>
+
+      {openInstructions && (
+            <div className="profiles-modal">
+              <div className="profiles-modal-box">
+                <p>You have been signed in for Pantry from 10:30 am - 11:30 am</p>
+                <p>Instructions: Wait in lobby for the team lead</p>
+                <div className="profile-button">
+                  <button
+                    className="profile-button-box"
+                    onClick={closeInstructionModal}>
+                    Understood
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
       <div className="profile-style">
         <div className="volunteerHome-statBox">
           <div className="volunteerHome-statBox-firstLine">
@@ -161,7 +194,7 @@ function VolunteerHome() {
               <p className="profile-text">Next Shift:</p>
               <p className="profile-text">Last Shift: </p>
               <p className="profile-text">Groups:</p>
-			  <p className="profile-text">Favorite Area:</p>
+			        <p className="profile-text">Favorite Area:</p>
               <p className="profile-text">Total Hours:</p>
               <p className="profile-text">Yearly Hours:</p>
               <p className="profile-text">Total Shifts:</p>
@@ -185,8 +218,8 @@ function VolunteerHome() {
               placeholder="Enter Code"
               className={"main-input-box"}
             />	
-            <div className="main-button">
-              <button className="main-button-box">Sign In</button>
+            <div className="volunteerHome-button">
+              <button className="volunteerHome-button-box" onClick={openInstructionModal}>Submit</button>
             </div>
           </div>
         </div>

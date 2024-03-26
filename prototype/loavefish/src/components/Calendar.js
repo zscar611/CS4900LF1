@@ -17,6 +17,16 @@ function popup(props)
 var active_index = 4000;
 var new_index = 4001;
 function VolunteerHome() {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	function getShiftData()
 	{
 		//TODO: get shift data from here
@@ -75,6 +85,18 @@ function VolunteerHome() {
 		//if active day is a scheduled day
 		if (datesToAddClassTo.find(dDate => isSameDay(dDate, date))) 
 			{
+				//TODO: Call query that displays shift entries for a given day
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				//get index in list of scheduled days to show popup correctly
 				new_index = datesToAddClassTo.findIndex(dDate => isSameDay(dDate, date));
@@ -89,12 +111,12 @@ function VolunteerHome() {
 					if (active_index != 4000)
 					{	
 						//toggles off old selected date
-						popups[active_index].classList.toggle("show");
+						
 					}
 				
 					//shows popup over active index
 					active_index = new_index;
-					popups[active_index].classList.toggle("show");
+				
 					
 					
 				}
@@ -112,7 +134,7 @@ function VolunteerHome() {
 			else
 			{
 			console.log(active_index);
-			popups[active_index].classList.toggle("show");
+		
 			active_index = 4000;
 			
 			}

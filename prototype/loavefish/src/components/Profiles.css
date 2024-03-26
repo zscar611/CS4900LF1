@@ -20,6 +20,16 @@
     padding: 0;
 }
 
+.profile-icons-caret {
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile-icons-caret-hover {
+    color: gray;
+}
+
+
 .profile-icons-element {
     margin-right: 1em;
     padding: 0;

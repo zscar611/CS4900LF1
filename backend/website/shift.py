@@ -3,11 +3,10 @@ from .models import Shift, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 import datetime
+import json
+
 
 shift = Blueprint('shift', __name__)
-
-
-
 
 
 
@@ -48,10 +47,10 @@ def convert_to_standard_time(time_str):
 def serialize_shift(shift):
     shift_to_return = {}
     shift_to_return['full_name'] = shift.full_name
-    shift_to_return['date'] = shift.date
+    shift_to_return['date'] = str(shift.date)
     shift_to_return['activity'] = shift.activity
-    shift_to_return['time_in'] = shift.time_in
-    shift_to_return['time_out'] = shift.time_out
+    shift_to_return['time_in'] = str(shift.time_in)
+    shift_to_return['time_out'] = str(shift.time_out)
     shift_to_return['hours'] = shift.hours
     shift_to_return['group'] = shift.group
     shift_to_return['volunteer'] = shift.volunteer
@@ -71,6 +70,31 @@ def completedShifts():
     clockedIn = Shift.query.filter(
     Shift.out_time.like(not 'NULL')
     )
+
+
+# get user info from name and id
+@shift.route('/find-user', methods=['GET', 'POST'])
+def get_user():
+    if request.method == 'POST':
+        full_name = request.form.get("full_name")
+        volunteerId = request.form.get("id")
+        
+        return_list = []
+
+        users = Shift.query.filter(
+            Shift.full_name.like(full_name),
+            Shift.volunteer.like(volunteerId),
+        ).all()
+        for user in users:
+            return_list.append(serialize_shift(user))
+        if users:
+            
+            return json.dumps(return_list), 200
+
+        return
+
+
+
 
 # A query for any given shifts in a given day (regardless of clocked in or out)
 @shift.route('/scheduledToday', methods=['GET'])

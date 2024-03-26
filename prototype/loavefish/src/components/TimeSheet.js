@@ -18,18 +18,24 @@ function TimeSheet() {
 
 //TODO: GET SHIFT ENTRIES WITH A TIME WITHIN 15 MINS OF CURRENT TIME AND SIGNEDIN = 0 &
 
-  const [signInDict, setSignInDict] = useState([ {
-      name: "Tom Brady",
-      area: "Pantry",
-      timeScheduled: "10:30am - 11:30am",
-    }
+  const [signInDict, setSignInDict] = useState([ 
   ]);
+  
+  
+   const [signOutDict, setSignOutDict] = useState([
+  ]);
+
+
+  const [signInDict2, setSignInDict2] = useState([]);
+  
+  
+  
   
   //gets scheduled shift data from DB
 	const [allAccounts, setAllAccounts] = useState([]);
 	const getData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/auth/all", {
+      const response = await fetch("http://localhost:5000/shift/scheduledToday", {
         method: "GET",
         mode: "cors",
       });
@@ -39,6 +45,8 @@ function TimeSheet() {
   
         console.log("All users:", allUsers);
         setAllAccounts([]);
+		setSignInDict2([]);
+		setSignInDict([]);
         allUsers.forEach((user) => {
           console.log(user["full_name"]);
           setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
@@ -49,70 +57,31 @@ function TimeSheet() {
     } catch (error) {
       console.error("Error fetching all users:", error);
     }
-  };
 	//adds names to fullNameList
 	for(let i = 0; i < allAccounts.length; i++)
 		{
-		
-			signInDict.push(             
+			
+			signInDict2.push(             
 			
 			{name: allAccounts[i]["full_name"],
 			 area: allAccounts[i]["activity"],
-			 timeScheduled: (allAccounts[i]["time_in"] + " - " + allAccounts[i]["time_out"])
+			 timeScheduled: (allAccounts[i]["time_in"] + " - " + allAccounts[i]["time_out"]),
+			 shiftid:  allAccounts[i]["id"],
+			 volunteerid: allAccounts[i]["volunteer"],
+			 date: allAccounts[i]["date"]	
+				
 			})	
+			 
 		}	
+		setSignInDict(signInDict2)
+  };
 	
-  
-	window.onload = getData;
-	
-	
+console.log(signInDict);
 	
 	
 
 
-  const [signOutDict, setSignOutDict] = useState([
-    {
-      name: "Tom Brady",
-      area: "Pantry",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Bilbo Baggins",
-      area: "Warehouse",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Frodo Baggins",
-      area: "Home Deliveries",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Sam Gamgee",
-      area: "Call Center",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Dwight Shrute",
-      area: "Pantry",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Wes Anderson",
-      area: "Home Deliveries",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Tim Healey",
-      area: "Pantry",
-      timeScheduled: "10:30am - 11:30am",
-    },
-    {
-      name: "Billy Zoto",
-      area: "Warehouse",
-      timeScheduled: "10:30am - 11:30am",
-    },
-  ]);
-
+ 
   const signIn = (person) => {
     console.log(person);
     // send JSON to backend checking in person
@@ -153,6 +122,8 @@ function TimeSheet() {
         <div className="row">
           <div className="column">
             <h2>Sign In</h2>
+			<button onClick={() => getData()}>Refresh</button>
+			
             <ul>
               {signInDict.map((person, index) => (
                 <div className="admin-person" key={index}>

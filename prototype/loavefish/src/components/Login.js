@@ -68,7 +68,7 @@ function Login() {
     }
     else if (result === true)
     {
-      if (currentUser === "Admin")
+      if (currentUser === "Admin")//We have to make sure that a User cannot be named 'Admin'
       {
         navigate('/AdminHome');
       }

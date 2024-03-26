@@ -131,11 +131,38 @@ function VolunteerHome() {
 	
 	//END CALENDAR STUFF
   
-  
-	const handleLogout = () => 
+	const sendRequest = async () => {
+		try {
+		  const response = await fetch("http://localhost:5000/auth/logout", {
+			method: "POST",
+			mode: "cors"
+		  });
+		  if (response.ok) {
+			
+			console.log("Response received");
+			const responseData = await response.json();
+			// if logged in
+			if (responseData.SUCCESS) {
+			  console.log("Logged Out");
+			  return true;
+			}
+			// if error
+			if (responseData.ERROR) {
+			  console.log(responseData.ERROR)
+			  
+			  return false;
+			}
+		  }
+		} catch (error) {
+		  console.error("Message Not Sent: ", error);
+		}
+	  };
+
+
+	const handleLogout = async () => 
 	{
-    // TODO add SQL logic here
-    navigate('/');
+		const result = await sendRequest();
+    	navigate('/');
     };
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState("");

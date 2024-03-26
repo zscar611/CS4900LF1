@@ -4,6 +4,7 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
@@ -89,13 +90,15 @@ def login():
 
         user = User.query.filter(
         User.phone_number.like(phone_number),
-        User.password.like(password)
+        #User.password.like(password)
         ).first()
 
         if user:
             if check_password_hash(user.password, password):
                 message = {"SUCCESS": "User sucessfully logged in"}
+                login_user(user,remember=True)
                 return jsonify(message), 200
+                
             else:
                 message = {"ERROR": "Incorrect password"}
                 return jsonify(message), 400
@@ -107,8 +110,13 @@ def login():
 
 
 @auth.route('/logout', methods=['GET', 'POST'])
+#@login_required
 def logout():
-    pass
+    if request.method == 'POST':
+        logout_user()
+        message = {"SUCCESS": "User succesfully logged out"}
+        return jsonify(message), 200
+    
 
 
 @auth.route('/sign-up/', methods=['GET', 'POST'])

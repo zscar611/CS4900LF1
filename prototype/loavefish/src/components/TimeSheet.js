@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 import "./TimeSheet.css";
@@ -18,21 +18,59 @@ function TimeSheet() {
 
 //TODO: GET SHIFT ENTRIES WITH A TIME WITHIN 15 MINS OF CURRENT TIME AND SIGNEDIN = 0 &
 
-  const [signInDict, setSignInDict] = useState([ 
-  ]);
-  
-  
-   const [signOutDict, setSignOutDict] = useState([
-  ]);
-
-
+  const [signInDict, setSignInDict] = useState([]);
+  const [signOutDict, setSignOutDict] = useState([]);
   const [signInDict2, setSignInDict2] = useState([]);
+  const [allAccounts, setAllAccounts] = useState([]);
+
   
   
-  
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/shift/scheduledToday", {
+          method: "GET",
+          mode: "cors",
+        });
+        if (response.ok) {
+          const allUsers = await response.json();
+      
+          console.log("All users:", allUsers);
+          setAllAccounts([]);
+          setSignInDict2([]);
+          setSignInDict([]);
+          allUsers.forEach((user) => {
+            console.log(user["full_name"]);
+            setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
+          });
+        } else {
+          console.error("Error fetching all users:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching all users:", error);
+      }
+    //adds names to fullNameList
+    for(let i = 0; i < allAccounts.length; i++)
+      {
+        
+        signInDict2.push(             
+        
+        {name: allAccounts[i]["full_name"],
+         area: allAccounts[i]["activity"],
+         timeScheduled: (allAccounts[i]["time_in"] + " - " + allAccounts[i]["time_out"]),
+         shiftid:  allAccounts[i]["id"],
+         volunteerid: allAccounts[i]["volunteer"],
+         date: allAccounts[i]["date"]	
+          
+        })	
+         
+      }	
+      setSignInDict(signInDict2)
+    };
+    getData();
+  },[]);
   
   //gets scheduled shift data from DB
-	const [allAccounts, setAllAccounts] = useState([]);
 	const getData = async () => {
     try {
       const response = await fetch("http://localhost:5000/shift/scheduledToday", {
@@ -42,11 +80,10 @@ function TimeSheet() {
       if (response.ok) {
         const allUsers = await response.json();
 		
-  
         console.log("All users:", allUsers);
         setAllAccounts([]);
-		setSignInDict2([]);
-		setSignInDict([]);
+        setSignInDict2([]);
+        setSignInDict([]);
         allUsers.forEach((user) => {
           console.log(user["full_name"]);
           setAllAccounts((prevAllAccounts) => [...prevAllAccounts, user]);
@@ -102,12 +139,8 @@ console.log(signInDict);
   // if name is clicked open the volunteers profile
   const openProfile = (person) => {
     // send data to back end and navigate to profile js
-    navigate("/profiles");
-  };
-
-  const handleLogout = () => {
-    // TODO insert SQL logic here
-    navigate("/");
+    let dataVar = [person.name];
+    navigate('/profiles', { state: { data: dataVar } });
   };
 
 

@@ -8,18 +8,16 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
-
 function Profiles() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const location = useLocation();
   const [data, setData] = useState("");
   const todayDate = new Date();
-  const [upcomingShifts, setUpcomingShifts] = ([]);
+  const [upcomingShifts, setUpcomingShifts] = [];
   const [nextShift, setNextShift] = useState("");
   const [lastShift, setLastShift] = useState("");
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
-
 
   useEffect(() => {
     if (location.state && location.state.data) {
@@ -29,14 +27,17 @@ function Profiles() {
     }
   }, [location]);
 
-  
-
   const openDeleteModal = () => {
     setDeleteOpen(true);
   };
 
   const closeDeleteModal = () => {
     setDeleteOpen(false);
+  };
+
+  const handleDeleteUser = () => {
+    console.log("Delete");
+    
   };
 
   return (
@@ -59,15 +60,28 @@ function Profiles() {
             />
           </div>
           {deleteOpen && (
-            <div className="volunteerAdd-modal">
-              <div className="volunteerAdd-modal-box">
+            <div className="profiles-modal">
+              <div className="profiles-modal-box">
                 <p>
-                  Are you sure you want to delete the account for{" "}
-                  {location.state.data[0].full_name}, Deleting will permantely
-                  delete the account off the database, and is NOT reversible
+                  Are you sure you want to delete the account for {userName},
+                  Deleting will permantely delete the account off the database,
+                  and is NOT reversible
                 </p>
-                <button onClick={closeDeleteModal}>Cancel</button>
-                <button>Delete</button>
+                <div className="profile-button">
+                  <button
+                    className="profile-button-box"
+                    onClick={closeDeleteModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div className="profile-button">
+                  <button
+                    className="profile-button-box-delete"
+                    onClick={handleDeleteUser}>
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           )}

@@ -37,7 +37,6 @@ function Report() {
       <Navbar />
       <h1>Reports</h1>
       <div className="report-align-items">
-        <h1>This Weeks Report</h1>
         <div className="main-button">
           <button
             className="main-button-box"
@@ -54,11 +53,24 @@ function Report() {
             <ul>
               <div className="admin-person">
                 <p className="admin-text">All Accounts: </p>
-                {allAccounts.map((person, index) => (
-                  <p className="admin-text" key={index}>
-                    {person.first_name} {person.last_name} {person.phone_number}
-                  </p>
-                ))}
+                <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Hours</th>
+                </tr>
+                {allAccounts.map((val, key) => {
+                    return (
+                        <tr key={key}>
+                            <td>{val.first_name}</td>
+                            <td>{val.last_name}</td>
+                            <td>{val.phone_number}</td>
+                            <td>{val.gender}</td>
+                        </tr>
+                    )
+                })}
+            </table>
                 <p className="admin-text">Total Accounts: {allAccounts.length}</p>
               </div>
             </ul>

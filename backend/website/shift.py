@@ -57,19 +57,22 @@ def serialize_shift(shift):
 
     return shift_to_return
 
+# QUERY FUNCTIONS
 
-# TODO: Query functions are designed but need to be implemented and tested
-# A query for any shifts that has an in time but does not have an out time (clocked in or has not begun)
-def incompleteShifts():
-    clockedIn = Shift.query.filter(
-    Shift.out_time.like('NULL')
+# A query for all shifts of a given user !!! NOT TESTED YET !!!
+def userShifts(userName):
+    shiftList = Shift.query.filter(
+        Shift.full_name.like(userName) # TODO: We should probably search for users using their ID rather than username in the event of duplicate names
     )
+    shiftsScheduled = []
+    for x in shiftList:
+        shiftsScheduled.append(serialize_shift(x))
+    return jsonify(shiftsScheduled)
 
-# A query for any shifts that has both in and out times (completed shift)
-def completedShifts():
-    clockedIn = Shift.query.filter(
-    Shift.out_time.like(not 'NULL')
-    )
+# TODO: A query to fetch a user id using their first name and phone number
+# The thought process here being in the event where someone shares the same phone number
+def getUserId():
+    pass
 
 # A query for any given shifts in a given day (regardless of clocked in or out)
 @shift.route('/scheduledToday', methods=['GET'])

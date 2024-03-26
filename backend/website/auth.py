@@ -74,14 +74,6 @@ def update_phone_number():
     pass
 
 
-
-
-        
-
-
-
-
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -163,3 +155,7 @@ def sign_up():
     elif request.method == 'GET':
         message = {"FORMAT": "first_name = string over 2 chars, last_name = string over 2 chars, phone_number = string of 10 chars, date_of_birth = string of 10 chars"}
         return jsonify(message), 200
+
+# @auth.route('/update_password', methods=['PATCH']) ?
+def update_password(new_string):
+    pass

@@ -212,7 +212,8 @@ def add():
 # TODO: Determine route/path
 # Retrieve the stats of each individual user
 @shift.route('/user-stats', methods=['GET'])
-def personal_stats(id):
+def personal_stats():  # use request.form.get, test with postman
+    id = request.args.get("id")  # the odds of the user knowing their ID feels pretty low
     allShifts = Shift.query.filter(
         Shift.volunteer.like(id)
     )

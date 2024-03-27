@@ -146,7 +146,7 @@ def checkout():
             shift = Shift.query.filter_by(id=id).update({Shift.checked_in:False, Shift.checked_out:True, Shift.time_out:time_out, Shift.hours:hours})
             db.session.commit()
             message = {"SUCCESS": "Shift checked out"}
-            return jsonify(message), 400
+            return jsonify(message), 200
         else:
             message = {"ERROR": "Shift id not found"}
             return jsonify(message), 400

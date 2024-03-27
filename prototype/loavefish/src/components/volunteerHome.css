@@ -39,12 +39,10 @@
     color: gray;
 }
 
-.profile-style {
+.volunteerHome-style {
     width: 80%;
     margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2em;
+    margin-top: .5em;
 }
 
 .volunteerHome-statBox {
@@ -93,6 +91,26 @@
     cursor: pointer;
   }
   
+  .volunteerHome-buttonTopScreen {
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-left: 1em;
+  }
+  
+  .volunteerHome-button-boxTopScreen {
+    background: #007052;
+    color: white;
+    padding: 14px 22px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+
   .volunteerHome-img {
     width: 20%;
     height: 10%;

@@ -7,9 +7,13 @@ import "./volunteerHome.css";
 import { differenceInCalendarDays } from "date-fns";
 import { differenceInCalendarMonths } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretRight,
+  faRightFromBracket,
+  faTrash,
+  faPenToSquare,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
 
 function isSameDay(a, b) {
   return differenceInCalendarDays(a, b) === 0;
@@ -21,11 +25,12 @@ function popup(props) {
 var active_index = 4000;
 var new_index = 4001;
 
-
 function VolunteerHome() {
-
-
   const [openInstructions, setOpenInstructions] = useState(false);
+  const [value, setValue] = useState();  
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState("");
+
 
   const openInstructionModal = () => {
     setOpenInstructions(true);
@@ -117,7 +122,6 @@ function VolunteerHome() {
     }
   }
 
-  const [value, setValue] = useState();
 
   function onChange(nextValue) {
     setValue(nextValue);
@@ -155,46 +159,81 @@ function VolunteerHome() {
     const result = await sendRequest();
     navigate("/");
   };
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState("");
+
+  const navigateProfile = async () => {
+    navigate("/VolunteerAccount");
+  };
 
   return (
     <div className="App">
       <header>
-        <img src={'/logo-Burned.png'} className="volunteerHome-img" alt="logo" />
+        <img
+          src={"/logo-Burned.png"}
+          className="volunteerHome-img"
+          alt="logo"
+        />
       </header>
       <div className="volunteerHome-name-container">
-        <h1>Hello Frodo Baggins!</h1>
-        <div className="volunteerHome-button">
-          <button className="volunteerHome-button-box" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>  
+        <h1>Hello Frodo Baggins</h1>
       </div>
 
       {openInstructions && (
-            <div className="profiles-modal">
-              <div className="profiles-modal-box">
-                <p>You have been signed in for Pantry from 10:30 am - 11:30 am</p>
-                <p>Instructions: Wait in lobby for the team lead</p>
-                <div className="profile-button">
-                  <button
-                    className="profile-button-box"
-                    onClick={closeInstructionModal}>
-                    Understood
-                  </button>
-                </div>
-              </div>
+        <div className="profiles-modal">
+          <div className="profiles-modal-box">
+            <p>You have been signed in for Pantry from 10:30 am - 11:30 am</p>
+            <p>Instructions: Wait in lobby for the team lead</p>
+            <div className="profile-button">
+              <button
+                className="profile-button-box"
+                onClick={closeInstructionModal}
+              >
+                Understood
+              </button>
             </div>
-          )}
-      <div className="profile-style">
+          </div>
+        </div>
+      )}
+
+      <div className="volunteerHome-buttonTopScreen">
+        <button className="volunteerHome-button-boxTopScreen" onClick={navigateProfile}>
+          <FontAwesomeIcon
+            icon={faUser}
+            className="profile-icons-element"
+          />
+          Account
+        </button>
+      </div>
+
+      <div className="volunteerHome-buttonTopScreen">
+        <button className="volunteerHome-button-boxTopScreen">
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            className="profile-icons-element"
+          />
+          Edit
+        </button>
+      </div>
+      <div className="volunteerHome-buttonTopScreen">
+        <button
+          className="volunteerHome-button-boxTopScreen"
+          onClick={handleLogout}
+        >
+          <FontAwesomeIcon
+            icon={faRightFromBracket}
+            className="profile-icons-element"
+          />
+          Logout
+        </button>
+      </div>
+
+      <div className="volunteerHome-style">
         <div className="volunteerHome-statBox">
           <div className="volunteerHome-statBox-firstLine">
             <div className="volunteerHome-leftHalf">
               <p className="profile-text">Next Shift:</p>
               <p className="profile-text">Last Shift: </p>
               <p className="profile-text">Groups:</p>
-			        <p className="profile-text">Favorite Area:</p>
+              <p className="profile-text">Favorite Area:</p>
               <p className="profile-text">Total Hours:</p>
               <p className="profile-text">Yearly Hours:</p>
               <p className="profile-text">Total Shifts:</p>
@@ -217,9 +256,14 @@ function VolunteerHome() {
               type="text"
               placeholder="Enter Code"
               className={"main-input-box"}
-            />	
+            />
             <div className="volunteerHome-button">
-              <button className="volunteerHome-button-box" onClick={openInstructionModal}>Submit</button>
+              <button
+                className="volunteerHome-button-box"
+                onClick={openInstructionModal}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

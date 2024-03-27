@@ -128,7 +128,7 @@ def activate():
             shift = Shift.query.filter_by(id=id).update({Shift.checked_in:True, Shift.time_in:time_in})
             db.session.commit()
             message = {"SUCCESS": "Shift checked in"}
-            return jsonify(message), 400
+            return jsonify(message), 200
         else:
             message = {"ERROR": "Shift id not found"}
             return jsonify(message), 400

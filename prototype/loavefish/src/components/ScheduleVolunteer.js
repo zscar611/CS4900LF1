@@ -270,6 +270,7 @@ function ScheduleVolunteer() {
 	  formData.append("time_in", (timeInSelected + " " +  timeZone1));
 	  formData.append("time_out", (timeOutSelected + " " + timeZone2));
     formData.append("id", userId);
+	
     // if in group send currentGroup
     if (inGroup) {
       formData.append("group", currentGroup) ;

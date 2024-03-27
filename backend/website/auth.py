@@ -156,6 +156,39 @@ def sign_up():
         message = {"FORMAT": "first_name = string over 2 chars, last_name = string over 2 chars, phone_number = string of 10 chars, date_of_birth = string of 10 chars"}
         return jsonify(message), 200
 
+@auth.route('/reset', methods=['POST'])
+def reset():
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    phone_number = request.form.get("phone_number")
+
+    user = User.query.filter(
+        User.first_name.like(first_name),
+        User.last_name.like(last_name),
+        User.phone_number.like(phone_number)
+    ).first()
+
+    if not user:
+        message = {"ERROR": "User not found"}
+        return jsonify(message), 400
+
+    # auto generate password
+    password = last_name.lower()[:3] + first_name.lower()[:3] + user.date_of_birth[:2] + user.date_of_birth[6:]
+
+    # reset users password to default
+    User.query.filter_by(id=user.id).update({User.password:password})
+
+    message = {"SUCCESS": "Users password has been reset"}
+    return jsonify(message), 200
+
+
+
+
+
+
+
+
+
 # @auth.route('/update_password', methods=['PATCH']) ???
 def getUserId(first, last, phone): # Not tested yet
     user = User.query.filter(
@@ -165,6 +198,7 @@ def getUserId(first, last, phone): # Not tested yet
     ).first()
 
     return user.id
+
 
 def update_password(id, new_password): # Not tested yet
     db.session.query().where(User.id == id).update({"password":generate_password_hash(new_password, method='pbkdf2:sha256')}) # searching DB for the given id, and updates it with the same

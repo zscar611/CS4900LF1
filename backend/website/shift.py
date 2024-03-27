@@ -54,6 +54,7 @@ def serialize_shift(shift):
     shift_to_return['hours'] = shift.hours
     shift_to_return['group'] = shift.group
     shift_to_return['volunteer'] = shift.volunteer
+    shift_to_return['id'] = shift.id
 
     return shift_to_return
 
@@ -107,17 +108,12 @@ def checkedOut():
         scheduledVolunteers.append(serialize_shift(x))
     return jsonify(scheduledVolunteers)
 
-
-
-
-
-
-
 @shift.route('/activate', methods=['GET', 'POST'])
 def activate():
     if request.method == 'POST':
         # check if shift exists
         id = request.form.get("id")
+        print(id) 
         shift = Shift.query.filter_by(id=id).first()
         if shift:
             # format current time to match time in database
@@ -126,7 +122,7 @@ def activate():
             shift = Shift.query.filter_by(id=id).update({Shift.checked_in:True, Shift.time_in:time_in})
             db.session.commit()
             message = {"SUCCESS": "Shift checked in"}
-            return jsonify(message), 400
+            return jsonify(message), 200
         else:
             message = {"ERROR": "Shift id not found"}
             return jsonify(message), 400
@@ -144,7 +140,7 @@ def checkout():
             shift = Shift.query.filter_by(id=id).update({Shift.checked_in:False, Shift.checked_out:True, Shift.time_out:time_out, Shift.hours:hours})
             db.session.commit()
             message = {"SUCCESS": "Shift checked out"}
-            return jsonify(message), 400
+            return jsonify(message), 200
         else:
             message = {"ERROR": "Shift id not found"}
             return jsonify(message), 400

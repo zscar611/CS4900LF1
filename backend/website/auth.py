@@ -74,14 +74,6 @@ def update_phone_number():
     pass
 
 
-
-
-        
-
-
-
-
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -163,3 +155,20 @@ def sign_up():
     elif request.method == 'GET':
         message = {"FORMAT": "first_name = string over 2 chars, last_name = string over 2 chars, phone_number = string of 10 chars, date_of_birth = string of 10 chars"}
         return jsonify(message), 200
+
+# @auth.route('/update_password', methods=['PATCH']) ???
+def getUserId(first, last, phone): # Not tested yet
+    user = User.query.filter(
+        User.first_name.like(first),
+        User.last_name.like(last),
+        User.phone_number.like(phone)
+    ).first()
+
+    return user.id
+
+def update_password(id, new_password): # Not tested yet
+    db.session.query().where(User.id == id).update({"password":generate_password_hash(new_password, method='pbkdf2:sha256')}) # searching DB for the given id, and updates it with the same
+    db.session.commit()
+
+    message = {"SUCCESS": "Password has been successfully updated."}
+    return jsonify(message), 200

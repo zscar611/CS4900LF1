@@ -209,8 +209,36 @@ def add():
         message = {"SUCCESS": "Volunteer shift scheduled"}
         return jsonify(message), 201
 
-    
+# TODO: Determine route/path
+# Retrieve the stats of each individual user
+@shift.route('/user-stats', methods=['GET'])
+def personal_stats(id):
+    allShifts = Shift.query.filter(
+        Shift.volunteer.like(id)
+    )
+    # find the sum of all hours and shifts volunteered
+    totalUserHours = 0
+    totalUserShifts = 0
+    for shift in allShifts:
+        totalUserHours += shift.hours
+        totalUserShifts += 1
+    userStats = (totalUserHours, totalUserShifts)
+    return jsonify(userStats, 200)
 
+# TODO: Determine route/path
+# Retrieve the combined stats of every volunteer
+@shift.route('/combined-stats', methods=['GET'])
+def overall_stats():
+    query = db.select(Shift.hours)
+    totalHours = 0
+    totalUsers = 0
+
+    for shift in query:
+        totalHours += shift.hours
+        totalUsers += 1
+    allStats = (totalHours, totalUsers)
+
+    return jsonify(allStats, 200)
 
         
 

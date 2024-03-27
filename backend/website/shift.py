@@ -54,6 +54,7 @@ def serialize_shift(shift):
     shift_to_return['hours'] = shift.hours
     shift_to_return['group'] = shift.group
     shift_to_return['volunteer'] = shift.volunteer
+    shift_to_return['id'] = shift.id
 
     return shift_to_return
 
@@ -118,6 +119,7 @@ def activate():
     if request.method == 'POST':
         # check if shift exists
         id = request.form.get("id")
+        print(id) 
         shift = Shift.query.filter_by(id=id).first()
         if shift:
             # format current time to match time in database

@@ -13,8 +13,7 @@ import Navbar from "./Navbar.js";
 
 function TimeSheet() {
   const navigate = useNavigate();
-  //const [checkIn, setCheckedIn] = useState([]);
-  //const [checkOut, setCheckOut] = useState([]);
+ 
 
 //TODO: GET SHIFT ENTRIES WITH A TIME WITHIN 15 MINS OF CURRENT TIME AND SIGNEDIN = 0 &
 
@@ -22,9 +21,9 @@ function TimeSheet() {
   const [signOutDict, setSignOutDict] = useState([]);
   const [signInDict2, setSignInDict2] = useState([]);
   const [allAccounts, setAllAccounts] = useState([]);
-
+  var currentShiftID = 0;
   
-  
+  //GETS ALL VOLUNTEERS SCHEDULED TODAY THAT HAVEN'T SIGNED IN
   useEffect(() => {
     const getData = async () => {
       try {
@@ -118,23 +117,95 @@ console.log(signInDict);
 	
 
 
- 
+
+//SENDS SHIFT ID TO DB TO CHECK IN
+	const checkIn = async () => {
+    try {
+	  const formData = new FormData();
+	 
+	  formData.append("id", currentShiftID);
+
+    // if in group send currentGroup
+
+	  console.log("Creating:", formData);
+	
+
+	//TODO CHANGE ROUTE
+      const response = await fetch("http://localhost:5000/shift/activate", {
+        method: "POST",
+        mode: "cors",
+        body: formData,
+      });
+	  
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+	
+	
+	
+	
+//SENDS SHIFT ID TO DB TO CHECK OUT
+	const checkOut = async () => {
+    try {
+	  const formData = new FormData();
+	 
+	  formData.append("id", currentShiftID);
+
+    // if in group send currentGroup
+
+	  console.log("Creating:", formData);
+
+
+	//TODO CHANGE ROUTE
+      const response = await fetch("http://localhost:5000/shift/checkout", {
+        method: "POST",
+        mode: "cors",
+        body: formData,
+      });
+	  
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };	
+	
+	
+	
+	
+	
+	
+	
+
+
+ //ACTIVATES ON SIGN IN BUTTON CLICK CALLS DB REQUEST
   const signIn = (person) => {
     console.log(person);
-    // send JSON to backend checking in person
+	
+	//SETS SHIFT ID TO SEND TO BACKEND
+	currentShiftID = person.shiftid;
+	checkIn();
     setSignOutDict((prevSignOutDict) => [...prevSignOutDict, person]);
     setSignInDict((prevSignInDict) =>
-      prevSignInDict.filter((p) => p !== person)
+    prevSignInDict.filter((p) => p !== person)
     );
   };
 
+
+
+ //ACTIVATES ON SIGN OUT BUTTON CLICK CALLS DB REQUEST
   const signOut = (person) => {
     console.log(person);
-    // send JSON to backend checking in person
+	currentShiftID = person.shiftid;
+	checkOut();
+
     setSignOutDict((prevSignOutDict) =>
       prevSignOutDict.filter((p) => p !== person)
     );
   };
+
+
+
+
 
   // if name is clicked open the volunteers profile
   const openProfile = (person) => {
@@ -179,7 +250,7 @@ console.log(signInDict);
                   <p className="admin-text">{person.name}</p>
                   <p>{person.area}</p>
                   <p>{person.timeScheduled}</p>
-                  <button onClick={() => signOut(person)}>Undo</button>
+                 
                   <button onClick={() => signOut(person)}>Sign Out</button>
                 </div>
               ))}

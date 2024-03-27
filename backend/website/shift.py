@@ -108,12 +108,6 @@ def checkedOut():
         scheduledVolunteers.append(serialize_shift(x))
     return jsonify(scheduledVolunteers)
 
-
-
-
-
-
-
 @shift.route('/activate', methods=['GET', 'POST'])
 def activate():
     if request.method == 'POST':
